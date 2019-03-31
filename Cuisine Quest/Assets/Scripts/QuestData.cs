@@ -9,7 +9,7 @@ public enum QuestType
 }
 
 [System.Serializable]
-public class Quest : ISaveable 
+public class QuestData 
 {
     [SerializeField]
     private string questName;
@@ -21,15 +21,4 @@ public class Quest : ISaveable
     private List<RequiredItem> requiredItems;
     [SerializeField]
     private bool completedQuest;
-
-    public string Save()
-    {
-        return JsonUtility.ToJson(this,true);
-    }
-
-    bool checkQuestCompletion()
-    {
-        return true;
-    }
-
 }
