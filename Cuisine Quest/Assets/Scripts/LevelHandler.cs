@@ -6,22 +6,36 @@ public class LevelHandler : MonoBehaviour {
     public GameObject Player;
     public Transform Camera;
 
-    public Area[] Areas;
+    public AreaAbstract CurrentArea;
+    //public Area[] Areas;
     public AreaScriptable[] AreaTest;
+
+    private bool hasNewArea = true;
+    private bool loadedNewArea = false;
+    public float AreaLoadDelay = 1.0f;
+    private float loadDelayStart = 0;
+
 	// Use this for initialization
 	void Start () {
-		
+        
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+        if (hasNewArea && !loadedNewArea)
+        {
+            if (AreaLoadDelay + loadDelayStart < Time.fixedTime && !Camera.GetComponent<CameraController>().GetTransitioning()) FinishAreaMove();
+            
+        }
 	}
 
     public void TeleportPlayer(Vector3 cameraLocation, Vector2 playerLocation)
     {
         Camera.position = cameraLocation;
         Player.transform.position = (Vector2)cameraLocation + playerLocation;
+
+        hasNewArea = true;
+        loadedNewArea = false;
     }
 
     public void TeleportPlayer(string location, Vector2 playerLocation){
@@ -40,19 +54,11 @@ public class LevelHandler : MonoBehaviour {
         AreaScriptable locationArea = getAreaScriptable(location);
         if(locationArea != null){
             TeleportPlayer((Vector3)locationArea.Location + new Vector3(0,0,Camera.transform.position.z), locationArea.DefaultPlayerLocation);
-        }else{
+            
+        }
+        else{
             Debug.Log("Area not found");
         }
-    }
-
-
-    private Area getArea(string location){
-        Area locationArea = null;
-        foreach(Area a in Areas){
-            if (a.Name == location) locationArea = a;
-        }
-
-        return locationArea;
     }
 
 
@@ -65,12 +71,38 @@ public class LevelHandler : MonoBehaviour {
 
         return locationArea;
     }
+
+    public void StartMoveArea(AreaAbstract newArea)
+    {
+        if(newArea != CurrentArea)
+        {
+            CurrentArea.DeLoadArea();
+            CurrentArea = newArea;
+            hasNewArea = true;
+            loadedNewArea = false;
+            //CurrentArea.LoadArea();
+            loadDelayStart = Time.fixedTime;
+        }
+    }
+
+    public void FinishAreaMove(AreaAbstract newArea)
+    {
+        if (newArea != CurrentArea & !loadedNewArea)
+        {
+            CurrentArea.LoadArea();
+            loadedNewArea = true ;
+            hasNewArea = false;
+        }
+    }
+
+    public void FinishAreaMove()
+    {
+       
+        CurrentArea.LoadArea();
+        loadedNewArea = true;
+        hasNewArea = false;
+    }
+
 }
 
-[System.Serializable]
-public class Area
-{
-    public Vector2 Location;
-    public string Name;
-    public Vector2 DefaultPlayerLocation;
-}
+

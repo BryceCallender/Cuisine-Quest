@@ -4,28 +4,19 @@ using UnityEngine;
 
 public class TeleportTrigger : MonoBehaviour {
     
-    public string TeleportLocation;
+    //public string TeleportLocation;
+    public AreaAbstract TeleportLocation;
     public Vector2 PlayerLocation;
 
-
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
-            if(TeleportLocation != ""){
-                GameObject.FindGameObjectWithTag("LevelHandler").GetComponent<LevelHandler>().TeleportPlayer(TeleportLocation, PlayerLocation);
+            if(TeleportLocation != null){
+                LevelHandler lh = GameObject.FindGameObjectWithTag("LevelHandler").GetComponent<LevelHandler>();
+                //lh.StartMoveArea(TeleportLocation);
+                lh.TeleportPlayer(TeleportLocation.name, PlayerLocation);
             }else{
                 Debug.Log("TeleportLocation missing!");
             }

@@ -13,7 +13,7 @@ public class CameraController : MonoBehaviour {
 
     public bool DungeonExit = false;
 
-    public BoxCollider2D[] MyColliders;
+    //public BoxCollider2D[] MyColliders;
 	// Use this for initialization
 	void Start () {
 		
@@ -36,17 +36,19 @@ public class CameraController : MonoBehaviour {
                 transform.position = transitionDestination;
                 transitioning = false;
                 Player.HasMovementControl = true;
+                GameObject.FindGameObjectWithTag("LevelHandler").GetComponent<LevelHandler>().FinishAreaMove();
             }
         }
 	}
 
     public void SetDungeonExit(bool state) {
         DungeonExit = state;
-        //foreach (BoxCollider2D bc in MyColliders)
-        //{
-        //    bc.isTrigger = state;
-            
-        //}
+        
+    }
+
+    public bool GetTransitioning()
+    {
+        return transitioning;
     }
     
 
@@ -63,28 +65,28 @@ public class CameraController : MonoBehaviour {
         //moving left
         if(Player.transform.position.x <= transform.position.x - transitionGrid.x /2 + edgeBuffer)
         {
-            sceneTransition(new Vector2(-1, 0));
+            SceneTransition(new Vector2(-1, 0));
         }
         //moving right
         else if (Player.transform.position.x >= transform.position.x + transitionGrid.x / 2 - edgeBuffer)
         {
-            sceneTransition(new Vector2(1, 0));
+            SceneTransition(new Vector2(1, 0));
         }
         //moving up
         else if (Player.transform.position.y >= transform.position.y + transitionGrid.y / 2 - edgeBuffer)
         {
-            sceneTransition(new Vector2(0, 1));
+            SceneTransition(new Vector2(0, 1));
         }
         //moving down
         else if (Player.transform.position.y <= transform.position.y - transitionGrid.y / 2 + edgeBuffer)
         {
-            sceneTransition(new Vector2(0, -1));
+            SceneTransition(new Vector2(0, -1));
         }
     }
 
-    private void sceneTransition(Vector2 direction)
+    public void SceneTransition(Vector2 direction)
     {
-        if (true) //check level handler for transition check
+        if (true && !transitioning) //check level handler for transition check
         {
             transitioning = true;
             transitionDestination = direction * transitionGrid ;
@@ -92,6 +94,8 @@ public class CameraController : MonoBehaviour {
             Debug.Log(transitionDestination.ToString());
 
             Player.HasMovementControl = false;
+
+            
         }
     }
 }

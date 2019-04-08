@@ -12,4 +12,14 @@ public abstract class Item : MonoBehaviour {
         Weapon,
         Ability
     }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.transform.tag == "Player")
+        {
+            collision.GetComponent<CiscoTesting>().AddItem(Name, 1);
+            GameObject.FindGameObjectWithTag("LevelHandler").GetComponent<LevelHandler>().CurrentArea.RemoveObj(gameObject);
+            //Destroy(gameObject);
+        }
+    }
 }

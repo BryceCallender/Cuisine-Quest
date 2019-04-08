@@ -5,12 +5,21 @@ using UnityEngine;
 public class CiscoTesting : MonoBehaviour {
     public float WalkingSpeed = 10f;
     public bool HasMovementControl = true;
-    
+
+    public int FishMeat = 0;
+    public int Greens = 0;
+    public int Lemons = 0;
+
+    public Quest[] MyQuest;
 
     private Rigidbody2D rb;
 	// Use this for initialization
 	void Start () {
         rb = GetComponent<Rigidbody2D>();
+        foreach(Quest q in MyQuest)
+        {
+            q.State = Quest.QuestState.inProgress;
+        }
 	}
 	
 	// Update is called once per frame
@@ -55,5 +64,29 @@ public class CiscoTesting : MonoBehaviour {
         Vector2 movement = new Vector2(hMove, vMove);
         movement = movement.normalized * WalkingSpeed;
         rb.velocity = movement;
+    }
+
+    public void AddItem(string type, int count)
+    {
+        switch (type)
+        {
+            case "LemonJuice":
+                Lemons += count;
+                break;
+            case "Greens":
+                Greens += count;
+                break;
+            case "FishMeat":
+                FishMeat += count;
+                break;
+            default:
+                Debug.Log("Item not found.");
+                break;
+        }
+
+        foreach (ItemQuest q in MyQuest)
+        {
+            if(q.State != Quest.QuestState.completed) q.CheckCompletion(this);
+        }
     }
 }
