@@ -7,6 +7,9 @@ public class DungeonTrigger : MonoBehaviour {
     public Vector2 MyDungeonCoordinate;
     public Vector2 MyOverworldCoordinate;
 
+    public AreaScriptable IngressLocation;
+    public AreaScriptable EgressLocation;
+
     public Vector2 PlayerIngressLocation;
     public Vector2 PlayerEgressLocation;
 
@@ -29,12 +32,12 @@ public class DungeonTrigger : MonoBehaviour {
             float playerDirection = Vector3.Dot(EntranceDirection, collision.GetComponent<Rigidbody2D>().velocity);
             if(playerDirection < 0)
             {
-                Vector3 cameraLocation = new Vector3(MyOverworldCoordinate.x, MyOverworldCoordinate.y, Camera.main.transform.position.z);
-                GameObject.FindGameObjectWithTag("LevelHandler").GetComponent<LevelHandler>().TeleportPlayer(cameraLocation, (Vector2)cameraLocation + PlayerEgressLocation);
+                //Vector3 cameraLocation = new Vector3(MyOverworldCoordinate.x, MyOverworldCoordinate.y, Camera.main.transform.position.z);
+                GameObject.FindGameObjectWithTag("LevelHandler").GetComponent<LevelHandler>().TeleportPlayer(EgressLocation.name, PlayerEgressLocation);
             }else if(playerDirection > 0)
             {
-                Vector3 cameraLocation = new Vector3(MyDungeonCoordinate.x, MyDungeonCoordinate.y, Camera.main.transform.position.z);
-                GameObject.FindGameObjectWithTag("LevelHandler").GetComponent<LevelHandler>().TeleportPlayer(cameraLocation, (Vector2)cameraLocation + PlayerIngressLocation);
+                //Vector3 cameraLocation = new Vector3(MyDungeonCoordinate.x, MyDungeonCoordinate.y, Camera.main.transform.position.z);
+                GameObject.FindGameObjectWithTag("LevelHandler").GetComponent<LevelHandler>().TeleportPlayer(IngressLocation.name,  PlayerIngressLocation);
 
             }
             

@@ -3,13 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TeleportTrigger : MonoBehaviour {
-    public Vector2 EntranceDirection = new Vector2(0, -1);
-    public Vector2 MyUnderworldCoerdinate;
-    public Vector2 MyOverworldCoerdinate;
-
-    public Vector2 PlayerIngressLocation;
-    public Vector2 PlayerEgressLocation;
-
+    
+    public string TeleportLocation;
+    public Vector2 PlayerLocation;
 
 
     // Use this for initialization
@@ -28,18 +24,13 @@ public class TeleportTrigger : MonoBehaviour {
     {
         if (collision.tag == "Player")
         {
-            float playerDirection = Vector3.Dot(EntranceDirection, collision.GetComponent<Rigidbody2D>().velocity);
-            if (playerDirection < 0)
-            {
-                Vector3 cameraLocation = new Vector3(MyOverworldCoerdinate.x, MyOverworldCoerdinate.y, Camera.main.transform.position.z);
-                GameObject.FindGameObjectWithTag("LevelHandler").GetComponent<LevelHandler>().TeleportPlayer(cameraLocation, (Vector2)cameraLocation + PlayerEgressLocation);
+            if(TeleportLocation != ""){
+                GameObject.FindGameObjectWithTag("LevelHandler").GetComponent<LevelHandler>().TeleportPlayer(TeleportLocation, PlayerLocation);
+            }else{
+                Debug.Log("TeleportLocation missing!");
             }
-            else if (playerDirection > 0)
-            {
-                Vector3 cameraLocation = new Vector3(MyUnderworldCoerdinate.x, MyUnderworldCoerdinate.y, Camera.main.transform.position.z);
-                GameObject.FindGameObjectWithTag("LevelHandler").GetComponent<LevelHandler>().TeleportPlayer(cameraLocation, (Vector2)cameraLocation + PlayerIngressLocation);
 
-            }
+
 
         }
     }
