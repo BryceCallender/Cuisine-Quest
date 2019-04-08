@@ -1,0 +1,824 @@
+fileFormatVersion: 2
+guid: a08b4356e9f9f4986be8994f9c5451cf
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: meat-chicken-fish-pixel-art-450w-700831069_0
+    21300002: meat-chicken-fish-pixel-art-450w-700831069_1
+    21300004: meat-chicken-fish-pixel-art-450w-700831069_2
+    21300006: meat-chicken-fish-pixel-art-450w-700831069_3
+    21300008: meat-chicken-fish-pixel-art-450w-700831069_4
+    21300010: meat-chicken-fish-pixel-art-450w-700831069_5
+    21300012: meat-chicken-fish-pixel-art-450w-700831069_6
+    21300014: meat-chicken-fish-pixel-art-450w-700831069_7
+    21300016: meat-chicken-fish-pixel-art-450w-700831069_8
+    21300018: meat-chicken-fish-pixel-art-450w-700831069_9
+    21300020: meat-chicken-fish-pixel-art-450w-700831069_10
+    21300022: meat-chicken-fish-pixel-art-450w-700831069_11
+    21300024: meat-chicken-fish-pixel-art-450w-700831069_12
+    21300026: meat-chicken-fish-pixel-art-450w-700831069_13
+    21300028: meat-chicken-fish-pixel-art-450w-700831069_14
+    21300030: meat-chicken-fish-pixel-art-450w-700831069_15
+    21300032: meat-chicken-fish-pixel-art-450w-700831069_16
+    21300034: meat-chicken-fish-pixel-art-450w-700831069_17
+    21300036: meat-chicken-fish-pixel-art-450w-700831069_18
+    21300038: meat-chicken-fish-pixel-art-450w-700831069_19
+    21300040: meat-chicken-fish-pixel-art-450w-700831069_20
+    21300042: meat-chicken-fish-pixel-art-450w-700831069_21
+    21300044: meat-chicken-fish-pixel-art-450w-700831069_22
+    21300046: meat-chicken-fish-pixel-art-450w-700831069_23
+    21300048: meat-chicken-fish-pixel-art-450w-700831069_24
+    21300050: meat-chicken-fish-pixel-art-450w-700831069_25
+    21300052: meat-chicken-fish-pixel-art-450w-700831069_26
+    21300054: meat-chicken-fish-pixel-art-450w-700831069_27
+    21300056: meat-chicken-fish-pixel-art-450w-700831069_28
+    21300058: meat-chicken-fish-pixel-art-450w-700831069_29
+    21300060: meat-chicken-fish-pixel-art-450w-700831069_30
+    21300062: meat-chicken-fish-pixel-art-450w-700831069_31
+    21300064: FishMeatLarge
+    21300066: meat-chicken-fish-pixel-art-450w-700831069_33
+  externalObjects: {}
+  serializedVersion: 7
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: meat-chicken-fish-pixel-art-450w-700831069_0
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 349
+        width: 76
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03bfb3954464c4305b93b1bb12ed56f1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meat-chicken-fish-pixel-art-450w-700831069_1
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 346
+        width: 94
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ddd75a9c75628433dbb45c1f0fa99bb7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meat-chicken-fish-pixel-art-450w-700831069_2
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 345
+        width: 94
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbfb729bcae4f4d53984bd251dd30ac7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meat-chicken-fish-pixel-art-450w-700831069_3
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 227
+        width: 68
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8d7ff3e14f22488ba5bc13d3bd07bc8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meat-chicken-fish-pixel-art-450w-700831069_4
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 232
+        width: 9
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 454364e786cfc4781854417161f5e442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meat-chicken-fish-pixel-art-450w-700831069_5
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 227
+        width: 20
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5a16089c1df8417a9c5634b3a61f5d1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meat-chicken-fish-pixel-art-450w-700831069_6
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 232
+        width: 4
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e3f18ed2b1f846ceaa2ffcbf8995079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meat-chicken-fish-pixel-art-450w-700831069_7
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 253
+        width: 15
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 569a8c4c31f694fb8b58f63353e30698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meat-chicken-fish-pixel-art-450w-700831069_8
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 227
+        width: 70
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4cda9446ba5445509150e926e2fb3c8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meat-chicken-fish-pixel-art-450w-700831069_9
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 227
+        width: 19
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfe93ccc41c26495ea56b439b4e8e8b7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meat-chicken-fish-pixel-art-450w-700831069_10
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 227
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d5813e5842a84e42ad6ec42dcd4b0ae
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meat-chicken-fish-pixel-art-450w-700831069_11
+      rect:
+        serializedVersion: 2
+        x: 302
+        y: 235
+        width: 22
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b98ab4fad59141f3b946c72136b62b3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meat-chicken-fish-pixel-art-450w-700831069_12
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 227
+        width: 26
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be72509e68be04462b4d9ce5cec60e4d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meat-chicken-fish-pixel-art-450w-700831069_13
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 245
+        width: 54
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9abb4e420f93498c89b6b56788a812a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meat-chicken-fish-pixel-art-450w-700831069_14
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 227
+        width: 10
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 478ff0c624cfa4623a41e8dbea457f2f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meat-chicken-fish-pixel-art-450w-700831069_15
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 237
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eec376921b958498db2512ec2e27d56b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meat-chicken-fish-pixel-art-450w-700831069_16
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 244
+        width: 8
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95f6cf1679b2f4718a6d63ed4a43192e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meat-chicken-fish-pixel-art-450w-700831069_17
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 238
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44d3f925f56f14ead90b1f811ce3d167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meat-chicken-fish-pixel-art-450w-700831069_18
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 240
+        width: 4
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 762422dbfa1a8433391b4966463bf372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meat-chicken-fish-pixel-art-450w-700831069_19
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 227
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1521727def914495b0f278eb9cb42fe
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meat-chicken-fish-pixel-art-450w-700831069_20
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 228
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a59fdf2f84ca430c8c5606c1d19148e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meat-chicken-fish-pixel-art-450w-700831069_21
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 227
+        width: 17
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16877013bc4d3405bac5039ac3db1c5f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meat-chicken-fish-pixel-art-450w-700831069_22
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 227
+        width: 18
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7e7b9565aa1748f69a34fa1108a02f1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meat-chicken-fish-pixel-art-450w-700831069_23
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 227
+        width: 15
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 174f5375b6813462e8c6b908987c87ea
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meat-chicken-fish-pixel-art-450w-700831069_24
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 228
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 848b938ce4c9b4600a0e2c727b826b73
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meat-chicken-fish-pixel-art-450w-700831069_25
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 228
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e9a5ba6915884ff2b89e5b6d733264d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meat-chicken-fish-pixel-art-450w-700831069_26
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 228
+        width: 6
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2fef3496b1554a8da8817849664154d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meat-chicken-fish-pixel-art-450w-700831069_27
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 173
+        width: 33
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bacf95f5e20bd489ea4ccec0dfcbc6bc
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meat-chicken-fish-pixel-art-450w-700831069_28
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 176
+        width: 32
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a88ca51523614be3ae79d801813f309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meat-chicken-fish-pixel-art-450w-700831069_29
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 174
+        width: 33
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7b688a1bb9d44902b19a501c8d41bea
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meat-chicken-fish-pixel-art-450w-700831069_30
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 81
+        width: 58
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0e4eb2c4663c4065b22803dc65191fc
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meat-chicken-fish-pixel-art-450w-700831069_31
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 74
+        width: 58
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b6b63720fed049878a157d4547ada6f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FishMeatLarge
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 77
+        width: 55
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9cd8cb7935f194d918b77f209c8bdcda
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: meat-chicken-fish-pixel-art-450w-700831069_33
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 0
+        width: 10
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 767ad368859c949a898bea97b8140a9e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 3a10c3ce45ce248c2bd19c5540476fe1
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
