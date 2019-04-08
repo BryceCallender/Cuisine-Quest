@@ -20,7 +20,5 @@ public abstract class Quest : ScriptableObject {
         canceled
     }
 
-    //public GameObject[] ItemsNeeded;
-    //public AreaScriptable AreaNeeded;
-    //public GreenWeeds[] items;
+    public abstract void CheckCompletion(CiscoTesting player);
 }

@@ -84,7 +84,7 @@ public class CiscoTesting : MonoBehaviour {
                 break;
         }
 
-        foreach (ItemQuest q in MyQuest)
+        foreach (Quest q in MyQuest)
         {
             if(q.State != Quest.QuestState.completed) q.CheckCompletion(this);
         }

@@ -8,7 +8,7 @@ public class ItemQuest : Quest {
     public GameObject[] ItemsNeeded;
     public AreaScriptable AreaNeeded;
 
-    public void CheckCompletion(CiscoTesting player)
+    public override void CheckCompletion(CiscoTesting player)
     {
         bool isComplete = true;
         int Lemons = player.Lemons;
