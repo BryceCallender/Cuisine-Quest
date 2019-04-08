@@ -605,8 +605,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 966b06f5660db40fbae4e2a140e6320f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saveableObjects:
-  - {fileID: 1266693898}
+  saveableObjects: []
 --- !u!4 &364956902
 Transform:
   m_ObjectHideFlags: 0
@@ -696,6 +695,47 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &410553012
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 410553014}
+  - component: {fileID: 410553013}
+  m_Layer: 0
+  m_Name: Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &410553013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 410553012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00ae585524eea4a25802635357dd6e91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentQuests: []
+--- !u!4 &410553014
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 410553012}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 325.62088, y: 194.43253, z: -1.3599633}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &591173743
 GameObject:
@@ -1290,19 +1330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5411ac9d64b754421a1e99075e6ee0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  quests:
-  - questName: Collect Fish Tails
-    questType: 1
-    requiredItems:
-    - name: Fish Tails`
-      requiredAmount: 5
-    completedQuest: 0
-  - questName: Kill Orcs
-    questType: 0
-    requiredItems:
-    - name: Orcs
-      requiredAmount: 100
-    completedQuest: 0
+  quests: []
 --- !u!1 &1377155213
 GameObject:
   m_ObjectHideFlags: 0
@@ -1704,7 +1732,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
