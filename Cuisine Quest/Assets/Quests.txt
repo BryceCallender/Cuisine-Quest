@@ -1,0 +1,27 @@
+﻿NAME
+Collect Fish Tails
+BEGINDESC
+Some random description about having to collect some fish tails for some
+odd reason since we dont what it can be used for as an ingredient. You need to 
+collect 5 tails.
+ENDDESC
+QUESTTYPE
+1
+REQUIRED
+1
+Fish Tails
+5
+END
+NAME
+Kill The Orcs
+BEGINDESC
+Kill the orcs plain and simple. They have become a nuisance on this land
+and need to be wiped. I will need you to kill at least 100 of them.
+ENDDESC
+QUESTTYPE
+0
+REQUIRED
+1
+Orcs
+100
+END
