@@ -2,28 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CiscoTesting : MonoBehaviour {
+public class CiscoTesting : MonoBehaviour 
+{
     public float WalkingSpeed = 10f;
     public bool HasMovementControl = true;
 
-    public int FishMeat = 0;
-    public int Greens = 0;
-    public int Lemons = 0;
-
     public Quest[] MyQuest;
+    public Dictionary<GameObject, int> items;
 
     private Rigidbody2D rb;
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
+        items = new Dictionary<GameObject, int>();
         rb = GetComponent<Rigidbody2D>();
         foreach(Quest q in MyQuest)
         {
-            q.State = Quest.QuestState.inProgress;
+            q.questData.questState = QuestState.inProgress;
         }
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
 
         if (HasMovementControl) handlMovement();
         
@@ -66,27 +67,24 @@ public class CiscoTesting : MonoBehaviour {
         rb.velocity = movement;
     }
 
-    public void AddItem(string type, int count)
+    public void AddItem(GameObject item)
     {
-        switch (type)
+        if(items.ContainsKey(item))
         {
-            case "LemonJuice":
-                Lemons += count;
-                break;
-            case "Greens":
-                Greens += count;
-                break;
-            case "FishMeat":
-                FishMeat += count;
-                break;
-            default:
-                Debug.Log("Item not found.");
-                break;
+            items[item]++;
+        }
+        else
+        {
+            items.Add(item,0);
         }
 
-        foreach (Quest q in MyQuest)
+        //Check for completion of the quest when an item is picked up
+        foreach (Quest quest in MyQuest)
         {
-            if(q.State != Quest.QuestState.completed) q.CheckCompletion(this);
+            if (quest.questData.questState != QuestState.completed)
+            {
+                quest.CheckCompletion(this);
+            }
         }
     }
 }

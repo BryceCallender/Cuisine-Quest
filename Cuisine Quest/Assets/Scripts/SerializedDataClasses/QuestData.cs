@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
 /// Quest types. There is kill, collect, and kill and collect types of quest
@@ -12,6 +13,19 @@ public enum QuestType
 }
 
 /// <summary>
+/// Quest state.
+/// </summary>
+public enum QuestState
+{
+    pending,
+    unlocked,
+    inProgress,
+    completed,
+    done,
+    canceled
+}
+
+/// <summary>
 /// Quest data. Each quest has a name,description,type,items needed, and a 
 /// completion status
 /// </summary>
@@ -19,10 +33,11 @@ public enum QuestType
 public class QuestData 
 {
     public string questName;
+    [TextArea]
     public string description;
     public QuestType questType;
     public List<RequiredItem> requiredItems = new List<RequiredItem>();
-    public bool completedQuest;
+    public QuestState questState;
 }
 
 /// <summary>
@@ -34,7 +49,7 @@ public class PlayerQuestData
     public int questID;
     public string questName;
     public bool hasQuest;
-    public bool completedQuest;
+    public QuestState questState;
 }
 
 /// <summary>

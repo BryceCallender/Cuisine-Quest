@@ -7,7 +7,6 @@ public class PlayerQuestSystem : MonoBehaviour
     QuestManager questManager;
     [SerializeField]
     List<PlayerQuestData> currentQuests;
-    public const int MAX_QUEST = 2;
     private readonly string fileName = "Quests.json";
 
     // Use this for initialization
@@ -35,6 +34,7 @@ public class PlayerQuestSystem : MonoBehaviour
         {
             currentQuests.Add(quest);
         }
+        questManager.InitQuestScriptableObjects(quests);
     }
 
     /// <summary>
@@ -44,14 +44,14 @@ public class PlayerQuestSystem : MonoBehaviour
     private void InitQuestData()
     {
         PlayerQuestData questData = new PlayerQuestData();
-
-        for(int i = 0; i < MAX_QUEST; i++)
+        //For all the quests we have in the manager we make 
+        //a clean slate for all of them
+        for(int i = 0; i < questManager.quests.Count; i++)
         {
             questData.questID = i;
-            questData.questName = questManager.quests[i].questName;
-            questData.completedQuest = false;
+            questData.questName = questManager.quests[i].questData.questName;
+            questData.questState = QuestState.pending;
             questData.hasQuest = false;
-
             currentQuests.Add(questData);
             questData = new PlayerQuestData();
         }
