@@ -7,15 +7,17 @@ public class QuestManager : MonoBehaviour
     public List<Quest> quests;
 
     /// <summary>
-    /// Makes this class non-destroyable. It also initializes the quest data
-    /// by reading the text file with all the attributes for the game quests
+    /// Makes this class non-destroyable.
     /// </summary>
     private void Awake()
     {
         DontDestroyOnLoad(this);
-        //ReadQuestFile();
     }
 
+    /// <summary>
+    /// Initializes the quest scriptable objects.
+    /// </summary>
+    /// <param name="playerData">Player Quest data from the JSON file.</param>
     public void InitQuestScriptableObjects(PlayerQuestArray playerData)
     {
         int index = 0;
