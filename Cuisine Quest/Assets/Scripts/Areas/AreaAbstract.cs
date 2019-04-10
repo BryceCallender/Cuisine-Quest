@@ -23,7 +23,8 @@ public abstract class AreaAbstract : MonoBehaviour {
         GameObject prefab = objOrigin.Prefab;
         Vector2 spawnLocation = objOrigin.MyLocation;
         GameObject newObj = Instantiate(prefab, spawnLocation + MyArea.Location, Quaternion.identity);
-        newObj.SendMessage("SetMyOrigin", objOrigin);
+        newObj.GetComponent<SpawnObject>().SetMyOrigin(objOrigin);
+        //newObj.SendMessage("SetMyOrigin", objOrigin);
         loaded.Add(newObj);
     }
 

@@ -14,7 +14,7 @@ public class AreaDefault : AreaAbstract {
     {
         //Default behavior
         removeObj(obj);
-        //ToLoad.Remove(obj.GetComponent<Item>().GetMyOrigin());
+        //ToLoad.Remove(obj.GetComponent<SpawnObject>().GetMyOrigin());
     }
 
     //remove until Area reload
@@ -22,6 +22,6 @@ public class AreaDefault : AreaAbstract {
     {
         //Default behavior
         removeObj(obj);
-        
+
     }
 }
