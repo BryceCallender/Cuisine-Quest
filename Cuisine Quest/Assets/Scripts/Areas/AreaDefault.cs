@@ -8,4 +8,20 @@ public class AreaDefault : AreaAbstract {
 	void Update () {
 		
 	}
+
+    //remove permanently or until specified time
+    public override void DestroyObj(GameObject obj)
+    {
+        //Default behavior
+        removeObj(obj);
+        //ToLoad.Remove(obj.GetComponent<SpawnObject>().GetMyOrigin());
+    }
+
+    //remove until Area reload
+    public override void RemoveObj(GameObject obj)
+    {
+        //Default behavior
+        removeObj(obj);
+
+    }
 }

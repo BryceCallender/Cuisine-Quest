@@ -13,9 +13,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Description: 
   DependentQuests: []
-  State: 0
+  State: 2
   ItemsNeeded:
   - {fileID: 1502174101148422, guid: d56de10e62e7045eaad7df7843a4339f, type: 2}
   - {fileID: 1029527379581458, guid: 629f213a75aff4b7eacab9785f728d7d, type: 2}
+  - {fileID: 1502174101148422, guid: d56de10e62e7045eaad7df7843a4339f, type: 2}
+  - {fileID: 1502174101148422, guid: d56de10e62e7045eaad7df7843a4339f, type: 2}
   - {fileID: 1803489744764170, guid: 6a718e7f166e4438da210d7b646d2842, type: 2}
   AreaNeeded: {fileID: 0}
