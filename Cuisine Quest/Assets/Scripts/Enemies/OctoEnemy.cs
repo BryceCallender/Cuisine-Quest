@@ -39,15 +39,14 @@ public class OctoEnemy : EnemyAbstract
             {
                 transform.Rotate(0, 0, 180);
             }
+            Vector2 movement = transform.up;
+            movement = movement.normalized * speed;
+            rb.velocity = movement;
             timer = 0.0f;
             paths_traveled += 1;
         }
         else if (paths_traveled < 4)
         {
-            Vector2 movement = transform.up;
-            movement = movement.normalized * speed;
-            rb.velocity = movement;
-            
             timer += Time.deltaTime;
         }
         else
@@ -55,9 +54,7 @@ public class OctoEnemy : EnemyAbstract
             rb.velocity = new Vector2(0, 0);
             if (timer > 0.5f)
             {
-                GameObject bulletinstance;
-                bulletinstance = Instantiate(bullet, transform.position, transform.rotation);
-                bulletinstance.GetComponent<bullet>().setVelocity(transform.right);
+                //Attack();
                 timer = 0.0f;
                 paths_traveled = 0;
             }
@@ -66,6 +63,32 @@ public class OctoEnemy : EnemyAbstract
                 timer += Time.deltaTime;
             }
 
+        }
+    }
+
+     void Attack()
+    {
+        GameObject bulletinstance;
+        bulletinstance = Instantiate(bullet, transform.position, transform.rotation);
+        bulletinstance.GetComponent<bullet>().setVelocity(transform.right);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Wall") || collision.CompareTag("Area"))
+        {
+            transform.Rotate(0, 0, 180);
+            Vector2 movement = transform.up;
+            movement = movement.normalized * speed;
+            rb.velocity = movement;
+        }
+        else if(collision.CompareTag("Player"))
+        {
+            collision.GetComponent<CiscoTesting>().health -= 1;
+            transform.Rotate(0, 0, 180);
+            Vector2 movement = transform.up;
+            movement = movement.normalized * speed;
+            rb.velocity = movement;
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAbstract : MonoBehaviour
+public abstract class EnemyAbstract : MonoBehaviour
 {
 
     int health;
@@ -21,6 +21,11 @@ public class EnemyAbstract : MonoBehaviour
 	}
 
     private void Move()
+    {
+        
+    }
+
+    void Attack()
     {
         
     }
