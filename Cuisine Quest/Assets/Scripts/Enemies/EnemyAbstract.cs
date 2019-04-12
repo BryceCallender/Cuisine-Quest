@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class EnemyAbstract : MonoBehaviour
+public abstract class EnemyAbstract : SpawnObject
 {
 
-    int health;
+    protected int health;
     public int speed;
+    public droppedItem[] drops;
 
     // Use this for initialization
     void Start ()
@@ -20,13 +21,15 @@ public abstract class EnemyAbstract : MonoBehaviour
 		
 	}
 
-    private void Move()
-    {
-        
-    }
+    public abstract void Move();
 
-    void Attack()
-    {
-        
-    }
+    public abstract void Attack();
 }
+
+[System.Serializable]
+public class droppedItem
+{
+    public GameObject Item;
+    public int dropRate;
+}
+

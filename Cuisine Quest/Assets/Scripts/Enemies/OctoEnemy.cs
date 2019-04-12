@@ -12,6 +12,7 @@ public class OctoEnemy : EnemyAbstract
     // Use this for initialization
     void Start()
     {
+        health = 1;
         rb = GetComponent<Rigidbody2D>();
         speed = 5;
     }
@@ -20,11 +21,19 @@ public class OctoEnemy : EnemyAbstract
     void Update()
     {
         Move();
+        if (Input.GetKey(KeyCode.Z))
+        {
+            health -= 1;
+        }
+        if (health <= 0)
+        {
+            Die();
+        }
     }
 
-    private void Move()
+    public override void Move()
     {
-        if (timer > 0.3f && paths_traveled < 4)
+        if ((timer > 0.3f && paths_traveled < 4) || (timer == 0.0f && paths_traveled == 0))
         {
             travel_path = Random.Range(1, 5);
             if (travel_path == 1)
@@ -54,7 +63,7 @@ public class OctoEnemy : EnemyAbstract
             rb.velocity = new Vector2(0, 0);
             if (timer > 0.5f)
             {
-                //Attack();
+                Attack();
                 timer = 0.0f;
                 paths_traveled = 0;
             }
@@ -66,11 +75,11 @@ public class OctoEnemy : EnemyAbstract
         }
     }
 
-     void Attack()
+     public override void Attack()
     {
         GameObject bulletinstance;
         bulletinstance = Instantiate(bullet, transform.position, transform.rotation);
-        bulletinstance.GetComponent<bullet>().setVelocity(transform.right);
+        bulletinstance.GetComponent<bullet>().setVelocity(transform.up);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -90,5 +99,18 @@ public class OctoEnemy : EnemyAbstract
             movement = movement.normalized * speed;
             rb.velocity = movement;
         }
+    }
+    void Die()
+    {
+        float percent = 100.0f;
+        foreach(droppedItem drop in drops)
+        {
+            float rand = Random.Range(0.0f, (percent / drop.dropRate));
+            if(rand <= 1.0f)
+            {
+                Instantiate(drop.Item, transform.position, drop.Item.transform.rotation);
+            }
+        }
+        Destroy(gameObject);
     }
 }

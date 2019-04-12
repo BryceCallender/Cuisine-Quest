@@ -27,7 +27,19 @@ public class bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag != "Enemy")
+        if(collision.CompareTag("Wall"))
+        {
+            Destroy(gameObject);
+        }
+        else if(collision.CompareTag("Player"))
+        {
+            collision.GetComponent<CiscoTesting>().health -= 1;
+            Destroy(gameObject);
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Area"))
         {
             Destroy(gameObject);
         }

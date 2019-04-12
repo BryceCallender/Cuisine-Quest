@@ -31,6 +31,8 @@ public class CiscoTesting : MonoBehaviour {
         {
             print("dead");
         }
+
+        
         
 	}
 
@@ -94,4 +96,5 @@ public class CiscoTesting : MonoBehaviour {
             if(q.State != Quest.QuestState.completed) q.CheckCompletion(this);
         }
     }
+
 }
