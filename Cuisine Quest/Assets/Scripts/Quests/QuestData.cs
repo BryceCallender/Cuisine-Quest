@@ -18,11 +18,9 @@ public enum QuestType
 public enum QuestState
 {
     pending,
-    unlocked,
     inProgress,
     completed,
     done,
-    canceled
 }
 
 /// <summary>
@@ -50,6 +48,7 @@ public class PlayerQuestData
     public string questName;
     public bool hasQuest;
     public QuestState questState;
+    public int amountDone;
 }
 
 /// <summary>

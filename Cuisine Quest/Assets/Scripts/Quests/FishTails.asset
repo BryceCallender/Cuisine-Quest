@@ -12,10 +12,15 @@ MonoBehaviour:
   m_Name: FishTails
   m_EditorClassIdentifier: 
   questData:
-    questName: 
-    description: 
-    questType: 0
-    requiredItems: []
+    questName: Collect Fish Tails
+    description: Some random description about having to collect some fish tails for
+      some odd reason since we dont what it can be used for as an ingredient. You
+      need to  collect 5 tails.
+    questType: 1
+    requiredItems:
+    - item: {fileID: 1158362240031046, guid: 53af49ee4c3334b3a9c4afc7fd9192d7, type: 2}
+      requiredAmount: 5
     questState: 0
   DependentQuests: []
+  questID: 0
   AreaNeeded: {fileID: 0}

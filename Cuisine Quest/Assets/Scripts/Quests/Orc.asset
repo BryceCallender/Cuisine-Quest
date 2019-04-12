@@ -9,13 +9,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61549c411188a4d4aa2e4ba98c1732bf, type: 3}
-  m_Name: ItemQuestTest
+  m_Name: Orc
   m_EditorClassIdentifier: 
   questData:
-    questName: 
-    description: 
-    questType: 2
-    requiredItems: []
-    questState: 0
+    questName: Kill the orcs
+    description: Kill the orcs.
+    questType: 0
+    requiredItems:
+    - item: {fileID: 1158362240031046, guid: c59c5486e736744d78494f247af8fea0, type: 2}
+      requiredAmount: 100
+    questState: 1
   DependentQuests: []
+  questID: 2
   AreaNeeded: {fileID: 0}

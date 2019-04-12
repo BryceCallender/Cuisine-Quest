@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerQuestSystem : MonoBehaviour
+public class PlayerQuestSystem : MonoBehaviour, ISaveable
 {
     QuestManager questManager;
     [SerializeField]
-    List<PlayerQuestData> currentQuests;
+    public List<PlayerQuestData> currentQuests;
     private readonly string fileName = "Quests.json";
+    private string filePath;
 
     // Use this for initialization
     void Start () 
     {
+        filePath = Path.Combine(Application.persistentDataPath, fileName);
+
         questManager = FindObjectOfType<QuestManager>();
-	    if(!File.Exists(Path.Combine(Application.persistentDataPath, fileName)))
+        if (!File.Exists(filePath))
         {
             currentQuests = new List<PlayerQuestData>();
             InitQuestData();
@@ -29,7 +32,7 @@ public class PlayerQuestSystem : MonoBehaviour
     /// </summary>
     private void GetQuestsFromFile()
     {
-        PlayerQuestArray quests = JsonArrayHandler<PlayerQuestArray>.ReadJsonFile(Path.Combine(Application.persistentDataPath, fileName));
+        PlayerQuestArray quests = JsonArrayHandler<PlayerQuestArray>.ReadJsonFile(filePath);
         foreach(var quest in quests.items)
         {
             currentQuests.Add(quest);
@@ -52,15 +55,48 @@ public class PlayerQuestSystem : MonoBehaviour
             questData.questName = questManager.quests[i].questData.questName;
             questData.questState = QuestState.pending;
             questData.hasQuest = false;
+            questData.amountDone = 0;
             currentQuests.Add(questData);
             questData = new PlayerQuestData();
         }
 
-        JsonArrayHandler<PlayerQuestData>.WriteJsonFile(Path.Combine(Application.persistentDataPath, fileName), currentQuests);
+        if(File.Exists(filePath))
+        {
+            PlayerQuestArray quests = JsonArrayHandler<PlayerQuestArray>.ReadJsonFile(filePath);
+            questManager.InitQuestScriptableObjects(quests);
+        }
+        Save();
     }
 
-    private void OnApplicationQuit()
+    public bool GetHasQuestByID(int id)
     {
-        JsonArrayHandler<PlayerQuestData>.WriteJsonFile(Path.Combine(Application.persistentDataPath, fileName), currentQuests);
+        return currentQuests[id].hasQuest;
+    }
+
+    public int GetQuestCompletionStatus(int id)
+    {
+        return currentQuests[id].amountDone;
+    }
+
+    public Quest GetQuestByID(int id)
+    {
+        return questManager.quests[id];
+    }
+
+    public void SetQuestOn(int id)
+    {
+        currentQuests[id].hasQuest = true;
+        questManager.quests[id].questData.questState = QuestState.inProgress;
+    }
+
+    public void Save()
+    {
+        JsonArrayHandler<PlayerQuestData>.WriteJsonFile(filePath, currentQuests);
+    }
+
+    public void Clear()
+    {
+        currentQuests.Clear();
+        InitQuestData();
     }
 }
