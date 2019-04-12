@@ -9,6 +9,7 @@ public class CiscoTesting : MonoBehaviour {
     public int FishMeat = 0;
     public int Greens = 0;
     public int Lemons = 0;
+    public int health = 1;
 
     public Quest[] MyQuest;
 
@@ -26,6 +27,10 @@ public class CiscoTesting : MonoBehaviour {
 	void Update () {
 
         if (HasMovementControl) handlMovement();
+        if(health <= 0)
+        {
+            print("dead");
+        }
         
 	}
 
