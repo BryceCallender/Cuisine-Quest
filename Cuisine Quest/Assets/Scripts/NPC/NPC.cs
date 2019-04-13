@@ -2,9 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class NPCState
+{
+    public string name;
+    public bool hasTalked;
+}
+
+[System.Serializable]
+public class NPCStates
+{
+    public NPCState[] items;
+}
+
 public class NPC : MonoBehaviour 
 {
     public Quest giveableQuest;
+    public bool hasTalked;
     public CharacterDialog characterDialog;
     public DialogSystemController dialogSystemController;
 
@@ -21,25 +35,21 @@ public class NPC : MonoBehaviour
         {
             Quest quest = player.GetComponent<PlayerQuestSystem>().GetQuestByID(giveableQuest.questID);
             player.GetComponent<PlayerQuestSystem>().SetQuestOn(quest.questID);
+            hasTalked = true;
         }
-    }
-
-    public void StartDialogInteraction()
-    {
-        characterDialog.EnableDialog();
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
+        if(collision.CompareTag("Player") && !hasTalked)
         {
-            StartDialogInteraction();
+            characterDialog.EnableDialog();
         }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && dialogSystemController.isEmpty())
         {
             GiveQuest(collision.GetComponent<CiscoTesting>());
         }

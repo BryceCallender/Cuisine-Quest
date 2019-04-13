@@ -40,7 +40,6 @@ public class QuestUI : MonoBehaviour
         if(showQuestUI)
         {
             List<Quest> quests = questManager.GetQuests();
-            Debug.Log(quests.Count);
             //gUIStyle.wordWrap = true;
             //Draw Big Box to hold all the quests
             GUI.Box(new Rect(10, 10, 250, Screen.height - 20), "Quests");

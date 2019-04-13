@@ -25,9 +25,7 @@ public class CiscoTesting : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-
         if (HasMovementControl) handlMovement();
-        
 	}
 
     private void handlMovement()
