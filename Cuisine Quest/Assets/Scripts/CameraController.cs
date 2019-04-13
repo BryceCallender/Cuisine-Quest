@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour {
     public CiscoTesting Player;
+    public Hearts Health;
 
     public Vector2 transitionGrid = new Vector2(16, 10);
     public float TransitionSpeed = 10f;

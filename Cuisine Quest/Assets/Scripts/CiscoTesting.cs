@@ -1,12 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CiscoTesting : MonoBehaviour 
 {
     public float WalkingSpeed = 10f;
     public bool HasMovementControl = true;
 
+<<<<<<< HEAD
+=======
+    public int FishMeat = 0;
+    public int Greens = 0;
+    public int Lemons = 0;
+
+    public int currentHealth;
+    public int maxHealth = 5;
+
+
+>>>>>>> 03f653cf725a770921f1fdb96cb09d07290f620d
     public Quest[] MyQuest;
     public Dictionary<GameObject, int> items;
 
@@ -20,14 +32,26 @@ public class CiscoTesting : MonoBehaviour
         {
             q.questData.questState = QuestState.inProgress;
         }
+        currentHealth = maxHealth;
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
         if (HasMovementControl) handlMovement();
+<<<<<<< HEAD
+=======
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+>>>>>>> 03f653cf725a770921f1fdb96cb09d07290f620d
 	}
 
+    void Die()
+    {
+        SceneManager.LoadScene(0);
+    }
     private void handlMovement()
     {
         float vMove = 0; // = Input.GetAxis("Vertical");

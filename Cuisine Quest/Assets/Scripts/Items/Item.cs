@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public abstract class Item : MonoBehaviour 
-{
+public abstract class Item : SpawnObject {
+
     public string Name = "Unnamed";
     public ItemType Type;
     public enum ItemType
@@ -13,6 +13,18 @@ public abstract class Item : MonoBehaviour
         Weapon,
         Ability
     }
+
+    //private SpawningObject myOrigin;
+
+    //public void SetMyOrigin(SpawningObject myOrigin)
+    //{
+    //    this.myOrigin = myOrigin;
+    //}
+
+    //public SpawningObject GetMyOrigin()
+    //{
+    //    return myOrigin;
+    //}
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
