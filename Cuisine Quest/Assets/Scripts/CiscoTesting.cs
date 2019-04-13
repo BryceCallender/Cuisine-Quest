@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CiscoTesting : MonoBehaviour {
     public float WalkingSpeed = 10f;
@@ -9,6 +10,10 @@ public class CiscoTesting : MonoBehaviour {
     public int FishMeat = 0;
     public int Greens = 0;
     public int Lemons = 0;
+
+    public int currentHealth;
+    public int maxHealth = 5;
+
 
     public Quest[] MyQuest;
 
@@ -20,15 +25,23 @@ public class CiscoTesting : MonoBehaviour {
         {
             q.State = Quest.QuestState.inProgress;
         }
+        currentHealth = maxHealth;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
         if (HasMovementControl) handlMovement();
-        
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
 	}
 
+    void Die()
+    {
+        SceneManager.LoadScene(0);
+    }
     private void handlMovement()
     {
         float vMove = 0; // = Input.GetAxis("Vertical");
