@@ -8,17 +8,9 @@ public class CiscoTesting : MonoBehaviour
     public float WalkingSpeed = 10f;
     public bool HasMovementControl = true;
 
-<<<<<<< HEAD
-=======
-    public int FishMeat = 0;
-    public int Greens = 0;
-    public int Lemons = 0;
-
     public int currentHealth;
     public int maxHealth = 5;
 
-
->>>>>>> 03f653cf725a770921f1fdb96cb09d07290f620d
     public Quest[] MyQuest;
     public Dictionary<GameObject, int> items;
 
@@ -39,13 +31,10 @@ public class CiscoTesting : MonoBehaviour
 	void Update ()
     {
         if (HasMovementControl) handlMovement();
-<<<<<<< HEAD
-=======
         if (currentHealth <= 0)
         {
             Die();
         }
->>>>>>> 03f653cf725a770921f1fdb96cb09d07290f620d
 	}
 
     void Die()
