@@ -8,6 +8,7 @@ public abstract class EnemyAbstract : SpawnObject
     protected int health;
     public int speed;
     public droppedItem[] drops;
+    float percent = 100.0f;
 
     // Use this for initialization
     void Start ()
@@ -24,6 +25,18 @@ public abstract class EnemyAbstract : SpawnObject
     public abstract void Move();
 
     public abstract void Attack();
+
+    public void Drop()
+    {
+        foreach (droppedItem drop in drops)
+        {
+            float rand = Random.Range(0.0f, (percent / drop.dropRate));
+            if (rand <= 1.0f)
+            {
+                Instantiate(drop.Item, transform.position, drop.Item.transform.rotation);
+            }
+        }
+    }
 }
 
 [System.Serializable]

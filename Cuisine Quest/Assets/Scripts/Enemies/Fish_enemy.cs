@@ -93,15 +93,7 @@ public class Fish_enemy : EnemyAbstract
 
     void Die()
     {
-        float percent = 100.0f;
-        foreach (droppedItem drop in drops)
-        {
-            float rand = Random.Range(0.0f, (percent / drop.dropRate));
-            if (rand <= 1.0f)
-            {
-                Instantiate(drop.Item, transform.position, drop.Item.transform.rotation);
-            }
-        }
+        Drop();
         Destroy(gameObject);
     }
 }
