@@ -6,6 +6,10 @@ public class CiscoTesting : MonoBehaviour {
     public float WalkingSpeed = 10f;
     public bool HasMovementControl = true;
 
+    public Weapon CurrentWeapon;
+    public Weapon[] Weapons;
+    public Vector2 DirectionFacing = new Vector2(0, -1);
+
     public int FishMeat = 0;
     public int Greens = 0;
     public int Lemons = 0;
@@ -26,7 +30,21 @@ public class CiscoTesting : MonoBehaviour {
 	void Update () {
 
         if (HasMovementControl) handlMovement();
-        
+        if(Input.GetMouseButtonDown(0) && CurrentWeapon != null)
+        {
+            if (DirectionFacing.x > 0) CurrentWeapon.AttackRight();
+            else if (DirectionFacing.x < 0) CurrentWeapon.AttackLeft();
+            else if (DirectionFacing.y > 0) CurrentWeapon.AttackUp();
+            else if (DirectionFacing.y < 0) CurrentWeapon.AttackDown();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            CurrentWeapon = Weapons[0];
+        }else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            CurrentWeapon = Weapons[1];
+        }
 	}
 
     private void handlMovement()
@@ -41,23 +59,28 @@ public class CiscoTesting : MonoBehaviour {
         else if (Input.GetKey(KeyCode.W))
         {
             vMove = 1;
+            DirectionFacing = new Vector2(0, 1);
         }
         else if (Input.GetKey(KeyCode.S))
         {
             vMove = -1;
+            DirectionFacing = new Vector2(0, -1);
         }
 
         if ((Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.A)) || (!Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A)))
         {
             hMove = 0;
+
         }
         else if (Input.GetKey(KeyCode.D))
         {
             hMove = 1;
+            DirectionFacing = new Vector2(1, 0);
         }
         else if (Input.GetKey(KeyCode.A))
         {
             hMove = -1;
+            DirectionFacing = new Vector2(-1, 0);
         }
 
 

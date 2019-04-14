@@ -46,6 +46,11 @@ public abstract class AreaAbstract : MonoBehaviour {
         }
     }
 
+    public void AddObj(GameObject obj)
+    {
+        loaded.Add(obj);
+    }
+
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Player")

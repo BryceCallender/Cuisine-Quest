@@ -10,6 +10,7 @@ public class CameraBorder : MonoBehaviour {
     {
         if (collision.transform.tag == "Player")
         {
+            //Debug.Log(collision.transform.name);
             transform.parent.GetComponent<CameraController>().SceneTransition(TransitionDirection);
         }
     }

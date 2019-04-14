@@ -91,7 +91,7 @@ public class CameraController : MonoBehaviour {
             transitioning = true;
             transitionDestination = direction * transitionGrid ;
             transitionDestination += transform.position;
-            Debug.Log(transitionDestination.ToString());
+            //Debug.Log(transitionDestination.ToString());
 
             Player.HasMovementControl = false;
 
