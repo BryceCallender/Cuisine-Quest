@@ -285,7 +285,7 @@ GameObject:
   - component: {fileID: 30519769}
   m_Layer: 0
   m_Name: TownWall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25873,7 +25873,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyArea: {fileID: 11400000, guid: 55ffc8a1f2d474757a1070f03b9b467a, type: 2}
-  ToLoad: []
+  ToLoad:
+  - Prefab: {fileID: 1255861658072286, guid: 225d929cd6957c44b8b1cb26ec95b6e8, type: 2}
+    MyLocation: {x: -5, y: 0}
 --- !u!1 &1127410969
 GameObject:
   m_ObjectHideFlags: 0
@@ -55005,6 +55007,8 @@ MonoBehaviour:
   ToLoad:
   - Prefab: {fileID: 1803489744764170, guid: 6a718e7f166e4438da210d7b646d2842, type: 2}
     MyLocation: {x: 0, y: 0}
+  - Prefab: {fileID: 1255861658072286, guid: 225d929cd6957c44b8b1cb26ec95b6e8, type: 2}
+    MyLocation: {x: -3, y: -2}
 --- !u!1 &1694527682
 GameObject:
   m_ObjectHideFlags: 0
@@ -55187,7 +55191,7 @@ GameObject:
   - component: {fileID: 1744645557}
   m_Layer: 0
   m_Name: DungeonWalls
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59883,7 +59887,7 @@ GameObject:
   - component: {fileID: 1874028494}
   m_Layer: 0
   m_Name: House 1 Walls
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67122,7 +67126,7 @@ GameObject:
   - component: {fileID: 2035092665}
   m_Layer: 0
   m_Name: WorldPerimeter
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

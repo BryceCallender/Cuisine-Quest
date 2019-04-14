@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - LevelHandler
+  - Enemy
+  - BulletE
+  - Wall
   layers:
   - Default
   - TransparentFX
