@@ -8,6 +8,8 @@ using TMPro;
 public class OptionsMenu : MonoBehaviour 
 {
     public TMP_Dropdown resolutionDropDown;
+    public TMP_Dropdown qualityDropDown;
+    public Toggle toggle;
 
     Resolution[] resolutions;
     public AudioMixer audioMixer;
@@ -16,6 +18,7 @@ public class OptionsMenu : MonoBehaviour
     {
         resolutions = Screen.resolutions;
         SetResolutionDropDown();
+        InitChoicesToCurrentSettings();
     }
 
     public void SetVolume(float volume)
@@ -45,5 +48,33 @@ public class OptionsMenu : MonoBehaviour
         }
 
         resolutionDropDown.AddOptions(screenResolutions);
+    }
+
+    public void SetResolution(int index)
+    {
+        Resolution resolution = resolutions[index];
+        Screen.SetResolution(resolution.width,resolution.height,Screen.fullScreen);
+    }
+
+    public void InitChoicesToCurrentSettings()
+    {
+        toggle.isOn = Screen.fullScreen;
+        qualityDropDown.value = QualitySettings.GetQualityLevel();
+        qualityDropDown.RefreshShownValue();
+
+        Resolution currentResolution = Screen.currentResolution;
+        string resolution = currentResolution.width + " x " + currentResolution.height;
+
+        int resolutionIndex = 0;
+        for (int i = 0; i < resolutions.Length; i++)
+        {
+            if(resolutions[i].Equals(currentResolution))
+            {
+                resolutionIndex = i;
+            }
+        }
+
+        resolutionDropDown.value = resolutionIndex;
+        resolutionDropDown.RefreshShownValue();
     }
 }
