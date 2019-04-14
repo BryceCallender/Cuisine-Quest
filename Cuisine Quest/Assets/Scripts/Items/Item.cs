@@ -7,7 +7,8 @@ public abstract class Item : SpawnObject {
 
     public string Name = "Unnamed";
     public ItemType Type;
-    public enum ItemType{
+    public enum ItemType
+    {
         Inventory,
         Weapon,
         Ability
@@ -29,7 +30,7 @@ public abstract class Item : SpawnObject {
     {
         if(collision.transform.tag == "Player")
         {
-            collision.GetComponent<CiscoTesting>().AddItem(Name, 1);
+            collision.GetComponent<CiscoTesting>().AddItem(gameObject);
             GameObject.FindGameObjectWithTag("LevelHandler").GetComponent<LevelHandler>().CurrentArea.RemoveObj(gameObject);
             //Destroy(gameObject);
         }
