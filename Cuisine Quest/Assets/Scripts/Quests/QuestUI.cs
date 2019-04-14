@@ -16,6 +16,8 @@ public class QuestUI : MonoBehaviour
 
     public int height = 100;
     public int width = 100;
+    //The amount of things for IMGUI to draw
+    int guiQuestcount;
 
     // The position on of the scrolling viewport
     public Vector2 scrollPosition = Vector2.zero;
@@ -33,6 +35,8 @@ public class QuestUI : MonoBehaviour
         {
             showQuestUI = !showQuestUI;
         }
+
+        guiQuestcount = playerQuestSystem.GetActiveQuestCount();
     }
 
     private void OnGUI()
@@ -40,7 +44,6 @@ public class QuestUI : MonoBehaviour
         if(showQuestUI)
         {
             List<Quest> quests = questManager.GetQuests();
-            //gUIStyle.wordWrap = true;
             //Draw Big Box to hold all the quests
             GUI.Box(new Rect(10, 10, 250, Screen.height - 20), "Quests");
             int placeX = 15;
@@ -49,7 +52,7 @@ public class QuestUI : MonoBehaviour
             {
                 if(playerQuestSystem.GetHasQuestByID(quest.questID))
                 {
-                    scrollPosition = GUI.BeginScrollView(new Rect(10, 10, 250, Screen.height - 20), scrollPosition, new Rect(10, 10, 200, Screen.height - 20),false,true);
+                    scrollPosition = GUI.BeginScrollView(new Rect(10, 10, 250, Screen.height - 20), scrollPosition, new Rect(10, 10, 200, 75 * guiQuestcount),false,true);
 
                     //Draw the name of the quest
                     GUI.Label(new Rect(placeX, placeY, 100, 20), quest.questData.questName);
