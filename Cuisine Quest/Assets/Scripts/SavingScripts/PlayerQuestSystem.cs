@@ -83,6 +83,19 @@ public class PlayerQuestSystem : MonoBehaviour, ISaveable
         return questManager.quests[id];
     }
 
+    public int GetActiveQuestCount()
+    {
+        int count = 0;
+        foreach(PlayerQuestData data in currentQuests)
+        {
+            if(data.hasQuest)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+
     public void SetQuestOn(int id)
     {
         currentQuests[id].hasQuest = true;

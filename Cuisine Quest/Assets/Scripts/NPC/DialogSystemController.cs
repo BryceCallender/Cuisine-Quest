@@ -7,6 +7,7 @@ public class DialogSystemController : MonoBehaviour
 {
     private Queue<string> messages;
 
+    public Animator animator; 
     public TextMeshProUGUI characterDialogText;
     public GameObject dialogPopup;
     public bool paused;
@@ -35,6 +36,11 @@ public class DialogSystemController : MonoBehaviour
             Debug.Log("Hit space");
             DisplayMessage();
         }
+
+        if(animator.GetCurrentAnimatorStateInfo(0).IsName("DialogBox_Close"))
+        {
+            print("Closing");
+        }
     }
 
     public void StartDialog(Dialog dialog)
@@ -53,7 +59,12 @@ public class DialogSystemController : MonoBehaviour
     {
         if (isEmpty())
         {
-            dialogPopup.SetActive(false);
+            Debug.Log("Empty");
+            animator.SetBool("isOpen", false);
+            float time = animator.GetCurrentAnimatorStateInfo(0).length;
+            //Turns off the dialog box after the animation length is done
+            //So the engine doesnt have to worry about rendering. 
+            Invoke("TurnOffDialogBox", time);
             InteractionUnPauseMovementAndCamera();
             return;
         }
@@ -64,6 +75,7 @@ public class DialogSystemController : MonoBehaviour
 
         //Slowly displays the message that it should be showing
         dialogPopup.SetActive(true);
+        animator.SetBool("isOpen", true);
         coroutine = StartCoroutine(SlowlyDisplayMessage(sentence));
     }
 
@@ -94,6 +106,11 @@ public class DialogSystemController : MonoBehaviour
     public bool isEmpty()
     {
         return messages.Count == 0;
+    }
+
+    public void TurnOffDialogBox()
+    {
+        dialogPopup.SetActive(false);
     }
 
     private void InteractionPauseMovementAndCamera()
