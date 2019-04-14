@@ -6,6 +6,11 @@ public class SaveSystem : MonoBehaviour
 {
     public List<GameObject> saveableObjects;
 
+    private void Start()
+    {
+        DontDestroyOnLoad(this);
+    }
+
     /// <summary>
     /// Saves the game going thru the list of saveable objects and calling 
     /// the save function which will return the json format to the object
@@ -15,6 +20,7 @@ public class SaveSystem : MonoBehaviour
     public void SaveGame()
     {
         Debug.Log("Game Saved");
+        AudioSourceController.Instance.PlayAudio("Save");
         foreach (GameObject saveObject in saveableObjects)
         {
            saveObject.GetComponent<ISaveable>().Save();
