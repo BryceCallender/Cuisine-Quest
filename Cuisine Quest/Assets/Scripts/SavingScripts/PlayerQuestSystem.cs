@@ -83,6 +83,11 @@ public class PlayerQuestSystem : MonoBehaviour, ISaveable
         return questManager.quests[id];
     }
 
+    public List<Quest> GetQuests()
+    {
+        return questManager.GetQuests();
+    }
+
     public int GetActiveQuestCount()
     {
         int count = 0;
@@ -96,10 +101,10 @@ public class PlayerQuestSystem : MonoBehaviour, ISaveable
         return count;
     }
 
-    public void SetQuestOn(int id)
+    public void SetQuestStatus(int id, QuestState state)
     {
         currentQuests[id].hasQuest = true;
-        questManager.quests[id].questData.questState = QuestState.inProgress;
+        questManager.quests[id].questData.questState = state;
     }
 
     public void Save()

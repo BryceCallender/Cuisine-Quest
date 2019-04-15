@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour {
-    public CiscoTesting Player;
+    public PlayerController Player;
     public Hearts Health;
 
     public Vector2 transitionGrid = new Vector2(16, 10);
@@ -16,8 +16,8 @@ public class CameraController : MonoBehaviour {
 
     //public BoxCollider2D[] MyColliders;
 	// Use this for initialization
-	void Start () {
-		
+	void Start () 
+    {	
 	}
 	
 	// Update is called once per frame
@@ -25,7 +25,7 @@ public class CameraController : MonoBehaviour {
         if (DungeonExit)
         {
             transitioning = false;
-            Player.HasMovementControl = true;
+            Player.playerCanMove = true;
         }
         if (transitioning)
         {
@@ -36,7 +36,7 @@ public class CameraController : MonoBehaviour {
             {
                 transform.position = transitionDestination;
                 transitioning = false;
-                Player.HasMovementControl = true;
+                Player.playerCanMove = true;
                 GameObject.FindGameObjectWithTag("LevelHandler").GetComponent<LevelHandler>().FinishAreaMove();
             }
         }
@@ -60,6 +60,7 @@ public class CameraController : MonoBehaviour {
             handlePlayerTracking();
         }
     }
+
     float edgeBuffer = 0.7f;
     private void handlePlayerTracking()
     {
@@ -94,9 +95,8 @@ public class CameraController : MonoBehaviour {
             transitionDestination += transform.position;
             Debug.Log(transitionDestination.ToString());
 
-            Player.HasMovementControl = false;
+            Player.playerCanMove = false;
 
-            
         }
     }
 }

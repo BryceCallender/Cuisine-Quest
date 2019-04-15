@@ -3672,7 +3672,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecdc310ba0dfe408892917c6cb6d6f06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  giveableQuest: {fileID: 11400000, guid: 58f82cab45cfb48aeb82c3f03b11840c, type: 2}
+  giveableQuest: {fileID: 11400000, guid: 00851405f49254c28ba66a7dbd2a3fd1, type: 2}
   hasTalked: 0
   characterDialog: {fileID: 392920403}
 --- !u!114 &392920403
@@ -25541,6 +25541,7 @@ GameObject:
   - component: {fileID: 1133537819}
   - component: {fileID: 1133537818}
   - component: {fileID: 1133537814}
+  - component: {fileID: 1133537821}
   - component: {fileID: 1133537820}
   - component: {fileID: 1133537817}
   - component: {fileID: 1133537816}
@@ -25564,11 +25565,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WalkingSpeed: 4
-  HasMovementControl: 1
   currentHealth: 0
   maxHealth: 5
-  MyQuest:
-  - {fileID: 11400000, guid: f4802d13aee6d48f68bd5549d89ae93d, type: 2}
 --- !u!50 &1133537815
 Rigidbody2D:
   serializedVersion: 4
@@ -25703,6 +25701,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentQuests: []
+--- !u!114 &1133537821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1133537813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93bbe42602ef6ed40abe1d3f6dcef523, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  playerCanMove: 1
 --- !u!1 &1136033032
 GameObject:
   m_ObjectHideFlags: 0
@@ -66439,7 +66450,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b0aa3d533402b34eb4120f94faf0fda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 1133537814}
+  Player: {fileID: 1133537821}
   Health: {fileID: 0}
   transitionGrid: {x: 16, y: 10}
   TransitionSpeed: 10

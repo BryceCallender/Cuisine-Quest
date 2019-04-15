@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LemonJuice : Item {
-
-	
+public class LemonJuice : Item 
+{	
 }
