@@ -4,19 +4,22 @@ using UnityEngine;
 
 public class Sword : Weapon {
     //public float AttackWait = 0.5f;
-    private float attackedLast = float.NegativeInfinity;
+    //private float attackedLast = float.NegativeInfinity;
 
-    private Vector2 JabVector;
+    //private Vector2 JabVector;
 
-    private float JabFinish;
+    //private float JabFinish;
     private bool Jabbing = false;
 
     private bool Slashing = false;
 
-    public JabbingProperties JP;
-    public SlashingProperties SP;
+    //public JabbingProperties JP;
+    //public SlashingProperties SP;
 
-    public GameObject Mesh;
+    public SlashingWeapon sw;
+    public JabbingWeapon jw;
+
+    //public GameObject Mesh;
 
     public enum AttackType
     {
@@ -27,73 +30,67 @@ public class Sword : Weapon {
 
 	// Use this for initialization
 	void Start () {
-		
+        //sw = new SlashingWeapon();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-        if (MyAttack == AttackType.Jab) JabAttack(JP, ref JabVector, ref JabFinish, ref Jabbing);
+        //if (MyAttack == AttackType.Jab) jw.JabAttack(transform, ref JabVector, ref JabFinish, ref Jabbing);
+        if (MyAttack == AttackType.Jab) jw.JabAttack(transform, ref Jabbing, false);
         else if (MyAttack == AttackType.Slash)
         {
             
-            SlashAttack(SP, ref Slashing);
+            sw.SlashAttack(transform, ref Slashing);
         }
 	}
 
-    private void attack()
-    {
-        //JabFinish = Time.fixedTime + 2;
-        if(attackedLast + JP.AttackWait < Time.fixedTime)
-        {
-            Jabbing = true;
-            Mesh.SetActive(true);
-            GetComponent<AudioSource>().Play();
-            attackedLast = Time.fixedTime;
-        }
-        
-    }
+  
 
     public override void Attack(Vector2 PlayerDirection)
     {
         if(MyAttack == AttackType.Jab)
         {
-            if (PlayerDirection.x < 0) AttackLeft();
-            else if (PlayerDirection.x > 0) AttackRight();
-            else if (PlayerDirection.y < 0) AttackDown();
-            else if (PlayerDirection.y > 0) AttackUp();
+            if (jw.CanAttack()) GetComponent<AudioSource>().Play();
+            else return;
+
+            if (PlayerDirection.x < 0) jw.AttackLeft(transform, ref Jabbing);
+            else if (PlayerDirection.x > 0) jw.AttackRight(transform, ref Jabbing);
+            else if (PlayerDirection.y < 0) jw.AttackDown(transform, ref Jabbing);
+            else if (PlayerDirection.y > 0) jw.AttackUp(transform, ref Jabbing);
 
         }
 
-        else if(MyAttack == AttackType.Slash)
+        else if(MyAttack == AttackType.Slash && !Slashing)
         {
-            transform.localPosition = SP.HiltLocation;
-            transform.localEulerAngles = new Vector3(0, 0, SP.RotationBegin);
+            transform.localPosition = sw.HiltLocation;
+            transform.localEulerAngles = new Vector3(0, 0, sw.RotationBegin);
 
             //transform.right = PlayerDirection;
 
             if (PlayerDirection.x < 0)
             {
-                transform.localPosition = SP.HiltLeftLocation;
-                SP.myDirection = SlashingProperties.Direction.Left;
+                transform.localPosition = sw.HiltLeftLocation;
+                sw.myDirection = SlashingWeapon.Direction.Left;
             }
             else if (PlayerDirection.x > 0)
             {
-                transform.localPosition = SP.HiltLocation;
-                SP.myDirection = SlashingProperties.Direction.Right;
+                transform.localPosition = sw.HiltLocation;
+                sw.myDirection = SlashingWeapon.Direction.Right;
             }
             else if (PlayerDirection.y > 0)
             {
-                transform.localPosition = SP.HiltUpLocation;
-                SP.myDirection = SlashingProperties.Direction.Up;
+                transform.localPosition = sw.HiltUpLocation;
+                sw.myDirection = SlashingWeapon.Direction.Up;
             }
             else if (PlayerDirection.y < 0)
             {
-                transform.localPosition = SP.HiltDownLocation;
-                SP.myDirection = SlashingProperties.Direction.Down;
+                transform.localPosition = sw.HiltDownLocation;
+                sw.myDirection = SlashingWeapon.Direction.Down;
             }
 
-                Slashing = true;
+            GetComponent<AudioSource>().Play();
+            Slashing = true;
             Mesh.SetActive(true);
             //SlashAttack(SP);
         }
@@ -103,50 +100,12 @@ public class Sword : Weapon {
         Debug.Log("I ain't throw'n me blade!");
     }
 
-    public void AttackRight()
-    {
-        if (attackedLast + JP.AttackWait > Time.fixedTime) return;
-
-        transform.localEulerAngles = new Vector3(0, 0, 0);
-        transform.localPosition = new Vector3(0, JP.JabYOffset, 0);
-        JabVector = new Vector2(JP.JabRightDistance, JP.JabYOffset);
-        attack();
-    }
-
-    public void AttackLeft()
-    {
-        if (attackedLast + JP.AttackWait > Time.fixedTime) return;
-
-        transform.localEulerAngles = new Vector3(0, 0, 180);
-        transform.localPosition = new Vector3(0, JP.JabYOffset, 0);
-        JabVector = new Vector2(-JP.JabLeftDistance, JP.JabYOffset);
-
-        attack();
-    }
-
-    public void AttackDown()
-    {
-        if (attackedLast + JP.AttackWait > Time.fixedTime) return;
-
-        transform.localEulerAngles = new Vector3(0, 0, 270);
-        transform.localPosition = new Vector3(-JP.JabXOffset, 0, 0);
-        JabVector = new Vector2(-JP.JabXOffset, -JP.JabDownDistance);
-        attack();
-    }
-
-    public void AttackUp()
-    {
-        if (attackedLast + JP.AttackWait > Time.fixedTime) return;
-
-        transform.localEulerAngles = new Vector3(0, 0, 90);
-        transform.localPosition = new Vector3(JP.JabXOffset, 0, 0);
-        JabVector = new Vector2(JP.JabXOffset, JP.JabUpDistance);
-        attack();
-    }
+    
     public void attackEnd()
     {
         transform.localPosition = new Vector3(0, 0, 0);
         Mesh.SetActive(false);
+        Slashing = false;
         Jabbing = false;
     }
 

@@ -3551,20 +3551,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WeaponPower: 2
-  AttackWait: 0.75
-  JabSpeed: 10
-  JabDistance: 1
-  JabDuration: 0.5
-  JabRightDistance: 0.5
-  JabLeftDistance: 0.5
-  JabUpDistance: 0.75
-  JabDownDistance: 0.75
-  JabXOffset: 0.1
-  JabYOffset: -0.2
+  Mesh: {fileID: 1587528301}
+  jw:
+    AttackPowerMultiplier: 0
+    AttackWait: 0.75
+    Speed: 10
+    JabDistance: 1
+    JabDuration: 0.5
+    JabRightDistance: 0.5
+    JabLeftDistance: 0.5
+    JabUpDistance: 0.75
+    JabDownDistance: 0.75
+    JabXOffset: 0.1
+    JabYOffset: -0.2
   ProjectileSpeed: 10
   ProjectileFireRate: 1
   Tridentin: {fileID: 229591401}
-  Mesh: {fileID: 1587528301}
 --- !u!4 &425772829
 Transform:
   m_ObjectHideFlags: 0
@@ -3634,21 +3636,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WeaponPower: 3
+  Mesh: {fileID: 140224908}
   KnifeCount: 4
   KnifeThrowingSpeed: 20
-  AttackWait: 0.35
   ThrowingKnife: {fileID: 1667652139356886, guid: 35b8de0b58955b34ca309e3a1cc59bcb,
     type: 2}
-  JabSpeed: 200
-  JabDistance: 0.2
-  JabDuration: 0.2
-  JabRightDistance: 0.5
-  JabLeftDistance: 0.5
-  JabUpDistance: 0.5
-  JabDownDistance: 0.58
-  JabXOffset: 0.18
-  JabYOffset: -0.18
-  Mesh: {fileID: 140224908}
+  jw:
+    AttackPowerMultiplier: 0
+    AttackWait: 0.35
+    Speed: 200
+    JabDistance: 0.2
+    JabDuration: 0.2
+    JabRightDistance: 0.5
+    JabLeftDistance: 0.5
+    JabUpDistance: 0.5
+    JabDownDistance: 0.58
+    JabXOffset: 0.18
+    JabYOffset: -0.18
 --- !u!61 &430736673
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -19868,7 +19872,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WeaponPower: 1
-  JP:
+  Mesh: {fileID: 781053415}
+  sw:
+    RotationSpeed: 800
+    RotationBegin: -45
+    RotationLength: 90
+    HiltLocation: {x: 0.368, y: -0.2}
+    HiltUpLocation: {x: 0.211, y: 0.414}
+    HiltLeftLocation: {x: -0.371, y: 0}
+    HiltDownLocation: {x: -0.3, y: -0.46}
+    HiltDisplacement: {x: 0, y: 0.3}
+    WaitOnFinish: 0.3
+    myDirection: 0
+  jw:
     AttackPowerMultiplier: 0
     AttackWait: 0.4
     Speed: 15
@@ -19877,21 +19893,10 @@ MonoBehaviour:
     JabRightDistance: 0.5
     JabLeftDistance: 0.5
     JabUpDistance: 0.5
-    JabDownDistance: 0.7
+    JabDownDistance: 0.5
     JabXOffset: 0.1
     JabYOffset: -0.2
-  SP:
-    RotationSpeed: 650
-    RotationBegin: -45
-    RotationLength: 90
-    HiltLocation: {x: 0.368, y: -0.2}
-    HiltUpLocation: {x: 0.211, y: 0.414}
-    HiltLeftLocation: {x: -0.371, y: -0.2}
-    HiltDownLocation: {x: -0.3, y: -0.46}
-    WaitOnFinish: 0.3
-    myDirection: 0
-  Mesh: {fileID: 781053415}
-  MyAttack: 1
+  MyAttack: 0
 --- !u!82 &963812620
 AudioSource:
   m_ObjectHideFlags: 0
@@ -25521,7 +25526,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WalkingSpeed: 4
   HasMovementControl: 1
-  CurrentWeapon: {fileID: 430736672}
+  CurrentWeapon: {fileID: 963812619}
   Weapons:
   - {fileID: 963812619}
   - {fileID: 425772828}
