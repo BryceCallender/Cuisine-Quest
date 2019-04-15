@@ -93,7 +93,7 @@ public class OctoEnemy : EnemyAbstract
         }
         else if(collision.CompareTag("Player"))
         {
-            collision.GetComponent<CiscoTesting>().health -= 1;
+            collision.GetComponent<CiscoTesting>().currentHealth -= 1;
             transform.Rotate(0, 0, 180);
             Vector2 movement = transform.up;
             movement = movement.normalized * speed;

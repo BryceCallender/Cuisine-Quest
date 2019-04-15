@@ -83,7 +83,7 @@ public class Fish_enemy : EnemyAbstract
     {
         if(collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<CiscoTesting>().health -= 1;
+            collision.gameObject.GetComponent<CiscoTesting>().currentHealth -= 1;
             rb.velocity = new Vector2(0, 0);
             playerFound = false;
             timer = 0.0f;

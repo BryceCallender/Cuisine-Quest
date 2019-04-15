@@ -7,8 +7,7 @@ public class CiscoTesting : MonoBehaviour
 {
     public float WalkingSpeed = 10f;
     public bool HasMovementControl = true;
-    
-    public int health = 1;
+
     public int currentHealth;
     public int maxHealth = 5;
 
@@ -32,10 +31,7 @@ public class CiscoTesting : MonoBehaviour
 	void Update ()
     {
         if (HasMovementControl) handlMovement();
-        if(health <= 0)
-        {
-            print("dead");
-        }
+
         if (currentHealth <= 0)
         {
             Die();
