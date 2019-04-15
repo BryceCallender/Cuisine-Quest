@@ -36,11 +36,6 @@ public class DialogSystemController : MonoBehaviour
             Debug.Log("Hit space");
             DisplayMessage();
         }
-
-        if(animator.GetCurrentAnimatorStateInfo(0).IsName("DialogBox_Close"))
-        {
-            print("Closing");
-        }
     }
 
     public void StartDialog(Dialog dialog)
@@ -59,13 +54,11 @@ public class DialogSystemController : MonoBehaviour
     {
         if (isEmpty())
         {
-            Debug.Log("Empty");
             animator.SetBool("isOpen", false);
             float time = animator.GetCurrentAnimatorStateInfo(0).length;
             //Turns off the dialog box after the animation length is done
             //So the engine doesnt have to worry about rendering. 
             Invoke("TurnOffDialogBox", time);
-            InteractionUnPauseMovementAndCamera();
             return;
         }
 
@@ -113,13 +106,13 @@ public class DialogSystemController : MonoBehaviour
         dialogPopup.SetActive(false);
     }
 
-    private void InteractionPauseMovementAndCamera()
+    private void StopPlayerMovement()
     {
         //this.GetComponent<PlayerMovement>().enabled = false;
         //this.GetComponent<CameraController>().enabled = false;
     }
 
-    private void InteractionUnPauseMovementAndCamera()
+    private void StartPlayerMovement()
     {
         //this.GetComponent<PlayerMovement>().enabled = true;
         //this.GetComponent<CameraController>().enabled = true;

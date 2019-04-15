@@ -33,7 +33,7 @@ public class bullet : MonoBehaviour
         }
         else if(collision.CompareTag("Player"))
         {
-            collision.GetComponent<CiscoTesting>().health -= 1;
+            collision.GetComponent<CiscoTesting>().currentHealth -= 1;
             Destroy(gameObject);
         }
     }
