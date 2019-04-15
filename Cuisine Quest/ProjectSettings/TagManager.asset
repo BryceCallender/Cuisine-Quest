@@ -8,6 +8,7 @@ TagManager:
   - Weapon
   - Area
   - Water
+  - Item
   layers:
   - Default
   - TransparentFX

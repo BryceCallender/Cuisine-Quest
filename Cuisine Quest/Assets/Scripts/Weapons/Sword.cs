@@ -3,25 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Sword : Weapon {
-    public float AttackWait = 0.5f;
+    //public float AttackWait = 0.5f;
     private float attackedLast = float.NegativeInfinity;
-
-    public float JabSpeed = 100;
-    public float JabDistance = 1.0f;
-    public float JabDuration = 0.2f;
-
-    public float JabRightDistance = 0.5f;
-    public float JabLeftDistance = 0.5f;
-    public float JabUpDistance = 0.75f;
-    public float JabDownDistance = 0.75f;
-
-    public float JabXOffset = 0.1f;
-    public float JabYOffset = 0.1f;
 
     private Vector2 JabVector;
 
     private float JabFinish;
     private bool Jabbing = false;
+
+    private bool Slashing = false;
+
+    public JabbingProperties JP;
+    public SlashingProperties SP;
 
     public GameObject Mesh;
 
@@ -30,7 +23,7 @@ public class Sword : Weapon {
         Jab,
         Slash
     }
-    public AttackType Attack;
+    public AttackType MyAttack;
 
 	// Use this for initialization
 	void Start () {
@@ -40,25 +33,18 @@ public class Sword : Weapon {
 	// Update is called once per frame
 	void Update () {
 
-
-		if(Jabbing && Vector3.Magnitude(transform.localPosition) < JabDistance)
+        if (MyAttack == AttackType.Jab) JabAttack(JP, ref JabVector, ref JabFinish, ref Jabbing);
+        else if (MyAttack == AttackType.Slash)
         {
-            transform.localPosition = Vector3.MoveTowards(transform.localPosition, JabVector, JabSpeed * Time.deltaTime);
-        }else if (Jabbing)
-        {
-            Jabbing = false;
-            JabFinish = Time.fixedTime;
-        }else if(JabFinish + JabDuration < Time.fixedTime)
-        {
-            transform.localPosition = new Vector3(0, 0, 0);
-            Mesh.SetActive(false);
+            
+            SlashAttack(SP, ref Slashing);
         }
 	}
 
     private void attack()
     {
         //JabFinish = Time.fixedTime + 2;
-        if(attackedLast + AttackWait < Time.fixedTime)
+        if(attackedLast + JP.AttackWait < Time.fixedTime)
         {
             Jabbing = true;
             Mesh.SetActive(true);
@@ -68,46 +54,110 @@ public class Sword : Weapon {
         
     }
 
-
-
-    public override void AttackRight()
+    public override void Attack(Vector2 PlayerDirection)
     {
-        if (attackedLast + AttackWait > Time.fixedTime) return;
+        if(MyAttack == AttackType.Jab)
+        {
+            if (PlayerDirection.x < 0) AttackLeft();
+            else if (PlayerDirection.x > 0) AttackRight();
+            else if (PlayerDirection.y < 0) AttackDown();
+            else if (PlayerDirection.y > 0) AttackUp();
+
+        }
+
+        else if(MyAttack == AttackType.Slash)
+        {
+            transform.localPosition = SP.HiltLocation;
+            transform.localEulerAngles = new Vector3(0, 0, SP.RotationBegin);
+
+            //transform.right = PlayerDirection;
+
+            if (PlayerDirection.x < 0)
+            {
+                transform.localPosition = SP.HiltLeftLocation;
+                SP.myDirection = SlashingProperties.Direction.Left;
+            }
+            else if (PlayerDirection.x > 0)
+            {
+                transform.localPosition = SP.HiltLocation;
+                SP.myDirection = SlashingProperties.Direction.Right;
+            }
+            else if (PlayerDirection.y > 0)
+            {
+                transform.localPosition = SP.HiltUpLocation;
+                SP.myDirection = SlashingProperties.Direction.Up;
+            }
+            else if (PlayerDirection.y < 0)
+            {
+                transform.localPosition = SP.HiltDownLocation;
+                SP.myDirection = SlashingProperties.Direction.Down;
+            }
+
+                Slashing = true;
+            Mesh.SetActive(true);
+            //SlashAttack(SP);
+        }
+    }
+    public override void AttackSecondary(Vector2 PlayerDirection, bool PrimaryAttacking)
+    {
+        Debug.Log("I ain't throw'n me blade!");
+    }
+
+    public void AttackRight()
+    {
+        if (attackedLast + JP.AttackWait > Time.fixedTime) return;
 
         transform.localEulerAngles = new Vector3(0, 0, 0);
-        transform.localPosition = new Vector3(0, JabYOffset, 0);
-        JabVector = new Vector2(JabRightDistance, JabYOffset);
+        transform.localPosition = new Vector3(0, JP.JabYOffset, 0);
+        JabVector = new Vector2(JP.JabRightDistance, JP.JabYOffset);
         attack();
     }
 
-    public override void AttackLeft()
+    public void AttackLeft()
     {
-        if (attackedLast + AttackWait > Time.fixedTime) return;
+        if (attackedLast + JP.AttackWait > Time.fixedTime) return;
 
         transform.localEulerAngles = new Vector3(0, 0, 180);
-        transform.localPosition = new Vector3(0, JabYOffset, 0);
-        JabVector = new Vector2(-JabLeftDistance, JabYOffset);
+        transform.localPosition = new Vector3(0, JP.JabYOffset, 0);
+        JabVector = new Vector2(-JP.JabLeftDistance, JP.JabYOffset);
 
         attack();
     }
 
-    public override void AttackDown()
+    public void AttackDown()
     {
-        if (attackedLast + AttackWait > Time.fixedTime) return;
+        if (attackedLast + JP.AttackWait > Time.fixedTime) return;
 
         transform.localEulerAngles = new Vector3(0, 0, 270);
-        transform.localPosition = new Vector3(-JabXOffset, 0, 0);
-        JabVector = new Vector2(-JabXOffset, -JabDownDistance);
+        transform.localPosition = new Vector3(-JP.JabXOffset, 0, 0);
+        JabVector = new Vector2(-JP.JabXOffset, -JP.JabDownDistance);
         attack();
     }
 
-    public override void AttackUp()
+    public void AttackUp()
     {
-        if (attackedLast + AttackWait > Time.fixedTime) return;
+        if (attackedLast + JP.AttackWait > Time.fixedTime) return;
 
         transform.localEulerAngles = new Vector3(0, 0, 90);
-        transform.localPosition = new Vector3(JabXOffset, 0, 0);
-        JabVector = new Vector2(JabXOffset, JabUpDistance);
+        transform.localPosition = new Vector3(JP.JabXOffset, 0, 0);
+        JabVector = new Vector2(JP.JabXOffset, JP.JabUpDistance);
         attack();
+    }
+    public void attackEnd()
+    {
+        transform.localPosition = new Vector3(0, 0, 0);
+        Mesh.SetActive(false);
+        Jabbing = false;
+    }
+
+    public override bool AttackAbort()
+    {
+        attackEnd();
+
+        return true;
+    }
+    public override void AttackAbortForced()
+    {
+        attackEnd();
     }
 }

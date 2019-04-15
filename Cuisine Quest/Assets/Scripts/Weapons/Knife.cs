@@ -2,9 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Trident : Weapon {
+public class Knife : Weapon {
+    public int KnifeCount = 1;
+
+    public float KnifeThrowingSpeed = 20f;
+
     public float AttackWait = 0.5f;
     private float attackedLast = float.NegativeInfinity;
+    public GameObject ThrowingKnife;
 
     public float JabSpeed = 100;
     public float JabDistance = 1.0f;
@@ -21,14 +26,7 @@ public class Trident : Weapon {
     private Vector2 JabVector;
 
     private float JabFinish;
-    private bool jabFinishSet = false;
     private bool Jabbing = false;
-    private bool HoldAtAttack = false;
-
-    public float ProjectileSpeed = 10;
-    public float ProjectileFireRate = 1;
-    private float lastProjectileFire = float.NegativeInfinity;
-    public TridentProjectile Tridentin;
 
     public GameObject Mesh;
 
@@ -39,61 +37,32 @@ public class Trident : Weapon {
 	
 	// Update is called once per frame
 	void Update () {
-
-        HoldAtAttack = Input.GetMouseButton(0);
-
-        if (Jabbing && Vector3.Magnitude(transform.localPosition) < Vector3.Magnitude(JabVector))//JabDistance)
+        if (Jabbing && Vector3.Magnitude(transform.localPosition) < Vector3.Magnitude(JabVector))
         {
             transform.localPosition = Vector3.MoveTowards(transform.localPosition, JabVector, JabSpeed * Time.deltaTime);
-            //Debug.Log(Vector3.Magnitude(transform.localPosition));
-        }
-        else if(Jabbing && HoldAtAttack)
-        {
-            
-            if (!jabFinishSet)
-            {
-                JabFinish = Time.fixedTime;
-                jabFinishSet = true;
-            }
         }
         else if (Jabbing)
         {
             Jabbing = false;
-            if (!jabFinishSet)
-            {
-                JabFinish = Time.fixedTime;
-                jabFinishSet = true;
-            }
+            JabFinish = Time.fixedTime;
         }
         else if (JabFinish + JabDuration < Time.fixedTime)
         {
             AttackAbort();
         }
-        //Debug.Log(JabFinish);
     }
 
     private void attack()
     {
         //JabFinish = Time.fixedTime + 2;
-        if (attackedLast + AttackWait < Time.fixedTime)
+        if (attackedLast + AttackWait < Time.fixedTime && KnifeCount > 0)
         {
             Jabbing = true;
-            jabFinishSet = false;
             Mesh.SetActive(true);
             //GetComponent<AudioSource>().Play();
             attackedLast = Time.fixedTime;
         }
 
-    }
-
-    private void attackSecondary()
-    {
-        //Debug.Log("Fire");
-        GameObject projectile = GameObject.Instantiate(Tridentin.gameObject, Tridentin.transform.position, Quaternion.identity);
-        projectile.SetActive(true);
-        projectile.transform.right = transform.right;
-        projectile.transform.parent = null;
-        projectile.GetComponent<Rigidbody2D>().velocity = ProjectileSpeed * transform.right;
     }
 
     public override void Attack(Vector2 PlayerDirection)
@@ -105,7 +74,15 @@ public class Trident : Weapon {
     }
     public override void AttackSecondary(Vector2 PlayerDirection, bool PrimaryAttacking)
     {
-        if (PrimaryAttacking) attackSecondary();
+        if(KnifeCount > 0)
+        {
+            AttackAbortForced();
+            GameObject throwingKnife = Instantiate(ThrowingKnife, gameObject.transform.position, Quaternion.identity);
+            throwingKnife.GetComponent<Rigidbody2D>().velocity = KnifeThrowingSpeed * PlayerDirection;
+            throwingKnife.transform.right = PlayerDirection;
+
+            KnifeCount -= 1;
+        }
     }
 
     public void AttackRight()
@@ -123,7 +100,7 @@ public class Trident : Weapon {
         if (attackedLast + AttackWait > Time.fixedTime) return;
 
         transform.localEulerAngles = new Vector3(0, 0, 180);
-        transform.localPosition = new Vector3(0,  JabYOffset,0);
+        transform.localPosition = new Vector3(0, JabYOffset, 0);
         JabVector = new Vector2(-JabLeftDistance, JabYOffset);
 
         attack();
@@ -134,7 +111,7 @@ public class Trident : Weapon {
         if (attackedLast + AttackWait > Time.fixedTime) return;
 
         transform.localEulerAngles = new Vector3(0, 0, 270);
-        transform.localPosition = new Vector3(-JabXOffset, 0,  0);
+        transform.localPosition = new Vector3(-JabXOffset, 0, 0);
         JabVector = new Vector2(-JabXOffset, -JabDownDistance);
         attack();
     }
@@ -144,11 +121,11 @@ public class Trident : Weapon {
         if (attackedLast + AttackWait > Time.fixedTime) return;
 
         transform.localEulerAngles = new Vector3(0, 0, 90);
-        transform.localPosition = new Vector3(JabXOffset, 0,  0);
+        transform.localPosition = new Vector3(JabXOffset, 0, 0);
         JabVector = new Vector2(JabXOffset, JabUpDistance);
         attack();
     }
-    private void attackEnd()
+    public void attackEnd()
     {
         transform.localPosition = new Vector3(0, 0, 0);
         Mesh.SetActive(false);
@@ -157,13 +134,10 @@ public class Trident : Weapon {
 
     public override bool AttackAbort()
     {
-        if (!HoldAtAttack)
-        {
-            attackEnd();
-        }
-        return !HoldAtAttack;
-    }
+        attackEnd();
 
+        return true;
+    }
     public override void AttackAbortForced()
     {
         attackEnd();

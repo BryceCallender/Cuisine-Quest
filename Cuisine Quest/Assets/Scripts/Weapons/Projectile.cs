@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour {
+public abstract class Projectile : MonoBehaviour {
+    public float Damage = 1;
 
 	// Use this for initialization
 	void Start () {
-        GameObject.FindGameObjectWithTag("LevelHandler").GetComponent<LevelHandler>().CurrentArea.AddObj(gameObject);
-        Destroy(gameObject, 2);
+        //GameObject.FindGameObjectWithTag("LevelHandler").GetComponent<LevelHandler>().CurrentArea.AddObj(gameObject);
+        //Destroy(gameObject, 2);
 	}
 	
 	// Update is called once per frame
@@ -15,14 +16,14 @@ public class Projectile : MonoBehaviour {
 		
 	}
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.tag != "Area" && collision.tag != "Water")
-        {
-            Debug.Log(collision.name);
-            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            transform.parent = collision.transform;
-        }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if(collision.tag != "Area" && collision.tag != "Water" && collision.tag != "Weapon" && collision.tag != "Item")
+    //    {
+    //        Debug.Log(collision.name);
+    //        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+    //        transform.parent = collision.transform;
+    //    }
         
-    }
+    //}
 }
