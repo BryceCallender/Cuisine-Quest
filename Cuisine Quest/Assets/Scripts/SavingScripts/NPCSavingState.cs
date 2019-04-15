@@ -26,15 +26,6 @@ public class NPCSavingState : MonoBehaviour, ISaveable
         }
     }
 
-    public void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.T))
-        {
-            Debug.Log("Saved");
-            WriteFile();
-        }
-    }
-
     public void ReadFile()
     {
         NPCStates npcFileStates = JsonArrayHandler<NPCStates>.ReadJsonFile(filePath);

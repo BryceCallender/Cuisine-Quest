@@ -7,15 +7,13 @@ public class QuestUI : MonoBehaviour
     QuestManager questManager;
     PlayerQuestSystem playerQuestSystem;
     public GUIStyle gUIStyle;
-
     private bool showQuestUI;
 
     const int offset = 20;
     const int padding = 5;
+    const int bottomScreenDisplacement = 20;
     readonly Vector2 GUI_BOX_SIZE = new Vector2(200, 30);
 
-    public int height = 100;
-    public int width = 100;
     //The amount of things for IMGUI to draw
     int guiQuestcount;
 
@@ -45,7 +43,7 @@ public class QuestUI : MonoBehaviour
         {
             List<Quest> quests = questManager.GetQuests();
             //Draw Big Box to hold all the quests
-            GUI.Box(new Rect(10, 10, 250, Screen.height - 20), "Quests");
+            GUI.Box(new Rect(10,10,250,Screen.height - bottomScreenDisplacement),"Quests");
             int placeX = 15;
             int placeY = 30;
             foreach (Quest quest in quests)

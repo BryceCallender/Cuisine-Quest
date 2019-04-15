@@ -19,12 +19,14 @@ public class NPC : MonoBehaviour
 {
     public Quest giveableQuest;
     public bool hasTalked;
+    [HideInInspector]
     public CharacterDialog characterDialog;
-    public DialogSystemController dialogSystemController;
+    private DialogSystemController dialogSystemController;
 
     private void Start()
     {
         dialogSystemController = FindObjectOfType<DialogSystemController>();
+        characterDialog = GetComponent<CharacterDialog>();
     }
 
     //TODO::Add the quest to the player gameobject
@@ -54,5 +56,4 @@ public class NPC : MonoBehaviour
             GiveQuest(collision.GetComponent<CiscoTesting>());
         }
     }
-
 }
