@@ -9,7 +9,7 @@ public class Fish_enemy : EnemyAbstract
     Vector3 thisPos;
     public float offset;
     float angle;
-    float minDistance = 4f;
+    float minDistance = 3f;
     float range;
     bool playerFound = false;
     Rigidbody2D rb;
