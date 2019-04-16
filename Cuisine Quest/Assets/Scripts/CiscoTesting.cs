@@ -32,14 +32,19 @@ public class CiscoTesting : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update ()
-    {
-        if(Input.GetMouseButtonDown(0) && CurrentWeapon != null)
+	void Update () {
+
+        if (HasMovementControl) handlMovement();
+
+        bool primaryAttack = Input.GetMouseButtonDown(0);
+        if (primaryAttack && CurrentWeapon != null)
         {
-            if (DirectionFacing.x > 0) CurrentWeapon.AttackRight();
-            else if (DirectionFacing.x < 0) CurrentWeapon.AttackLeft();
-            else if (DirectionFacing.y > 0) CurrentWeapon.AttackUp();
-            else if (DirectionFacing.y < 0) CurrentWeapon.AttackDown();
+            CurrentWeapon.Attack(DirectionFacing);
+        }
+        if (Input.GetMouseButton(0)) primaryAttack = true;
+        if (Input.GetMouseButtonDown(1) && CurrentWeapon != null)
+        {
+            CurrentWeapon.AttackSecondary(DirectionFacing, primaryAttack);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -55,7 +60,12 @@ public class CiscoTesting : MonoBehaviour
         {
             Die();
         }
-	}
+	
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            CurrentWeapon = Weapons[2];
+        }
+    }
 
     void Die()
     {
@@ -66,6 +76,8 @@ public class CiscoTesting : MonoBehaviour
         float vMove = 0; // = Input.GetAxis("Vertical");
         float hMove = 0; // = Input.GetAxis("Horizontal");
 
+        Vector2 newFacingDirection = DirectionFacing;
+
         if ((Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.S)) || (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S)))
         {
             vMove = 0;
@@ -73,12 +85,12 @@ public class CiscoTesting : MonoBehaviour
         else if (Input.GetKey(KeyCode.W))
         {
             vMove = 1;
-            DirectionFacing = new Vector2(0, 1);
+            newFacingDirection = new Vector2(0, 1);
         }
         else if (Input.GetKey(KeyCode.S))
         {
             vMove = -1;
-            DirectionFacing = new Vector2(0, -1);
+            newFacingDirection = new Vector2(0, -1);
         }
 
         if ((Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.A)) || (!Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A)))
@@ -89,14 +101,24 @@ public class CiscoTesting : MonoBehaviour
         else if (Input.GetKey(KeyCode.D))
         {
             hMove = 1;
-            DirectionFacing = new Vector2(1, 0);
+            newFacingDirection = new Vector2(1, 0);
         }
         else if (Input.GetKey(KeyCode.A))
         {
             hMove = -1;
-            DirectionFacing = new Vector2(-1, 0);
+            newFacingDirection = new Vector2(-1, 0);
         }
 
+        //checking if Player movement direction has changed and if 
+        //current weapon will allow character sprite direction change
+        if(newFacingDirection != DirectionFacing)
+        {
+            if (CurrentWeapon.AttackAbort())
+            {
+                DirectionFacing = newFacingDirection;
+            }
+        }
+        //Debug.Log(DirectionFacing.ToString());
 
         Vector2 movement = new Vector2(hMove, vMove);
         movement = movement.normalized * WalkingSpeed;

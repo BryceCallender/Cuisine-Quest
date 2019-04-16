@@ -33,6 +33,7 @@ public class LevelHandler : MonoBehaviour {
     {
         Camera.position = cameraLocation;
         Player.transform.position = (Vector2)cameraLocation + playerLocation;
+        Player.GetComponent<CiscoTesting>().CurrentWeapon.AttackAbortForced();
 
         hasNewArea = true;
         loadedNewArea = false;
