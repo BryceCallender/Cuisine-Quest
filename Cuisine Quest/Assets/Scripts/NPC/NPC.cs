@@ -36,7 +36,7 @@ public class NPC : MonoBehaviour
         if(dialogSystemController.isEmpty())
         {
             Quest quest = player.GetComponent<PlayerQuestSystem>().GetQuestByID(giveableQuest.questID);
-            player.GetComponent<PlayerQuestSystem>().SetQuestOn(quest.questID);
+            player.GetComponent<PlayerQuestSystem>().SetQuestStatus(quest.questID,QuestState.inProgress);
             hasTalked = true;
         }
     }
@@ -46,6 +46,16 @@ public class NPC : MonoBehaviour
         if(collision.CompareTag("Player") && !hasTalked)
         {
             characterDialog.EnableDialog();
+        }
+        //Quest is completed and we need to go to the npc to end the quest
+        else if(collision.GetComponent("Player") && hasTalked)
+        {
+            Quest quest = collision.GetComponent<PlayerQuestSystem>().GetQuestByID(giveableQuest.questID);
+            if(quest.questData.questState == QuestState.completed)
+            {
+                quest.questData.questState = QuestState.done;
+                Debug.Log("Finished Quest");
+            }
         }
     }
 

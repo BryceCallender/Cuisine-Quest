@@ -9,6 +9,7 @@ public class ItemQuest : Quest
 
     public override bool CheckCompletion(CiscoTesting player)
     {
+        Debug.Log(questData.requiredItems.Count);
         foreach(RequiredItem requiredItem in questData.requiredItems)
         {
             Item item = requiredItem.item.GetComponent<Item>();
@@ -18,10 +19,10 @@ public class ItemQuest : Quest
                 //matches that of the required item for the quest 
                 if(item.Type == Item.ItemType.Inventory && item.name == requiredItem.item.name)
                 {
-                    player.items[requiredItem.item]--;
-                    if(player.items[requiredItem.item] == 0)
+                    if (player.items[requiredItem.item.name] == requiredItem.requiredAmount)
                     {
                         questData.questState = QuestState.completed;
+                        player.items[requiredItem.item.name] = 0;
                     }
                 }
             }
