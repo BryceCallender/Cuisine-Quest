@@ -39,7 +39,7 @@ public class DialogSystemController : MonoBehaviour
 
         if(animator.GetCurrentAnimatorStateInfo(0).IsName("DialogBox_Close"))
         {
-            print("Closing");
+            //print("Closing");
         }
     }
 
