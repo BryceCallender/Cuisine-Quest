@@ -8,8 +8,9 @@ public class CiscoTesting : MonoBehaviour
     public float WalkingSpeed = 10f;
     public bool HasMovementControl = true;
 
-    public int currentHealth;
-    public int maxHealth = 5;
+    //public int currentHealth;
+    //public int maxHealth = 5;
+    public HealthSystem health = new HealthSystem();
 
     public Quest[] MyQuest;
     public Dictionary<GameObject, int> items;
@@ -24,7 +25,8 @@ public class CiscoTesting : MonoBehaviour
         {
             q.questData.questState = QuestState.inProgress;
         }
-        currentHealth = maxHealth;
+        health.setMaxHealth(5);
+        health.ResetHealth();
 	}
 	
 	// Update is called once per frame
@@ -32,7 +34,7 @@ public class CiscoTesting : MonoBehaviour
     {
         if (HasMovementControl) handlMovement();
 
-        if (currentHealth <= 0)
+        if (health.isAlive() == false)
         {
             Die();
         }

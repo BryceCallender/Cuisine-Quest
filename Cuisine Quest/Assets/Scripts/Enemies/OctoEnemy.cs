@@ -12,7 +12,8 @@ public class OctoEnemy : EnemyAbstract
     // Use this for initialization
     void Start()
     {
-        health = 1;
+        health.setMaxHealth(1);
+        health.ResetHealth();
         rb = GetComponent<Rigidbody2D>();
         speed = 5;
     }
@@ -23,9 +24,9 @@ public class OctoEnemy : EnemyAbstract
         Move();
         if (Input.GetKey(KeyCode.Z))
         {
-            health -= 1;
+            health.takeDamage(1);
         }
-        if (health <= 0)
+        if (health.isAlive() == false)
         {
             Die();
         }
@@ -93,7 +94,7 @@ public class OctoEnemy : EnemyAbstract
         }
         else if(collision.CompareTag("Player"))
         {
-            collision.GetComponent<CiscoTesting>().currentHealth -= 1;
+            collision.GetComponent<CiscoTesting>().health.takeDamage(1);
             transform.Rotate(0, 0, 180);
             Vector2 movement = transform.up;
             movement = movement.normalized * speed;

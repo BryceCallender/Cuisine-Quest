@@ -8,7 +8,7 @@ public class Bush : EnemyAbstract
 	// Use this for initialization
 	void Start ()
     {
-        health = 1;
+        health.setMaxHealth(1);
 	}
 	
 	// Update is called once per frame
@@ -16,9 +16,9 @@ public class Bush : EnemyAbstract
     {
         if (Input.GetKey(KeyCode.Z))
         {
-            health -= 1;
+            health.takeDamage(1);
         }
-        if (health <= 0)
+        if (health.isAlive() == false)
         {
             Die();
         }

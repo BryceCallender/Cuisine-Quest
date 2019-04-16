@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class EnemyAbstract : SpawnObject
 {
 
-    protected int health;
+    protected HealthSystem health = new HealthSystem();
     public int speed;
     public droppedItem[] drops;
     float percent = 100.0f;

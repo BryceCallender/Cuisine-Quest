@@ -15,7 +15,8 @@ public class Hearts : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-        HeartUI.sprite = HeartSprites[Player.currentHealth];
+	void Update ()
+    {
+        HeartUI.sprite = HeartSprites[Player.health.getCurrentHealth()];
 	}
 }
