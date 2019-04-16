@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class CiscoTesting : MonoBehaviour {
+public class CiscoTesting : MonoBehaviour 
+{
     public float WalkingSpeed = 10f;
     public bool HasMovementControl = true;
 
@@ -10,26 +12,28 @@ public class CiscoTesting : MonoBehaviour {
     public Weapon[] Weapons;
     public Vector2 DirectionFacing = new Vector2(0, -1);
 
-    public int FishMeat = 0;
-    public int Greens = 0;
-    public int Lemons = 0;
+    public int currentHealth;
+    public int maxHealth = 5;
 
     public Quest[] MyQuest;
+    public Dictionary<GameObject, int> items;
 
     private Rigidbody2D rb;
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
+        items = new Dictionary<GameObject, int>();
         rb = GetComponent<Rigidbody2D>();
         foreach(Quest q in MyQuest)
         {
-            q.State = Quest.QuestState.inProgress;
+            q.questData.questState = QuestState.inProgress;
         }
+        currentHealth = maxHealth;
 	}
 	
 	// Update is called once per frame
-	void Update () {
-
-        if (HasMovementControl) handlMovement();
+	void Update ()
+    {
         if(Input.GetMouseButtonDown(0) && CurrentWeapon != null)
         {
             if (DirectionFacing.x > 0) CurrentWeapon.AttackRight();
@@ -41,12 +45,22 @@ public class CiscoTesting : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             CurrentWeapon = Weapons[0];
-        }else if (Input.GetKeyDown(KeyCode.Alpha2))
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             CurrentWeapon = Weapons[1];
         }
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
 	}
 
+    void Die()
+    {
+        SceneManager.LoadScene(0);
+    }
     private void handlMovement()
     {
         float vMove = 0; // = Input.GetAxis("Vertical");
@@ -89,27 +103,25 @@ public class CiscoTesting : MonoBehaviour {
         rb.velocity = movement;
     }
 
-    public void AddItem(string type, int count)
+    public void AddItem(GameObject item)
     {
-        switch (type)
+        if(items.ContainsKey(item))
         {
-            case "LemonJuice":
-                Lemons += count;
-                break;
-            case "Greens":
-                Greens += count;
-                break;
-            case "FishMeat":
-                FishMeat += count;
-                break;
-            default:
-                Debug.Log("Item not found.");
-                break;
+            items[item]++;
+        }
+        else
+        {
+            items.Add(item,0);
         }
 
-        foreach (Quest q in MyQuest)
+        //Check for completion of the quest when an item is picked up
+        foreach (Quest quest in MyQuest)
         {
-            if(q.State != Quest.QuestState.completed) q.CheckCompletion(this);
+            if (quest.questData.questState != QuestState.completed)
+            {
+                quest.CheckCompletion(this);
+            }
         }
     }
+
 }

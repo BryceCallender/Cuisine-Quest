@@ -5,6 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class RequiredItem 
 {
-    public string name;
+    public GameObject item;
     public int requiredAmount;
 }

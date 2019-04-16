@@ -3,56 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "DungeonFresh/ItemQuest")]
-public class ItemQuest : Quest {
-
-    public GameObject[] ItemsNeeded;
+public class ItemQuest : Quest
+{
     public AreaScriptable AreaNeeded;
 
-    public override void CheckCompletion(CiscoTesting player)
+    public override bool CheckCompletion(CiscoTesting player)
     {
-        bool isComplete = true;
-        int Lemons = player.Lemons;
-        int Greens = player.Greens;
-        int FishMeat = player.FishMeat;
-
-        foreach(GameObject needed in ItemsNeeded)
+        foreach(RequiredItem requiredItem in questData.requiredItems)
         {
-            Item item = needed.GetComponent<Item>();
-            if (item)
+            Item item = requiredItem.item.GetComponent<Item>();
+            if (item != null)
             {
-                if(item.Type == Item.ItemType.Inventory)
+                //If the item is an inventory item and the name of the gameobject
+                //matches that of the required item for the quest 
+                if(item.Type == Item.ItemType.Inventory && item.name == requiredItem.item.name)
                 {
-                    switch (item.Name)
+                    player.items[requiredItem.item]--;
+                    if(player.items[requiredItem.item] == 0)
                     {
-                        case "LemonJuice":
-                            if (Lemons > 0) Lemons += -1;
-                            else isComplete = false;
-                            break;
-                        case "Greens":
-                            if (Greens > 0) Greens += -1;
-                            else isComplete = false;
-                            break;
-                        case "FishMeat":
-                            if (FishMeat > 0) FishMeat += -1;
-                            else isComplete = false;
-                            break;
-                        default:
-                            Debug.Log("Item not found.");
-                            isComplete = false;
-                            break;
+                        questData.questState = QuestState.completed;
                     }
-
                 }
             }
         }
-
-        if (isComplete)
-        {
-            State = QuestState.completed;
-            player.Lemons = Lemons;
-            player.Greens = Greens;
-            player.FishMeat = FishMeat;
-            Debug.Log("Quest Complete!");
-        }
+        return questData.questState == QuestState.completed;
     }
 }
