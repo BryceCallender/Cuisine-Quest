@@ -22,15 +22,13 @@ public class CiscoTesting : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         health.setMaxHealth(5);
         health.ResetHealth();
-        currentHealth = maxHealth;
         playerQuestSystem = GetComponent<PlayerQuestSystem>();
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (HasMovementControl) handlMovement();
-
+  
         if (health.isAlive() == false)
         {
             Die();
