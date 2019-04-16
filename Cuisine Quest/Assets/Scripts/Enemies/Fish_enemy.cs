@@ -18,7 +18,8 @@ public class Fish_enemy : EnemyAbstract
     // Use this for initialization
     void Start ()
     {
-        health = 1;
+        health.setMaxHealth(1);
+        health.ResetHealth();
         rb = GetComponent<Rigidbody2D>();
 	}
 	
@@ -27,9 +28,9 @@ public class Fish_enemy : EnemyAbstract
     {
         if (Input.GetKey(KeyCode.Z))
         {
-            health -= 1;
+            health.takeDamage(1);
         }
-        if (health <= 0)
+        if (health.isAlive() == false)
         {
             Die();
         }
@@ -83,7 +84,7 @@ public class Fish_enemy : EnemyAbstract
     {
         if(collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<CiscoTesting>().currentHealth -= 1;
+            collision.gameObject.GetComponent<CiscoTesting>().health.takeDamage(1);
             rb.velocity = new Vector2(0, 0);
             playerFound = false;
             timer = 0.0f;
