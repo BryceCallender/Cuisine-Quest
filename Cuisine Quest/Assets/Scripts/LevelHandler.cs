@@ -31,6 +31,7 @@ public class LevelHandler : MonoBehaviour {
 
     public void TeleportPlayer(Vector3 cameraLocation, Vector2 playerLocation)
     {
+
         Camera.position = cameraLocation;
         Player.transform.position = (Vector2)cameraLocation + playerLocation;
 
@@ -97,7 +98,6 @@ public class LevelHandler : MonoBehaviour {
 
     public void FinishAreaMove()
     {
-       
         CurrentArea.LoadArea();
         loadedNewArea = true;
         hasNewArea = false;

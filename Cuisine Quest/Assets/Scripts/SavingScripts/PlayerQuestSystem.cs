@@ -88,6 +88,14 @@ public class PlayerQuestSystem : MonoBehaviour, ISaveable
         return questManager.GetQuests();
     }
 
+    public void UpdateQuests(int id, Dictionary<string,int> items)
+    {
+        if(items.ContainsKey(questManager.quests[id].questData.requiredItems[0].item.name))
+        {
+            currentQuests[id].amountDone = items[questManager.quests[id].questData.requiredItems[0].item.name];
+        }
+    }
+
     public int GetActiveQuestCount()
     {
         int count = 0;

@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WorldLayout.unity
     guid: 1914d5d91b506b3409fc06bd7c409faf
+  - enabled: 1
+    path: Assets/Scenes/TestingQuest.unity
+    guid: 9a442ebcec1c040a38865fac8254e942
   m_configObjects: {}

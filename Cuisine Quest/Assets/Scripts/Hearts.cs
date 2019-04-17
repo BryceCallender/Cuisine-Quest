@@ -10,7 +10,6 @@ public class Hearts : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<CiscoTesting>();
 	}
 	

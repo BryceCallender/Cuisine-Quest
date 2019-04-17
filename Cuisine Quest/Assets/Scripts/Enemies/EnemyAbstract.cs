@@ -4,23 +4,11 @@ using UnityEngine;
 
 public abstract class EnemyAbstract : SpawnObject
 {
-
-    protected HealthSystem health = new HealthSystem();
+    [SerializeField]
+    protected HealthSystem health;
     public int speed;
     public droppedItem[] drops;
     float percent = 100.0f;
-
-    // Use this for initialization
-    void Start ()
-    {
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-		
-	}
 
     public abstract void Move();
 

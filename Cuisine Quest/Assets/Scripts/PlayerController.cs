@@ -8,34 +8,70 @@ public class PlayerController : MonoBehaviour
     private Animator anim;
     private bool playerMoving;
     public bool playerCanMove = true;
-    private Vector2 lastMove; 
+    private Vector2 lastMove;
+    private Rigidbody2D rb;
+    public Vector2 DirectionFacing = new Vector2(0, -1);
+    private float H_Axis;
+    private float V_Axis;
 
     // Use this for initialization
-	void Start ()
+    void Start ()
     {
         anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
         playerMoving = false;
+        H_Axis = Input.GetAxisRaw("Horizontal");
+        V_Axis = Input.GetAxisRaw("Vertical");
 
-		if(Input.GetAxisRaw("Horizontal") > 0.5f || Input.GetAxisRaw("Horizontal") < -0.5f && playerCanMove)
+        if ((H_Axis > 0.5f || H_Axis < -0.5f) &&
+           (V_Axis > 0.5f || V_Axis < -0.5f) && playerCanMove)
         {
-            transform.Translate(new Vector3(Input.GetAxisRaw("Horizontal") * moveSpeed * Time.deltaTime, 0f, 0f));
+            rb.velocity = new Vector3(H_Axis * moveSpeed, V_Axis * moveSpeed, 0f);
             playerMoving = true;
-            lastMove = new Vector2(Input.GetAxisRaw("Horizontal"), 0f);
+            lastMove = new Vector2(H_Axis, V_Axis);
+        }
+        else if((H_Axis > 0.5f || H_Axis < -0.5f) && playerCanMove)
+        {
+            rb.velocity = new Vector3(H_Axis * moveSpeed, 0f, 0f);
+            playerMoving = true;
+            lastMove = new Vector2(H_Axis, 0f);
+            if (H_Axis > 0.5f)
+            {
+                DirectionFacing = new Vector2(1,0);
+            }
+            else
+            {
+                DirectionFacing = new Vector2(-1, 0);
+            }
+        }
+        else if((V_Axis > 0.5f || V_Axis < -0.5f) && playerCanMove)
+        {
+            rb.velocity = new Vector3(0f, V_Axis * moveSpeed, 0f);
+            playerMoving = true;
+            lastMove = new Vector2(0f, V_Axis);
+
+            if (V_Axis > 0.5f)
+            {
+                DirectionFacing = new Vector2(0, 1);
+            }
+            else
+            {
+                DirectionFacing = new Vector2(0, -1);
+            }
+        }
+        else
+        {
+            rb.velocity = Vector2.zero;
         }
 
-        if (Input.GetAxisRaw("Vertical") > 0.5f || Input.GetAxisRaw("Vertical") < -0.5f && playerCanMove)
-        {
-            transform.Translate(new Vector3( 0f, Input.GetAxisRaw("Vertical") * moveSpeed * Time.deltaTime, 0f));
-            playerMoving = true;
-            lastMove = new Vector2(0f, Input.GetAxisRaw("Vertical"));
-        }
-        anim.SetFloat("MoveX", Input.GetAxisRaw("Horizontal"));
-        anim.SetFloat("MoveY", Input.GetAxisRaw("Vertical"));
+
+        anim.SetFloat("MoveX", H_Axis);
+        anim.SetFloat("MoveY", V_Axis);
         anim.SetBool("PlayerMoving", playerMoving);
         anim.SetFloat("LastMoveX", lastMove.x);
         anim.SetFloat("LastMoveY", lastMove.y);

@@ -28,7 +28,7 @@ public class DungeonTrigger : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Player")
+        if(collision.CompareTag("Player"))
         {
             float playerDirection = Vector3.Dot(EntranceDirection, collision.GetComponent<Rigidbody2D>().velocity);
             if(playerDirection < 0)
@@ -40,11 +40,8 @@ public class DungeonTrigger : MonoBehaviour {
             {
                 //Vector3 cameraLocation = new Vector3(MyDungeonCoordinate.x, MyDungeonCoordinate.y, Camera.main.transform.position.z);
                 SetAreaColliders(true, false);
-
                 GameObject.FindGameObjectWithTag("LevelHandler").GetComponent<LevelHandler>().TeleportPlayer(IngressLocation.name,  PlayerIngressLocation);
-
             }
-            
         }
     }
 

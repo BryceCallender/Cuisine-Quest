@@ -12,6 +12,7 @@ public class OctoEnemy : EnemyAbstract
     // Use this for initialization
     void Start()
     {
+        health = gameObject.AddComponent<HealthSystem>();
         health.setMaxHealth(1);
         health.ResetHealth();
         rb = GetComponent<Rigidbody2D>();
@@ -22,11 +23,7 @@ public class OctoEnemy : EnemyAbstract
     void Update()
     {
         Move();
-        if (Input.GetKey(KeyCode.Z))
-        {
-            health.takeDamage(1);
-        }
-        if (health.isAlive() == false)
+        if (!health.isAlive())
         {
             Die();
         }

@@ -18,6 +18,7 @@ public class Fish_enemy : EnemyAbstract
     // Use this for initialization
     void Start ()
     {
+        health = gameObject.AddComponent<HealthSystem>();
         health.setMaxHealth(1);
         health.ResetHealth();
         rb = GetComponent<Rigidbody2D>();
@@ -26,11 +27,7 @@ public class Fish_enemy : EnemyAbstract
 	// Update is called once per frame
 	void Update ()
     {
-        if (Input.GetKey(KeyCode.Z))
-        {
-            health.takeDamage(1);
-        }
-        if (health.isAlive() == false)
+        if (!health.isAlive())
         {
             Die();
         }
