@@ -19,10 +19,10 @@ public class ItemQuest : Quest
                 //matches that of the required item for the quest 
                 if(item.Type == Item.ItemType.Inventory && item.name == requiredItem.item.name)
                 {
-                    if (player.items[requiredItem.item.name] == requiredItem.requiredAmount)
+                    if (player.items[requiredItem.item.name] >= requiredItem.requiredAmount)
                     {
                         questData.questState = QuestState.completed;
-                        player.items[requiredItem.item.name] = 0;
+                        player.items[requiredItem.item.name] -= requiredItem.requiredAmount;
                     }
                 }
             }

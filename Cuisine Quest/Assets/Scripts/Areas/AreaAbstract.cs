@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public abstract class AreaAbstract : MonoBehaviour {
+public abstract class AreaAbstract : MonoBehaviour
+{
 
     public AreaScriptable MyArea;
     private List<GameObject> loaded = new List<GameObject>();
     public List<SpawningObject> ToLoad = new List<SpawningObject>();
 
-	public void LoadArea()
+    public void LoadArea()
     {
-        foreach(SpawningObject so in ToLoad)
+        foreach (SpawningObject so in ToLoad)
         {
             //LoadObj(so.Prefab, so.MyLocation);
             LoadObj(so);
@@ -39,20 +40,25 @@ public abstract class AreaAbstract : MonoBehaviour {
 
     public void DeLoadArea()
     {
-        while(loaded.Count > 0)
+        while (loaded.Count > 0)
         {
             GameObject obj = loaded[0];
             removeObj(obj);
         }
     }
 
+    public void AddObj(GameObject obj)
+    {
+        loaded.Add(obj);
+    }
+
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Player")
+        if (collision.tag == "Player")
         {
             GameObject.FindGameObjectWithTag("LevelHandler").GetComponent<LevelHandler>().StartMoveArea(this);
         }
-        
+
     }
 
     //public SpawningObject GetSpawingObject(GameObject obj)

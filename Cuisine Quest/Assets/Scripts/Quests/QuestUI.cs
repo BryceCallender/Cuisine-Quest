@@ -11,14 +11,14 @@ public class QuestUI : MonoBehaviour
 
     const int offset = 20;
     const int padding = 5;
-    const int bottomScreenDisplacement = 20;
+    const int bottomScreenDisplacement = 50; //Nice number and part of it comes from how long the hearts on the screen is
     readonly Vector2 GUI_BOX_SIZE = new Vector2(200, 30);
 
     //The amount of things for IMGUI to draw
     int guiQuestcount;
 
     // The position on of the scrolling viewport
-    public Vector2 scrollPosition = Vector2.zero;
+    private Vector2 scrollPosition = Vector2.zero;
 
     private void Awake()
     {
@@ -43,14 +43,20 @@ public class QuestUI : MonoBehaviour
         {
             List<Quest> quests = questManager.GetQuests();
             //Draw Big Box to hold all the quests
-            GUI.Box(new Rect(10,10,250,Screen.height - bottomScreenDisplacement),"Quests");
+            GUI.Box(new Rect(10,40,250,Screen.height - bottomScreenDisplacement),"Quests");
             int placeX = 15;
-            int placeY = 30;
+            int placeY = 60;
+            int questMask = (int)QuestState.completed | (int)QuestState.inProgress;
+            Debug.Log("Mask is: " + questMask);
             foreach (Quest quest in quests)
             {
-                if(playerQuestSystem.GetHasQuestByID(quest.questID))
+                Debug.Log(quest.questData.questState);
+                //TODO FIX THIS
+                if (playerQuestSystem.GetHasQuestByID(quest.questID) &&
+                    (quest.questData.questState == QuestState.inProgress ||
+                     (quest.questData.questState == QuestState.completed)))
                 {
-                    scrollPosition = GUI.BeginScrollView(new Rect(10, 10, 250, Screen.height - 20), scrollPosition, new Rect(10, 10, 200, 75 * guiQuestcount),false,true);
+                    scrollPosition = GUI.BeginScrollView(new Rect(10, 40, 250, Screen.height - 20), scrollPosition, new Rect(10, 40, 200, 75 * guiQuestcount),false,true);
 
                     //Draw the name of the quest
                     GUI.Label(new Rect(placeX, placeY, 100, 20), quest.questData.questName);

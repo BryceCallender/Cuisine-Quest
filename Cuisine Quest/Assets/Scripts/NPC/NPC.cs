@@ -48,12 +48,12 @@ public class NPC : MonoBehaviour
             characterDialog.EnableDialog();
         }
         //Quest is completed and we need to go to the npc to end the quest
-        else if(collision.GetComponent("Player") && hasTalked)
+        else if(collision.CompareTag("Player") && hasTalked)
         {
             Quest quest = collision.GetComponent<PlayerQuestSystem>().GetQuestByID(giveableQuest.questID);
             if(quest.questData.questState == QuestState.completed)
             {
-                quest.questData.questState = QuestState.done;
+                collision.GetComponent<PlayerQuestSystem>().SetQuestStatus(quest.questID, QuestState.done);
                 Debug.Log("Finished Quest");
             }
         }
@@ -61,7 +61,9 @@ public class NPC : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && dialogSystemController.isEmpty())
+        Quest quest = collision.GetComponent<PlayerQuestSystem>().GetQuestByID(giveableQuest.questID);
+        if (collision.CompareTag("Player") && dialogSystemController.isEmpty()
+            && quest.questData.questState < QuestState.completed)
         {
             GiveQuest(collision.GetComponent<CiscoTesting>());
         }

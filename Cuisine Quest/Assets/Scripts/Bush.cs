@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Bush : EnemyAbstract
 {
-
 	// Use this for initialization
 	void Start ()
     {
+        health = gameObject.AddComponent<HealthSystem>();
         health.setMaxHealth(1);
+        health.ResetHealth();
 	}
 	
 	// Update is called once per frame
