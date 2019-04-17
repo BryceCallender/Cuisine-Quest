@@ -87,7 +87,9 @@ public class CiscoTesting : MonoBehaviour
             itemName = itemName.Replace("(Clone)", "").Trim();
         }
 
-        if(items.ContainsKey(itemName))
+        Debug.Log(items.Count);
+
+        if (items.ContainsKey(itemName))
         {
             items[itemName]++;
         }

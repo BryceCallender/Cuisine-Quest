@@ -61,11 +61,15 @@ public class NPC : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        Quest quest = collision.GetComponent<PlayerQuestSystem>().GetQuestByID(giveableQuest.questID);
-        if (collision.CompareTag("Player") && dialogSystemController.isEmpty()
-            && quest.questData.questState < QuestState.completed)
+        if(collision.CompareTag("Player"))
         {
-            GiveQuest(collision.GetComponent<CiscoTesting>());
+            Quest quest = collision.GetComponent<PlayerQuestSystem>().GetQuestByID(giveableQuest.questID);
+            if (dialogSystemController.isEmpty()
+                && quest.questData.questState < QuestState.completed)
+            {
+                GiveQuest(collision.GetComponent<CiscoTesting>());
+            }
         }
+
     }
 }
