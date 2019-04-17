@@ -102,6 +102,7 @@ public class CiscoTesting : MonoBehaviour
         //Check for completion of the quest when an item is picked up
         foreach (Quest quest in playerQuestSystem.GetQuests())
         {
+            playerQuestSystem.UpdateQuests(quest.questID, items);
             if (quest.questData.questState == QuestState.inProgress)
             {
                 quest.CheckCompletion(this);

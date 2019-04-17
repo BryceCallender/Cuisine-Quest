@@ -23,11 +23,7 @@ public class OctoEnemy : EnemyAbstract
     void Update()
     {
         Move();
-        if (Input.GetKey(KeyCode.Z))
-        {
-            health.takeDamage(1);
-        }
-        if (health.isAlive() == false)
+        if (!health.isAlive())
         {
             Die();
         }

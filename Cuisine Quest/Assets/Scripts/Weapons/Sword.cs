@@ -45,8 +45,6 @@ public class Sword : Weapon {
         }
 	}
 
-  
-
     public override void Attack(Vector2 PlayerDirection)
     {
         if(MyAttack == AttackType.Jab)

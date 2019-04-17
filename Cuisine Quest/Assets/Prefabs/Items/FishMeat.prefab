@@ -23,8 +23,8 @@ GameObject:
   - component: {fileID: 114657175320459118}
   - component: {fileID: 58281915107877998}
   m_Layer: 0
-  m_Name: FishMeatLarge
-  m_TagString: Untagged
+  m_Name: FishMeat
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

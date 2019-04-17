@@ -11,6 +11,14 @@ public abstract class Weapon : MonoBehaviour {
     public abstract bool AttackAbort();
     public abstract void AttackAbortForced();
 
-
     public GameObject Mesh;
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        HealthSystem health = collision.GetComponent<HealthSystem>();
+        if (health)
+        {
+            health.takeDamage(WeaponPower);
+        }
+    }
 }

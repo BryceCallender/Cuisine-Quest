@@ -15,11 +15,7 @@ public class Bush : EnemyAbstract
 	// Update is called once per frame
 	void Update ()
     {
-        if (Input.GetKey(KeyCode.Z))
-        {
-            health.takeDamage(1);
-        }
-        if (health.isAlive() == false)
+        if (!health.isAlive())
         {
             Die();
         }

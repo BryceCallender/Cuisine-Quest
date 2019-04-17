@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Projectile : MonoBehaviour {
-    public float Damage = 1;
+    public int Damage = 1;
 
 	// Use this for initialization
 	void Start () {
@@ -16,6 +16,14 @@ public abstract class Projectile : MonoBehaviour {
 		
 	}
 
+    public void DoDamage(Collider2D collision)
+    {
+        HealthSystem health = collision.GetComponent<HealthSystem>();
+        if (health)
+        {
+            health.takeDamage(Damage);
+        }
+    }
     //private void OnTriggerEnter2D(Collider2D collision)
     //{
     //    if(collision.tag != "Area" && collision.tag != "Water" && collision.tag != "Weapon" && collision.tag != "Item")
@@ -24,6 +32,6 @@ public abstract class Projectile : MonoBehaviour {
     //        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
     //        transform.parent = collision.transform;
     //    }
-        
+
     //}
 }

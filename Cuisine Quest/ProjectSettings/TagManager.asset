@@ -9,6 +9,8 @@ TagManager:
   - BulletE
   - Wall
   - Area
+  - Weapon
+  - Item
   layers:
   - Default
   - TransparentFX

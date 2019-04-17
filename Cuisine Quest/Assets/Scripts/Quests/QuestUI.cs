@@ -45,17 +45,13 @@ public class QuestUI : MonoBehaviour
             GUI.Box(new Rect(10,40,250,Screen.height - bottomScreenDisplacement),"Quests");
             int placeX = 15;
             int placeY = 60;
-            int questMask = (int)QuestState.completed | (int)QuestState.inProgress;
-            Debug.Log("Mask is: " + questMask);
             foreach (Quest quest in quests)
             {
-                Debug.Log(quest.questData.questState);
-                //TODO FIX THIS
                 if (playerQuestSystem.GetHasQuestByID(quest.questID) &&
                     (quest.questData.questState == QuestState.inProgress ||
                      (quest.questData.questState == QuestState.completed)))
                 {
-                    scrollPosition = GUI.BeginScrollView(new Rect(10, 40, 250, Screen.height - bottomScreenDisplacement), scrollPosition, new Rect(10, 40, 200, 75 * guiQuestcount),false,true);
+                    scrollPosition = GUI.BeginScrollView(new Rect(10, 40, 250, Screen.height - bottomScreenDisplacement), scrollPosition, new Rect(10, 40, 200, 75 * guiQuestcount),false,false);
 
                     //Draw the name of the quest
                     GUI.Label(new Rect(placeX, placeY, 100, 20), quest.questData.questName);

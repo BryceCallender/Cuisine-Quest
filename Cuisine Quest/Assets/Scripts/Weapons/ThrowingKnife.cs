@@ -16,12 +16,13 @@ public class ThrowingKnife : Projectile {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag != "Area" && collision.tag != "Water" && collision.tag != "Weapon" && collision.tag != "Item"  && collision.tag != "Player")
+        if (collision.tag != "Area" && collision.tag != "Water" && collision.tag != "Weapon" && collision.tag != "Item"  && collision.tag != "Player" && !collision.CompareTag("BulletE"))
         {
             Debug.Log(collision.name);
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             transform.parent = collision.transform;
             hitObject = true;
+            DoDamage(collision);
 
             GetComponent<Animator>().Play("KnifeHit");
         }

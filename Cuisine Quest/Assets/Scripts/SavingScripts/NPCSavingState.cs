@@ -59,7 +59,7 @@ public class NPCSavingState : MonoBehaviour, ISaveable
         {
             NPCState state = new NPCState
             {
-                name = npcs[index].characterDialog.dialog.name,
+                name = npcs[index].characterDialog[0].dialog.name,
                 hasTalked = false
             };
             npcStates.Add(state);
