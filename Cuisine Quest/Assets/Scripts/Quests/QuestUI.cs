@@ -22,7 +22,6 @@ public class QuestUI : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(this);
         questManager = FindObjectOfType<QuestManager>();
         playerQuestSystem = FindObjectOfType<PlayerQuestSystem>();
     }
@@ -56,7 +55,7 @@ public class QuestUI : MonoBehaviour
                     (quest.questData.questState == QuestState.inProgress ||
                      (quest.questData.questState == QuestState.completed)))
                 {
-                    scrollPosition = GUI.BeginScrollView(new Rect(10, 40, 250, Screen.height - 20), scrollPosition, new Rect(10, 40, 200, 75 * guiQuestcount),false,true);
+                    scrollPosition = GUI.BeginScrollView(new Rect(10, 40, 250, Screen.height - bottomScreenDisplacement), scrollPosition, new Rect(10, 40, 200, 75 * guiQuestcount),false,true);
 
                     //Draw the name of the quest
                     GUI.Label(new Rect(placeX, placeY, 100, 20), quest.questData.questName);

@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = new Vector3(H_Axis * moveSpeed, V_Axis * moveSpeed, 0f);
             playerMoving = true;
+            lastMove = new Vector2(H_Axis, V_Axis);
         }
         else if((H_Axis > 0.5f || H_Axis < -0.5f) && playerCanMove)
         {

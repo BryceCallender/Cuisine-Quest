@@ -13,7 +13,7 @@ public class ItemQuest : Quest
         foreach(RequiredItem requiredItem in questData.requiredItems)
         {
             Item item = requiredItem.item.GetComponent<Item>();
-            if (item != null)
+            if (item != null && player.items.ContainsKey(item.name))
             {
                 //If the item is an inventory item and the name of the gameobject
                 //matches that of the required item for the quest 
