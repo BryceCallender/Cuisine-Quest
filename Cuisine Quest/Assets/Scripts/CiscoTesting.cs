@@ -10,7 +10,7 @@ public class CiscoTesting : MonoBehaviour
 
     //public int currentHealth;
     //public int maxHealth = 5;
-    public HealthSystem health = new HealthSystem();
+    public HealthSystem health;
 
     public Quest[] MyQuest;
     public Dictionary<GameObject, int> items;
@@ -19,6 +19,7 @@ public class CiscoTesting : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
+        health = gameObject.AddComponent<HealthSystem>();
         items = new Dictionary<GameObject, int>();
         rb = GetComponent<Rigidbody2D>();
         foreach(Quest q in MyQuest)

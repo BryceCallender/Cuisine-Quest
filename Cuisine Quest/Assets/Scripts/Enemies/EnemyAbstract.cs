@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class EnemyAbstract : SpawnObject
 {
 
-    protected HealthSystem health = new HealthSystem();
+    protected HealthSystem health;
     public int speed;
     public droppedItem[] drops;
     float percent = 100.0f;
@@ -13,7 +13,7 @@ public abstract class EnemyAbstract : SpawnObject
     // Use this for initialization
     void Start ()
     {
-		
+        
 	}
 	
 	// Update is called once per frame
