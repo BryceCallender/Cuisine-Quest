@@ -13,6 +13,7 @@ public class PlayerQuestSystem : MonoBehaviour, ISaveable
     // Use this for initialization
     void Start () 
     {
+        SaveSystem.Instance.AddSaveableObject(gameObject);
         filePath = Path.Combine(Application.persistentDataPath, fileName);
 
         questManager = FindObjectOfType<QuestManager>();
@@ -46,6 +47,7 @@ public class PlayerQuestSystem : MonoBehaviour, ISaveable
     /// </summary>
     private void InitQuestData()
     {
+        Debug.Log("Init quest data log");
         PlayerQuestData questData = new PlayerQuestData();
         //For all the quests we have in the manager we make 
         //a clean slate for all of them
@@ -54,16 +56,17 @@ public class PlayerQuestSystem : MonoBehaviour, ISaveable
             questData.questID = i;
             questData.questName = questManager.quests[i].questData.questName;
             questData.questState = QuestState.pending;
+            questManager.quests[i].questData.questState = questData.questState;
             questData.hasQuest = false;
-            questData.amountDone = 0;
+            int requiredItemCount = questManager.GetQuests()[i].questData.requiredItems.Count;
+            questData.amountDone = new int[requiredItemCount];
+            for (int j = 0; j < questData.amountDone.Length; j++)
+            {
+                questData.amountDone[j] = 0;
+            }
+
             currentQuests.Add(questData);
             questData = new PlayerQuestData();
-        }
-
-        if(File.Exists(filePath))
-        {
-            PlayerQuestArray quests = JsonArrayHandler<PlayerQuestArray>.ReadJsonFile(filePath);
-            questManager.InitQuestScriptableObjects(quests);
         }
         Save();
     }
@@ -73,7 +76,7 @@ public class PlayerQuestSystem : MonoBehaviour, ISaveable
         return currentQuests[id].hasQuest;
     }
 
-    public int GetQuestCompletionStatus(int id)
+    public int[] GetQuestCompletionStatus(int id)
     {
         return currentQuests[id].amountDone;
     }
@@ -90,9 +93,40 @@ public class PlayerQuestSystem : MonoBehaviour, ISaveable
 
     public void UpdateQuests(int id, Dictionary<string,int> items)
     {
-        if(items.ContainsKey(questManager.quests[id].questData.requiredItems[0].item.name))
+        //if player has the item in the inventory
+        UpdateItemDisplay(id, items);
+    }
+
+    public void UpdateCurrentQuestsAmountDone(Dictionary<string,int> items)
+    {
+        for (int i = 0; i < currentQuests.Count; i++)
         {
-            currentQuests[id].amountDone = items[questManager.quests[id].questData.requiredItems[0].item.name];
+            for(int j = 0; j < questManager.GetQuests()[i].questData.requiredItems.Count; j++)
+            {
+                if(items.ContainsKey(questManager.GetQuests()[i].questData.requiredItems[j].item.name))
+                {
+                    currentQuests[i].amountDone[j] = items[questManager.GetQuests()[i].questData.requiredItems[j].item.name];
+                }
+                else
+                {
+                    currentQuests[i].amountDone[j] = 0;
+                }
+            }
+        }
+    }
+
+    public void UpdateItemDisplay(int id, Dictionary<string, int> items)
+    {
+        int num = 0;
+        foreach(RequiredItem requiredItem in questManager.quests[id].questData.requiredItems)
+        {
+            Debug.Log(CiscoTesting.lastItemPickedUp);
+            if(requiredItem.item.name.Equals(CiscoTesting.lastItemPickedUp))
+            {  
+                currentQuests[id].amountDone[num] = items[requiredItem.item.name];
+                return;
+            }
+            num++;
         }
     }
 
@@ -117,12 +151,11 @@ public class PlayerQuestSystem : MonoBehaviour, ISaveable
 
     public void Save()
     {
+        //Update the quest states from the scriptable objects
+        for (int i = 0; i < questManager.GetQuests().Count; i++)
+        {
+            currentQuests[i].questState = questManager.GetQuests()[i].questData.questState;
+        }
         JsonArrayHandler<PlayerQuestData>.WriteJsonFile(filePath, currentQuests);
-    }
-
-    public void Clear()
-    {
-        currentQuests.Clear();
-        InitQuestData();
     }
 }

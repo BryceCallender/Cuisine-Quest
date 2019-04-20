@@ -24,6 +24,8 @@ public class AudioSourceController : MonoBehaviour
             instance = this;
         }
 
+        DontDestroyOnLoad(this);
+
         audioSource = GetComponent<AudioSource>();
 
         audioClipSources = new Dictionary<string, AudioClip>();

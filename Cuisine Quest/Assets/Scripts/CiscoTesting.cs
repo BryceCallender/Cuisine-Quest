@@ -14,14 +14,14 @@ public class CiscoTesting : MonoBehaviour
     public Dictionary<string, int> items;
     private PlayerController playerController;
 
-    private Rigidbody2D rb;
-	// Use this for initialization
-	void Start ()
+    public static string lastItemPickedUp;
+
+    // Use this for initialization
+    void Start ()
     {
         health = gameObject.AddComponent<HealthSystem>();
         playerController = GetComponent<PlayerController>();
         items = new Dictionary<string, int>();
-        rb = GetComponent<Rigidbody2D>();
         health.setMaxHealth(5);
         health.ResetHealth();
         playerQuestSystem = GetComponent<PlayerQuestSystem>();
@@ -30,7 +30,14 @@ public class CiscoTesting : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if(!health.isAlive())
+        //PrintItems();
+
+        if(items.Count > 0)
+        {
+            playerQuestSystem.UpdateCurrentQuestsAmountDone(items);
+        }
+
+        if (!health.isAlive())
         {
             Die();
         }
@@ -87,8 +94,6 @@ public class CiscoTesting : MonoBehaviour
             itemName = itemName.Replace("(Clone)", "").Trim();
         }
 
-        Debug.Log(itemName);
-
         if (items.ContainsKey(itemName))
         {
             items[itemName]++;
@@ -97,17 +102,39 @@ public class CiscoTesting : MonoBehaviour
         {
             Debug.Log("Adding " + itemName);
             items.Add(itemName, 1);
+            lastItemPickedUp = itemName;
         }
 
         //Check for completion of the quest when an item is picked up
-        foreach (Quest quest in playerQuestSystem.GetQuests())
+        UpdateQuestLog();
+    }
+
+    public void RemoveItems(string name, int amount)
+    {
+        items[name] -= amount;
+    }
+
+    public void PrintItems()
+    {
+        foreach (KeyValuePair<string, int> kvp in items)
         {
-            playerQuestSystem.UpdateQuests(quest.questID, items);
-            if (quest.questData.questState == QuestState.inProgress)
-            {
-                quest.CheckCompletion(this);
-            }
+            Debug.Log(string.Format("Key = {0}, Value = {1}", kvp.Key, kvp.Value));
         }
     }
 
+    public void UpdateQuestLog()
+    {
+        if(items.Count > 0)
+        {
+            foreach (Quest quest in playerQuestSystem.GetQuests())
+            {
+                playerQuestSystem.UpdateQuests(quest.questID, items);
+                if (quest.questData.questState == QuestState.inProgress ||
+                    quest.questData.questState == QuestState.completed)
+                {
+                    quest.CheckCompletion(this);
+                }
+            }
+        }
+    }
 }

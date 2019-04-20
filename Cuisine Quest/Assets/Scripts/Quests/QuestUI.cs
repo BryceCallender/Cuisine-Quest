@@ -59,8 +59,10 @@ public class QuestUI : MonoBehaviour
                     placeY += offset;
 
                     //Check if the quest is completed or not in order to say 
-                    //to collect more or just display COMPLETED!
-                    GUI.Box(new Rect(placeX, placeY, GUI_BOX_SIZE.x, GUI_BOX_SIZE.y),"");
+                    //to collect more or just display COMPLETED! This box is scaled
+                    //with the essence of multiple quests in mind so itll fit
+                    //all the quests inside its own box. 1 Box per quest
+                    GUI.Box(new Rect(placeX, placeY, GUI_BOX_SIZE.x, GUI_BOX_SIZE.y * quest.questData.requiredItems.Count),"");
                     if (quest.questData.questState == QuestState.completed)
                     {
                         //Just display that the quest has been completed
@@ -69,10 +71,17 @@ public class QuestUI : MonoBehaviour
                     else if(quest.questData.questState == QuestState.inProgress)
                     {
                         //Draw the numbers of stuff left for the quest
-                        string completionString = string.Format("{0}: ", quest.questData.requiredItems[0].item.name);
-                        completionString += playerQuestSystem.GetQuestCompletionStatus(quest.questID).ToString();
-                        completionString += "/" + quest.questData.requiredItems[0].requiredAmount;
-                        GUI.Label(new Rect(placeX + padding, placeY + padding, GUI_BOX_SIZE.x, GUI_BOX_SIZE.y),completionString);
+                        int index = 0;
+                        foreach (RequiredItem requiredItem in quest.questData.requiredItems)
+                        {
+                            string completionString = string.Format("{0}: ", requiredItem.item.name);
+                            completionString += playerQuestSystem.GetQuestCompletionStatus(quest.questID)[index].ToString();
+                            completionString += "/" + requiredItem.requiredAmount;
+                            GUI.Label(new Rect(placeX + padding, placeY + padding, GUI_BOX_SIZE.x, GUI_BOX_SIZE.y), completionString);
+                            //Move the placement down by the offset indication
+                            placeY += offset + (padding * 2);
+                            index++;
+                        }
                     }
 
                     //Move the placement down by the offset indication

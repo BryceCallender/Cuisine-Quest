@@ -1,10 +1,24 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class SaveSystem : MonoBehaviour
 {
     public List<GameObject> saveableObjects;
+    public List<string> fileNames;
+
+    private static SaveSystem instance = null;
+
+    public static SaveSystem Instance
+    {
+        get { return instance; }
+    }
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
@@ -30,9 +44,14 @@ public class SaveSystem : MonoBehaviour
     public void NewGame()
     {
         Debug.Log("New Game");
-        foreach (GameObject saveObject in saveableObjects)
+        foreach (string fileName in fileNames)
         {
-            saveObject.GetComponent<ISaveable>().Clear();
+            File.Delete(Path.Combine(Application.persistentDataPath, fileName));
         }
+    }
+
+    public void AddSaveableObject(GameObject objectToSave)
+    {
+        saveableObjects.Add(objectToSave);
     }
 }
