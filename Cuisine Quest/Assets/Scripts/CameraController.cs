@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour {
-    public CiscoTesting Player;
+public class CameraController : MonoBehaviour
+{
+    public PlayerController Player;
+    public Hearts Health;
 
     public Vector2 transitionGrid = new Vector2(16, 10);
     public float TransitionSpeed = 10f;
@@ -15,33 +17,35 @@ public class CameraController : MonoBehaviour {
 
     //public BoxCollider2D[] MyColliders;
 	// Use this for initialization
-	void Start () {
-		
+	void Start () 
+    {	
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+    {
         if (DungeonExit)
         {
             transitioning = false;
-            Player.HasMovementControl = true;
+            Player.playerCanMove = true;
         }
         if (transitioning)
         {
-            Vector3 newPosition =  Vector3.MoveTowards(transform.position, transitionDestination, TransitionSpeed * Time.deltaTime);
+            Vector3 newPosition = Vector3.MoveTowards(transform.position, transitionDestination, TransitionSpeed * Time.deltaTime);
             transform.position = newPosition;
 
             if(Vector3.Distance(transitionDestination, transform.position) < TransitionBuffer)
             {
                 transform.position = transitionDestination;
                 transitioning = false;
-                Player.HasMovementControl = true;
+                Player.playerCanMove = true;
                 GameObject.FindGameObjectWithTag("LevelHandler").GetComponent<LevelHandler>().FinishAreaMove();
             }
         }
 	}
 
-    public void SetDungeonExit(bool state) {
+    public void SetDungeonExit(bool state)
+    {
         DungeonExit = state;
         
     }
@@ -59,11 +63,12 @@ public class CameraController : MonoBehaviour {
             handlePlayerTracking();
         }
     }
+
     float edgeBuffer = 0.7f;
     private void handlePlayerTracking()
     {
         //moving left
-        if(Player.transform.position.x <= transform.position.x - transitionGrid.x /2 + edgeBuffer)
+        if(Player.transform.position.x <= transform.position.x - transitionGrid.x / 2 + edgeBuffer)
         {
             SceneTransition(new Vector2(-1, 0));
         }
@@ -89,13 +94,12 @@ public class CameraController : MonoBehaviour {
         if (true && !transitioning) //check level handler for transition check
         {
             transitioning = true;
-            transitionDestination = direction * transitionGrid ;
+            transitionDestination = direction * transitionGrid;
             transitionDestination += transform.position;
             Debug.Log(transitionDestination.ToString());
 
-            Player.HasMovementControl = false;
+            Player.playerCanMove = false;
 
-            
         }
     }
 }

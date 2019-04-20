@@ -83,6 +83,19 @@ public class PlayerQuestSystem : MonoBehaviour, ISaveable
         return questManager.quests[id];
     }
 
+    public List<Quest> GetQuests()
+    {
+        return questManager.GetQuests();
+    }
+
+    public void UpdateQuests(int id, Dictionary<string,int> items)
+    {
+        if(items.ContainsKey(questManager.quests[id].questData.requiredItems[0].item.name))
+        {
+            currentQuests[id].amountDone = items[questManager.quests[id].questData.requiredItems[0].item.name];
+        }
+    }
+
     public int GetActiveQuestCount()
     {
         int count = 0;
@@ -96,10 +109,10 @@ public class PlayerQuestSystem : MonoBehaviour, ISaveable
         return count;
     }
 
-    public void SetQuestOn(int id)
+    public void SetQuestStatus(int id, QuestState state)
     {
         currentQuests[id].hasQuest = true;
-        questManager.quests[id].questData.questState = QuestState.inProgress;
+        questManager.quests[id].questData.questState = state;
     }
 
     public void Save()
