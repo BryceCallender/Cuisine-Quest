@@ -82,14 +82,24 @@ public class OctoEnemy : EnemyAbstract
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Wall") || collision.CompareTag("Area"))
+        if (collision.CompareTag("Wall"))
         {
             transform.Rotate(0, 0, 180);
             Vector2 movement = transform.up;
             movement = movement.normalized * speed;
             rb.velocity = movement;
         }
-        else if(collision.CompareTag("Player"))
+        
+        else if (collision.CompareTag("EnemyTrigger"))
+        {
+            print("AREA!!!!!");
+            transform.Rotate(0, 0, 180);
+            Vector2 movement = transform.up;
+            movement = movement.normalized * speed;
+            rb.velocity = movement;
+            //transform.Translate(rb.velocity);
+        }
+        else if (collision.CompareTag("Player"))
         {
             collision.GetComponent<CiscoTesting>().health.takeDamage(1);
             transform.Rotate(0, 0, 180);
@@ -98,6 +108,7 @@ public class OctoEnemy : EnemyAbstract
             rb.velocity = movement;
         }
     }
+
     void Die()
     {
         Drop();

@@ -11,6 +11,7 @@ TagManager:
   - Area
   - Weapon
   - Item
+  - EnemyTrigger
   layers:
   - Default
   - TransparentFX

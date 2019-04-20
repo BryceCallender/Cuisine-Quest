@@ -9,7 +9,7 @@ public class ItemQuest : Quest
 
     public override bool CheckCompletion(CiscoTesting player)
     {
-        Debug.Log(questData.requiredItems.Count);
+        //Debug.Log(questData.requiredItems.Count);
         foreach(RequiredItem requiredItem in questData.requiredItems)
         {
             Item item = requiredItem.item.GetComponent<Item>();

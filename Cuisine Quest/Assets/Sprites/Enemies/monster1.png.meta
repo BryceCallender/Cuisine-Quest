@@ -1,11 +1,13 @@
 fileFormatVersion: 2
-guid: 0ee5ca2388a81e7489e4c91dac32ee7f
+guid: 116c6331cf8c71c4eb34b726f67c40ae
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Fish2png_0
-    21300002: Fish2png_1
-    21300004: Fish2png_2
-    21300006: Fish2png_3
+    21300000: monster1_0
+    21300002: monster1_1
+    21300004: monster1_2
+    21300006: monster1_3
+    21300008: monster1_4
+    21300010: monster1_5
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -88,13 +90,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Fish2png_0
+      name: monster1_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 2
-        width: 32
-        height: 54
+        x: 45
+        y: 1337
+        width: 66
+        height: 66
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -102,19 +104,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 80dabc793abd3a3478681c38c10cbc0b
+      spriteID: 48418563a535de04d80856f1102a8291
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fish2png_1
+      name: monster1_1
       rect:
         serializedVersion: 2
-        x: 80
-        y: 2
-        width: 32
-        height: 52
+        x: 226
+        y: 1339
+        width: 66
+        height: 66
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -122,19 +124,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bec58bf7c81f6f741a1d2cb5101dbdea
+      spriteID: 92e4a9b7add9bd2498b0c3729de600c0
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fish2png_2
+      name: monster1_2
       rect:
         serializedVersion: 2
-        x: 144
-        y: 3
-        width: 32
-        height: 54
+        x: 407
+        y: 1339
+        width: 66
+        height: 66
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -142,19 +144,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5147dd0a5cbbcaa46be8615ea85973c0
+      spriteID: f9a797ce9231b9846886b0fb7dc300f2
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fish2png_3
+      name: monster1_3
       rect:
         serializedVersion: 2
-        x: 208
-        y: 2
-        width: 32
-        height: 49
+        x: 45
+        y: 1144
+        width: 66
+        height: 66
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -162,7 +164,47 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5a529457d4418f842873e21432cd5d2d
+      spriteID: 1bc6077b6ae9c50418c6ba64bb811b2e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster1_4
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 1146
+        width: 66
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01adfb1ed9130704cb4fa68db1fa05b0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: monster1_5
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 1147
+        width: 66
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2eafa9d0c6d4ffd408801b6658cc10b7
       vertices: []
       indices: 
       edges: []
@@ -170,7 +212,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 83e298c69995aa44e8e568d89c4655b6
+    spriteID: a3afde0c2b1e8f04fb90ad1ad9af6361
     vertices: []
     indices: 
     edges: []
