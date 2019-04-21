@@ -35,7 +35,6 @@ public class NPC : MonoBehaviour
         characterDialog = gameObject.GetComponents<CharacterDialog>();
     }
 
-    //TODO::Add the quest to the player gameobject
     public void GiveQuest(CiscoTesting player, int index)
     {
         //give quest to player and set the SO to in progress

@@ -39,6 +39,29 @@ public class AudioSourceController : MonoBehaviour
     public void PlayAudio(string name)
     {
         audioSource.clip = audioClipSources[name];
+        audioSource.loop = false;
         audioSource.Play();
+    }
+
+    public void PlayAudioLooped(string name)
+    {
+        audioSource.clip = audioClipSources[name];
+        audioSource.loop = true;
+        audioSource.Play();
+    }
+
+    public float GetLengthOfSong(string name)
+    {
+        audioSource.clip = audioClipSources[name];
+        return audioSource.clip.length;
+    }
+
+    public float GetLengthOfCurrentSong()
+    {
+        if(audioClips.Count > 0)
+        {
+            return audioSource.clip.length;
+        }
+        return 0;
     }
 }

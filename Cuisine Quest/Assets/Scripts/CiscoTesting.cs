@@ -1,9 +1,23 @@
-﻿using System.Collections;
+﻿using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class CiscoTesting : MonoBehaviour 
+[System.Serializable]
+public class PlayerItem
+{
+    public string name;
+    public int amount;
+}
+
+[System.Serializable]
+public class PlayerItems
+{
+    public PlayerItem[] items;
+}
+
+
+public class CiscoTesting : MonoBehaviour, ISaveable
 {
     public HealthSystem health;
 
@@ -19,9 +33,21 @@ public class CiscoTesting : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        SaveSystem.Instance.AddSaveableObject(gameObject);
+        items = new Dictionary<string, int>();
+
+        if (File.Exists(Path.Combine(Application.persistentDataPath, "PlayerItems.json")))
+        {
+            InitDictionary();
+        }
+        else
+        {
+            items.Clear();
+        }
+
         health = gameObject.AddComponent<HealthSystem>();
         playerController = GetComponent<PlayerController>();
-        items = new Dictionary<string, int>();
+
         health.setMaxHealth(5);
         health.ResetHealth();
         playerQuestSystem = GetComponent<PlayerQuestSystem>();
@@ -30,9 +56,9 @@ public class CiscoTesting : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        //PrintItems();
+        PrintItems();
 
-        if(items.Count > 0)
+        if(items.Count > 0 && items != null)
         {
             playerQuestSystem.UpdateCurrentQuestsAmountDone(items);
         }
@@ -137,4 +163,29 @@ public class CiscoTesting : MonoBehaviour
             }
         }
     }
+
+    public void Save()
+    {
+        List<PlayerItem> playerItems = new List<PlayerItem>();
+
+        foreach(var item in items)
+        {
+            PlayerItem playerItem = new PlayerItem { name = item.Key, amount = item.Value };
+            playerItems.Add(playerItem);
+        }
+
+        JsonArrayHandler<PlayerItem>.WriteJsonFile(Path.Combine(Application.persistentDataPath, "PlayerItems.json"), playerItems);
+    }
+
+    public void InitDictionary()
+    {
+        PlayerItems playerItems = JsonArrayHandler<PlayerItems>.ReadJsonFile(Path.Combine(Application.persistentDataPath, "PlayerItems.json"));
+        items.Clear();
+
+        foreach(PlayerItem item in playerItems.items)
+        {
+            items.Add(item.name, item.amount);
+        }
+    }
+
 }
