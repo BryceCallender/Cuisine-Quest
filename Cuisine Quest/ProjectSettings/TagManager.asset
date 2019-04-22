@@ -12,6 +12,7 @@ TagManager:
   - Weapon
   - Item
   - CameraController
+  - Save
   layers:
   - Default
   - TransparentFX

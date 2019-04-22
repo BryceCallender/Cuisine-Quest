@@ -1,9 +1,23 @@
-﻿using System.Collections;
+﻿using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class CiscoTesting : MonoBehaviour 
+[System.Serializable]
+public class PlayerItem
+{
+    public string name;
+    public int amount;
+}
+
+[System.Serializable]
+public class PlayerItems
+{
+    public PlayerItem[] items;
+}
+
+
+public class CiscoTesting : MonoBehaviour, ISaveable
 {
     public HealthSystem health;
 
@@ -15,14 +29,26 @@ public class CiscoTesting : MonoBehaviour
     public Dictionary<string, int> items;
     private PlayerController playerController;
 
-    private Rigidbody2D rb;
-	// Use this for initialization
-	void Start ()
+    public static string lastItemPickedUp;
+
+    // Use this for initialization
+    void Start ()
     {
+        SaveSystem.Instance.AddSaveableObject(this);
+        items = new Dictionary<string, int>();
+
+        if (File.Exists(Path.Combine(Application.persistentDataPath, "PlayerItems.json")))
+        {
+            InitDictionary();
+        }
+        else
+        {
+            items.Clear();
+        }
+
         health = gameObject.AddComponent<HealthSystem>();
         playerController = GetComponent<PlayerController>();
-        items = new Dictionary<string, int>();
-        rb = GetComponent<Rigidbody2D>();
+
         health.setMaxHealth(5);
         health.ResetHealth();
         playerQuestSystem = GetComponent<PlayerQuestSystem>();
@@ -59,7 +85,12 @@ public class CiscoTesting : MonoBehaviour
         }
         if(secondaryAttackButtonDown) Debug.Log(primaryAttackButton + " " + secondaryAttackButtonDown);
 
-        if(!health.isAlive())
+        if(items.Count > 0 && items != null)
+        {
+            playerQuestSystem.UpdateCurrentQuestsAmountDone(items);
+        }
+
+        if (!health.isAlive())
         {
             Die();
         }
@@ -71,7 +102,7 @@ public class CiscoTesting : MonoBehaviour
         {
             CurrentWeapon.Attack(playerController.DirectionFacing);
         }
-
+        
         //if (Input.GetMouseButton(0))
         //{
         //    primaryAttack = true;
@@ -93,19 +124,6 @@ public class CiscoTesting : MonoBehaviour
         {
             CurrentWeapon = Weapons[2];
         }
-
-        //Check for completion of the quest when an item is picked up
-        if (CheckQuests)
-        {
-            foreach (Quest quest in playerQuestSystem.GetQuests())
-            {
-                if (quest.questData.questState == QuestState.inProgress)
-                {
-                    quest.CheckCompletion(this);
-                }
-            }
-        }
-        
     }
 
     void Die()
@@ -121,8 +139,6 @@ public class CiscoTesting : MonoBehaviour
             itemName = itemName.Replace("(Clone)", "").Trim();
         }
 
-        Debug.Log(itemName);
-
         if (items.ContainsKey(itemName))
         {
             items[itemName]++;
@@ -131,21 +147,65 @@ public class CiscoTesting : MonoBehaviour
         {
             Debug.Log("Adding " + itemName);
             items.Add(itemName, 1);
+            lastItemPickedUp = itemName;
         }
 
         //Check for completion of the quest when an item is picked up
-        if (CheckQuests)
+        UpdateQuestLog();
+    }
+
+    public void RemoveItems(string name, int amount)
+    {
+        items[name] -= amount;
+    }
+
+    public void PrintItems()
+    {
+        foreach (KeyValuePair<string, int> kvp in items)
+        {
+            Debug.Log(string.Format("Key = {0}, Value = {1}", kvp.Key, kvp.Value));
+        }
+    }
+
+    public void UpdateQuestLog()
+    {
+        if(items.Count > 0)
         {
             foreach (Quest quest in playerQuestSystem.GetQuests())
             {
                 playerQuestSystem.UpdateQuests(quest.questID, items);
-                if (quest.questData.questState == QuestState.inProgress)
+                if (quest.questData.questState == QuestState.inProgress ||
+                    quest.questData.questState == QuestState.completed)
                 {
                     quest.CheckCompletion(this);
                 }
             }
         }
         
+    }
+
+    public void Save()
+    {
+        List<PlayerItem> playerItems = new List<PlayerItem>();
+
+        foreach(var item in items)
+        {
+            PlayerItem playerItem = new PlayerItem { name = item.Key, amount = item.Value };
+            playerItems.Add(playerItem);
+        }
+
+        JsonArrayHandler<PlayerItem>.WriteJsonFile(Path.Combine(Application.persistentDataPath, "PlayerItems.json"), playerItems);
+    }
+
+    public void InitDictionary()
+    {
+        PlayerItems playerItems = JsonArrayHandler<PlayerItems>.ReadJsonFile(Path.Combine(Application.persistentDataPath, "PlayerItems.json"));
+        items.Clear();
+
+        foreach(PlayerItem item in playerItems.items)
+        {
+            items.Add(item.name, item.amount);
+        }
     }
 
 }
