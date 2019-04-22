@@ -33,7 +33,7 @@ public class CiscoTesting : MonoBehaviour, ISaveable
     // Use this for initialization
     void Start ()
     {
-        SaveSystem.Instance.AddSaveableObject(gameObject);
+        SaveSystem.Instance.AddSaveableObject(this);
         items = new Dictionary<string, int>();
 
         if (File.Exists(Path.Combine(Application.persistentDataPath, "PlayerItems.json")))

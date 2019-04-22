@@ -12,7 +12,7 @@ public class NPCSavingState : MonoBehaviour, ISaveable
 
     private void Start()
     {
-        SaveSystem.Instance.AddSaveableObject(gameObject);
+        SaveSystem.Instance.AddSaveableObject(this);
         filePath = Path.Combine(Application.persistentDataPath, fileName);
 
         npcStates = new List<NPCState>();
@@ -73,11 +73,5 @@ public class NPCSavingState : MonoBehaviour, ISaveable
     public void Save()
     {
         WriteFile();
-    }
-
-    public void Clear()
-    {
-        InitNPCFile();
-        ReadFile();
     }
 }

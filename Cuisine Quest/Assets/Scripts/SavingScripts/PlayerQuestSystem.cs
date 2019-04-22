@@ -13,7 +13,7 @@ public class PlayerQuestSystem : MonoBehaviour, ISaveable
     // Use this for initialization
     void Start () 
     {
-        SaveSystem.Instance.AddSaveableObject(gameObject);
+        SaveSystem.Instance.AddSaveableObject(this);
         filePath = Path.Combine(Application.persistentDataPath, fileName);
 
         questManager = FindObjectOfType<QuestManager>();

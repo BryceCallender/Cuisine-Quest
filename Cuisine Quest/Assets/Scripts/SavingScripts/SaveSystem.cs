@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-using UnityEngine.SceneManagement;
 
 public class SaveSystem : MonoBehaviour
 {
-    public List<GameObject> saveableObjects;
+    public List<ISaveable> saveableObjects; // list of scripts with ISaveable interface defined 
     public List<string> fileNames;
 
     private static SaveSystem instance = null;
@@ -23,6 +22,7 @@ public class SaveSystem : MonoBehaviour
     private void Start()
     {
         DontDestroyOnLoad(this);
+        saveableObjects = new List<ISaveable>();
     }
 
     /// <summary>
@@ -35,9 +35,9 @@ public class SaveSystem : MonoBehaviour
     {
         Debug.Log("Game Saved");
         AudioSourceController.Instance.PlayAudio("Save");
-        foreach (GameObject saveObject in saveableObjects)
+        foreach (ISaveable saveObject in saveableObjects)
         {
-           saveObject.GetComponent<ISaveable>().Save();
+            saveObject.Save();
         }
     }
 
@@ -50,7 +50,7 @@ public class SaveSystem : MonoBehaviour
         }
     }
 
-    public void AddSaveableObject(GameObject objectToSave)
+    public void AddSaveableObject(ISaveable objectToSave)
     {
         saveableObjects.Add(objectToSave);
     }
