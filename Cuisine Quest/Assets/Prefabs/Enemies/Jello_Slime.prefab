@@ -20,9 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4496616064670244}
   - component: {fileID: 212521125015383252}
-  - component: {fileID: 61757125673612636}
   - component: {fileID: 114626829293990114}
   - component: {fileID: 50257676643576250}
+  - component: {fileID: 60076455867985582}
   m_Layer: 0
   m_Name: Jello_Slime
   m_TagString: Enemy
@@ -63,8 +63,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &61757125673612636
-BoxCollider2D:
+--- !u!60 &60076455867985582
+PolygonCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -85,9 +85,18 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.03125, y: 1.03125}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.20861949, y: 0.42633992}
+      - {x: -0.17050137, y: 0.42633992}
+      - {x: -0.3353365, y: 0.22853774}
+      - {x: -0.35182002, y: -0.002231472}
+      - {x: -0.35182002, y: -0.3319018}
+      - {x: -0.23643543, y: -0.43080288}
+      - {x: 0.3075206, y: -0.43080288}
+      - {x: 0.4064217, y: -0.3319018}
+      - {x: 0.4064217, y: -0.08464905}
+      - {x: 0.35697114, y: 0.32743883}
 --- !u!114 &114626829293990114
 MonoBehaviour:
   m_ObjectHideFlags: 1

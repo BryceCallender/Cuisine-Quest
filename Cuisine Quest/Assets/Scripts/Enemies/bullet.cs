@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class bullet : MonoBehaviour
+public class bullet : Projectile
 {
     public int speed;
     Vector3 velocity;
@@ -27,13 +27,13 @@ public class bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Wall"))
+        if(collision.CompareTag("Wall") || collision.CompareTag("EnemyTrigger"))
         {
             Destroy(gameObject);
         }
         else if(collision.CompareTag("Player"))
         {
-            collision.GetComponent<CiscoTesting>().health.takeDamage(1);
+            DoDamage(collision);
             Destroy(gameObject);
         }
     }

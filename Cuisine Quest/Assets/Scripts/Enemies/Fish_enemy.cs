@@ -10,7 +10,6 @@ public class Fish_enemy : EnemyAbstract
     public float offset;
     float angle;
     float minDistance = 3f;
-    float range;
     bool playerFound = false;
     Rigidbody2D rb;
     float timer = 10f;
