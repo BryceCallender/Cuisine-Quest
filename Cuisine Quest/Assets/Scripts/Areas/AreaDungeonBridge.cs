@@ -5,6 +5,8 @@ using UnityEngine;
 public class AreaDungeonBridge : AreaAbstract {
     public List<SpawningObject> ToLoadOnBridge = new List<SpawningObject>();
     public int BridgeObjectOrderInLayer = 100;
+
+    public GameObject UnderBridgeWall;
     // Use this for initialization
     void Start () {
 		
@@ -31,7 +33,7 @@ public class AreaDungeonBridge : AreaAbstract {
             newObj.gameObject.layer =  9;
             loaded.Add(newObj);
 
-            LoadObj(so);
+            //LoadObj(so);
         }
 
         return false;
@@ -59,8 +61,14 @@ public class AreaDungeonBridge : AreaAbstract {
         
         if(direction.y > 0 || direction.y < 0)
         {
-            player.layer = 9;
-            player.GetComponent<SpriteRenderer>().sortingOrder = BridgeObjectOrderInLayer;
+            int newLayerOrder = 0;
+            if (player.GetComponent<SpriteRenderer>().sortingOrder < BridgeObjectOrderInLayer) newLayerOrder = BridgeObjectOrderInLayer;
+            player.GetComponent<CiscoTesting>().ChangeLayer(9, newLayerOrder);
+            //player.layer = 9;
+            //player.GetComponent<SpriteRenderer>().sortingOrder = BridgeObjectOrderInLayer;
+
+        }else{
+            UnderBridgeWall.SetActive(true);
         }
         
         
@@ -71,9 +79,15 @@ public class AreaDungeonBridge : AreaAbstract {
         if (collision.CompareTag("Player"))
         {
             GameObject player = GameObject.FindGameObjectWithTag("Player");
-            player.layer = 0;
 
-            player.GetComponent<SpriteRenderer>().sortingOrder = 20;
+             int newOrderLayer = 0;
+            if (player.GetComponent<SpriteRenderer>().sortingOrder > BridgeObjectOrderInLayer) newOrderLayer = -BridgeObjectOrderInLayer;
+            player.GetComponent<CiscoTesting>().ChangeLayer(0, newOrderLayer);
+
+            //player.layer = 0;
+            //player.GetComponent<SpriteRenderer>().sortingOrder = 20;
+
+            UnderBridgeWall.SetActive(false);
         }
     }
 }

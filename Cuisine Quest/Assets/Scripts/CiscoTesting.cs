@@ -113,6 +113,17 @@ public class CiscoTesting : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    public void ChangeLayer(int Layer, int orderInLayer){
+
+        gameObject.layer = Layer;
+        GetComponent<SpriteRenderer>().sortingOrder = GetComponent<SpriteRenderer>().sortingOrder + orderInLayer;
+
+        foreach(Weapon w in Weapons){
+            w.gameObject.layer = Layer;
+            w.Mesh.gameObject.layer = Layer;
+            w.Mesh.GetComponent<SpriteRenderer>().sortingOrder = w.Mesh.GetComponent<SpriteRenderer>().sortingOrder + orderInLayer;
+        }
+    }
     public void AddItem(GameObject item)
     {
         string itemName = item.name;
