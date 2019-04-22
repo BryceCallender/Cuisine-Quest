@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
     private float H_Axis;
     private float V_Axis;
 
+    public bool cameraTransition = false;
+    public Vector2 cameraTransitionDirection;
+
     // Use this for initialization
     void Start ()
     {
@@ -63,6 +66,10 @@ public class PlayerController : MonoBehaviour
             {
                 DirectionFacing = new Vector2(0, -1);
             }
+        }
+        else if (cameraTransition && !playerCanMove)
+        {
+            rb.velocity = cameraTransitionDirection * moveSpeed;
         }
         else
         {

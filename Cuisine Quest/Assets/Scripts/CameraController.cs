@@ -98,8 +98,15 @@ public class CameraController : MonoBehaviour
             transitionDestination += transform.position;
             Debug.Log(transitionDestination.ToString());
 
+            Player.cameraTransition = false;
             Player.playerCanMove = false;
 
+        }
+        else
+        {
+            Player.cameraTransitionDirection = direction;
+            Player.cameraTransition = true;
+            Debug.Log("Player Auto Move");
         }
     }
 }

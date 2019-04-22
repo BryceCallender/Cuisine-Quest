@@ -25,6 +25,7 @@ public class CiscoTesting : MonoBehaviour, ISaveable
     public Weapon[] Weapons;
 
     private PlayerQuestSystem playerQuestSystem;
+    public bool CheckQuests = false;
     public Dictionary<string, int> items;
     private PlayerController playerController;
 
@@ -52,10 +53,38 @@ public class CiscoTesting : MonoBehaviour, ISaveable
         health.ResetHealth();
         playerQuestSystem = GetComponent<PlayerQuestSystem>();
 	}
-	
-	// Update is called once per frame
-	void Update ()
+    bool primaryAttackButton = false;
+    bool secondaryAttackButton = false;
+    bool questMenuButton = false;
+    // Update is called once per frame
+    void Update ()
     {
+        bool primaryAttackButtonDown = false;
+        bool secondaryAttackButtonDown = false;
+        bool questMenuButtonDown = false;
+
+        if (Mathf.Abs(Input.GetAxisRaw("Fire1")) > 0 && !primaryAttackButton) primaryAttackButtonDown = true;
+        if (Mathf.Abs(Input.GetAxisRaw("Fire2")) > 0 && !secondaryAttackButton) secondaryAttackButtonDown = true;
+        //if(Mathf.Abs(Input.GetAxisRaw("")))
+
+        if (Mathf.Abs(Input.GetAxisRaw("Fire1")) > 0)
+        {
+            primaryAttackButton = true;
+        }
+        else
+        {
+            primaryAttackButton = false;
+        }
+        if (Mathf.Abs(Input.GetAxisRaw("Fire2")) > 0)
+        {
+            secondaryAttackButton = true;
+        }
+        else
+        {
+            secondaryAttackButton = false;
+        }
+        if(secondaryAttackButtonDown) Debug.Log(primaryAttackButton + " " + secondaryAttackButtonDown);
+
         if(items.Count > 0 && items != null)
         {
             playerQuestSystem.UpdateCurrentQuestsAmountDone(items);
@@ -66,18 +95,21 @@ public class CiscoTesting : MonoBehaviour, ISaveable
             Die();
         }
 
-        bool primaryAttack = Input.GetMouseButtonDown(0);
+        //bool primaryAttack = Input.GetMouseButtonDown(0);
+        //bool secondaryAttack = secondaryAttackButton;
 
-        if (primaryAttack && CurrentWeapon != null)
+        if (primaryAttackButtonDown && CurrentWeapon != null)
         {
             CurrentWeapon.Attack(playerController.DirectionFacing);
         }
-
-        primaryAttack |= Input.GetMouseButton(0);
-
-        if (Input.GetMouseButtonDown(1) && CurrentWeapon != null)
+        
+        //if (Input.GetMouseButton(0))
+        //{
+        //    primaryAttack = true;
+        //}
+        if (secondaryAttackButtonDown && CurrentWeapon != null)
         {
-            CurrentWeapon.AttackSecondary(playerController.DirectionFacing, primaryAttack);
+            CurrentWeapon.AttackSecondary(playerController.DirectionFacing, primaryAttackButton);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -149,6 +181,7 @@ public class CiscoTesting : MonoBehaviour, ISaveable
                 }
             }
         }
+        
     }
 
     public void Save()

@@ -23,8 +23,16 @@ public class Trident : Weapon {
     // Update is called once per frame
     void Update()
     {
-
-        HoldAtAttack = Input.GetMouseButton(0);
+        //Debug.Log(Input.GetAxisRaw("Fire1"));
+        if(Mathf.Abs(Input.GetAxisRaw("Fire1")) > 0)
+        {
+            HoldAtAttack = true;
+        }
+        else
+        {
+            HoldAtAttack = false;
+        }
+        //HoldAtAttack = Input.GetMouseButton(0);
         jw.JabAttack(transform, ref Jabbing, HoldAtAttack);
 
     }

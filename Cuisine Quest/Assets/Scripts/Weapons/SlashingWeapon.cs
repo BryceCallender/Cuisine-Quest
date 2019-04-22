@@ -79,7 +79,7 @@ public class SlashingWeapon  {
             float zRot = weapon.localEulerAngles.z;
             zRot = RotationSpeed * Time.deltaTime;
 
-            Debug.Log(weapon.localEulerAngles.z);
+            //Debug.Log(weapon.localEulerAngles.z);
             //if (zRot - sp.RotationBegin <  sp.RotationLength + rotationOffset || zRot  > 180 + rotationOffset)
             if (currentDisplacement < targetAngle)
             {
