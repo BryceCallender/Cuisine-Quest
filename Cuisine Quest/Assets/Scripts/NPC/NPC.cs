@@ -35,7 +35,6 @@ public class NPC : MonoBehaviour
         characterDialog = gameObject.GetComponents<CharacterDialog>();
     }
 
-    //TODO::Add the quest to the player gameobject
     public void GiveQuest(CiscoTesting player, int index)
     {
         //give quest to player and set the SO to in progress
@@ -64,11 +63,16 @@ public class NPC : MonoBehaviour
                 {
                     //Complete the quest and enable the quest completion dialog
                     collision.GetComponent<PlayerQuestSystem>().SetQuestStatus(quest.questID, QuestState.done);
+                    for (int j = 0; j < quest.questData.requiredItems.Count; j++)
+                    {
+                        RequiredItem item = quest.questData.requiredItems[j];
+                        collision.GetComponent<CiscoTesting>().RemoveItems(item.item.name, item.requiredAmount);
+                        collision.GetComponent<CiscoTesting>().UpdateQuestLog();
+                    }
                     Debug.Log("Finished Quest");
                     characterDialog[1].EnableDialog();
                 }
             }
-
         }
     }
 
