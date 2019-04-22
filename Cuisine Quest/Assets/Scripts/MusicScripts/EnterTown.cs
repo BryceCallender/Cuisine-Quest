@@ -3,25 +3,27 @@ using UnityEngine;
 
 public class EnterTown : MonoBehaviour 
 {
-    public static bool isInTown;
-
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Player"))
         {
-            isInTown = true;
+            float dot = Vector3.Dot(new Vector2(-1, 0), collision.GetComponent<Rigidbody2D>().velocity);
 
-            if(isInTown)
+            if (dot > 0)
             {
-                StartCoroutine(PlayTownMusic());
+                AudioSourceController.Instance.PlayAudioLooped("Town");
+            }
+            else
+            {
+                StartCoroutine(PlayFieldMusic());
             }
         }
     }
 
-    IEnumerator PlayTownMusic()
+    IEnumerator PlayFieldMusic()
     {
-        AudioSourceController.Instance.PlayAudio("TownIntro");
+        AudioSourceController.Instance.PlayAudio("FieldIntro");
         yield return new WaitForSeconds(AudioSourceController.Instance.GetLengthOfCurrentSong());
-        AudioSourceController.Instance.PlayAudioLooped("TownMusic");
+        AudioSourceController.Instance.PlayAudioLooped("FieldMusic");
     }
 }

@@ -56,8 +56,6 @@ public class CiscoTesting : MonoBehaviour, ISaveable
 	// Update is called once per frame
 	void Update ()
     {
-        PrintItems();
-
         if(items.Count > 0 && items != null)
         {
             playerQuestSystem.UpdateCurrentQuestsAmountDone(items);
@@ -75,10 +73,8 @@ public class CiscoTesting : MonoBehaviour, ISaveable
             CurrentWeapon.Attack(playerController.DirectionFacing);
         }
 
-        if (Input.GetMouseButton(0))
-        {
-            primaryAttack = true;
-        }
+        primaryAttack |= Input.GetMouseButton(0);
+
         if (Input.GetMouseButtonDown(1) && CurrentWeapon != null)
         {
             CurrentWeapon.AttackSecondary(playerController.DirectionFacing, primaryAttack);
@@ -95,15 +91,6 @@ public class CiscoTesting : MonoBehaviour, ISaveable
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             CurrentWeapon = Weapons[2];
-        }
-
-        //Check for completion of the quest when an item is picked up
-        foreach (Quest quest in playerQuestSystem.GetQuests())
-        {
-            if (quest.questData.questState == QuestState.inProgress)
-            {
-                quest.CheckCompletion(this);
-            }
         }
     }
 

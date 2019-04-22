@@ -1421,6 +1421,7 @@ MonoBehaviour:
   fileNames:
   - Quests.json
   - NPC.json
+  - PlayerItems.json
 --- !u!4 &364956902
 Transform:
   m_ObjectHideFlags: 0
@@ -2264,6 +2265,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6a74bb81c1b294ec88a38e9dacda223c, type: 3}
   - {fileID: 8300000, guid: 6f928cb1aeb1e4e8ba141c8fceaaed68, type: 3}
   - {fileID: 8300000, guid: 20dd9c325d7444ed79827d28e87c25ce, type: 3}
+  - {fileID: 8300000, guid: ac849068f0722498d9e4a133a068df8d, type: 3}
 --- !u!82 &714892620
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3187,7 +3189,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000030517578}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1093210200
