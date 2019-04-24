@@ -46,6 +46,8 @@ public class Knife : Weapon {
         {
             AttackAbortForced();
             GameObject throwingKnife = Instantiate(ThrowingKnife, gameObject.transform.position, Quaternion.identity);
+            throwingKnife.GetComponent<Projectile>().SetLayer(gameObject.layer, Mesh.GetComponent<SpriteRenderer>().sortingOrder);
+            
             throwingKnife.GetComponent<Rigidbody2D>().velocity = KnifeThrowingSpeed * PlayerDirection;
             throwingKnife.transform.right = PlayerDirection;
 

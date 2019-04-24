@@ -34,8 +34,17 @@ public class CiscoTesting : MonoBehaviour, ISaveable
     // Use this for initialization
     void Start ()
     {
-        SaveSystem.Instance.AddSaveableObject(this);
+        health = gameObject.AddComponent<HealthSystem>();
+        playerController = GetComponent<PlayerController>();
+
+        health.setMaxHealth(5);
+        health.ResetHealth();
+        playerQuestSystem = GetComponent<PlayerQuestSystem>();
+
         items = new Dictionary<string, int>();
+
+        SaveSystem.Instance.AddSaveableObject(this);
+        
 
         if (File.Exists(Path.Combine(Application.persistentDataPath, "PlayerItems.json")))
         {
@@ -46,12 +55,7 @@ public class CiscoTesting : MonoBehaviour, ISaveable
             items.Clear();
         }
 
-        health = gameObject.AddComponent<HealthSystem>();
-        playerController = GetComponent<PlayerController>();
-
-        health.setMaxHealth(5);
-        health.ResetHealth();
-        playerQuestSystem = GetComponent<PlayerQuestSystem>();
+        
 	}
     bool primaryAttackButton = false;
     bool secondaryAttackButton = false;
@@ -59,6 +63,7 @@ public class CiscoTesting : MonoBehaviour, ISaveable
     // Update is called once per frame
     void Update ()
     {
+        if (!playerController) playerController = GetComponent<PlayerController>();
         bool primaryAttackButtonDown = false;
         bool secondaryAttackButtonDown = false;
         bool questMenuButtonDown = false;
@@ -85,15 +90,15 @@ public class CiscoTesting : MonoBehaviour, ISaveable
         }
         if(secondaryAttackButtonDown) Debug.Log(primaryAttackButton + " " + secondaryAttackButtonDown);
 
-        if(items.Count > 0 && items != null)
-        {
-            playerQuestSystem.UpdateCurrentQuestsAmountDone(items);
-        }
+        //if(items.Count > 0 && items != null)
+        //{
+        //    playerQuestSystem.UpdateCurrentQuestsAmountDone(items);
+        //}
 
-        if (!health.isAlive())
-        {
-            Die();
-        }
+        //if (!health.isAlive())
+        //{
+        //    Die();
+        //}
 
         //bool primaryAttack = Input.GetMouseButtonDown(0);
         //bool secondaryAttack = secondaryAttackButton;
@@ -162,7 +167,7 @@ public class CiscoTesting : MonoBehaviour, ISaveable
         }
 
         //Check for completion of the quest when an item is picked up
-        UpdateQuestLog();
+        if(CheckQuests) UpdateQuestLog();
     }
 
     public void RemoveItems(string name, int amount)
