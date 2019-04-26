@@ -8,7 +8,7 @@ public class Pig : EnemyAbstract
     float minDistance = 3f;
     bool playerFound = false;
     Rigidbody2D rb;
-    float timer;
+    float movetimer;
     Vector2 direction = new Vector2(0, -1);
     float attackTime;
     public Weapon Sword;
@@ -19,8 +19,9 @@ public class Pig : EnemyAbstract
         health = gameObject.AddComponent<HealthSystem>();
         health.setMaxHealth(2);
         health.ResetHealth();
+        Sword = gameObject.GetComponentInChildren<Sword>();
         rb = GetComponent<Rigidbody2D>();
-        timer = 0.0f;
+        movetimer = 0.0f;
         attackTime = 0.0f;
         speed = 3;
     }
@@ -32,6 +33,24 @@ public class Pig : EnemyAbstract
         {
             Die();
         }
+
+        if (rb.velocity.x > rb.velocity.y && rb.velocity.x > 0)
+        {
+            direction = new Vector2(1, 0);
+        }
+        else if (rb.velocity.x < rb.velocity.y && rb.velocity.x < 0)
+        {
+            direction = new Vector2(-1, 0);
+        }
+        else if(rb.velocity.y > rb.velocity.x && rb.velocity.y > 0)
+        {
+            direction = new Vector2(0, 1);
+        }
+        else
+        {
+            direction = new Vector2(0, -1);
+        }
+        print(direction);
 
         Move();
         Attack();
@@ -57,33 +76,33 @@ public class Pig : EnemyAbstract
     {
         if(!playerFound)
         {
-            if(timer < 3.0f)
+            if(movetimer < 3.0f)
             {
                 Vector2 movement = new Vector2(1, 0);
                 movement = movement.normalized * speed;
                 rb.velocity = movement;
-                timer += Time.deltaTime;
+                movetimer += Time.deltaTime;
             }
-            else if(timer < 3.75f)
+            else if(movetimer < 3.75f)
             {
                 rb.velocity = Vector2.zero;
-                timer += Time.deltaTime;
+                movetimer += Time.deltaTime;
             }
-            else if(timer < 6.75f)
+            else if(movetimer < 6.75f)
             {
                 Vector2 movement = new Vector2(-1, 0);
                 movement = movement.normalized * speed;
                 rb.velocity = movement;
-                timer += Time.deltaTime;
+                movetimer += Time.deltaTime;
             }
-            else if(timer < 7.5f)
+            else if(movetimer < 7.5f)
             {
                 rb.velocity = Vector2.zero;
-                timer += Time.deltaTime;
+                movetimer += Time.deltaTime;
             }
             else
             {
-                timer = 0.0f;
+                movetimer = 0.0f;
             }
             
         }
@@ -100,9 +119,14 @@ public class Pig : EnemyAbstract
         if(playerFound)
         {
             float dist = Vector3.Distance(transform.position, target.position);
-            if(true)
+            if(dist < 2.3f && attackTime <= 0.0f)
             {
                 Sword.Attack(direction);
+                attackTime = 3.0f;
+            }
+            else
+            {
+                attackTime -= Time.deltaTime;
             }
         }
     }
