@@ -33,11 +33,13 @@ public class CameraController : MonoBehaviour
         {
             Vector3 newPosition = Vector3.MoveTowards(transform.position, transitionDestination, TransitionSpeed * Time.deltaTime);
             transform.position = newPosition;
+            Player.cameraTransition = true;
 
             if(Vector3.Distance(transitionDestination, transform.position) < TransitionBuffer)
             {
                 transform.position = transitionDestination;
                 transitioning = false;
+                Player.cameraTransition = false;
                 Player.playerCanMove = true;
                 GameObject.FindGameObjectWithTag("LevelHandler").GetComponent<LevelHandler>().FinishAreaMove();
             }
@@ -91,7 +93,7 @@ public class CameraController : MonoBehaviour
 
     public void SceneTransition(Vector2 direction)
     {
-        if (true && !transitioning) //check level handler for transition check
+        if (!transitioning) //check level handler for transition check
         {
             transitioning = true;
             transitionDestination = direction * transitionGrid;

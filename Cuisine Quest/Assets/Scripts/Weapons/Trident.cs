@@ -15,11 +15,6 @@ public class Trident : Weapon {
 
     //public GameObject Mesh;
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-
     // Update is called once per frame
     void Update()
     {
@@ -49,6 +44,7 @@ public class Trident : Weapon {
 
     public override void Attack(Vector2 PlayerDirection)
     {
+        weaponCollider.enabled = true;
         if (jw.CanAttack())
         {
             if (PlayerDirection.x < 0) jw.AttackLeft(transform, ref Jabbing);
@@ -69,6 +65,7 @@ public class Trident : Weapon {
         transform.localPosition = new Vector3(0, 0, 0);
         Mesh.SetActive(false);
         Jabbing = false;
+        weaponCollider.enabled = false;
     }
 
     public override bool AttackAbort()

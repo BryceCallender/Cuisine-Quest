@@ -28,11 +28,6 @@ public class Sword : Weapon {
     }
     public AttackType MyAttack;
 
-	// Use this for initialization
-	void Start () {
-        //sw = new SlashingWeapon();
-	}
-	
 	// Update is called once per frame
 	void Update () {
 
@@ -47,7 +42,8 @@ public class Sword : Weapon {
 
     public override void Attack(Vector2 PlayerDirection)
     {
-        if(MyAttack == AttackType.Jab)
+        weaponCollider.enabled = true;
+        if (MyAttack == AttackType.Jab)
         {
             if (jw.CanAttack()) GetComponent<AudioSource>().Play();
             else return;
@@ -105,6 +101,7 @@ public class Sword : Weapon {
         Mesh.SetActive(false);
         Slashing = false;
         Jabbing = false;
+        weaponCollider.enabled = false;
     }
 
     public override bool AttackAbort()

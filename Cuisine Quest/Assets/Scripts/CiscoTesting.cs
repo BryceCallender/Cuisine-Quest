@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 [System.Serializable]
 public class PlayerItem
 {
-    public string name;
+    public Item item;
     public int amount;
 }
 
@@ -24,18 +24,24 @@ public class CiscoTesting : MonoBehaviour, ISaveable
     public Weapon CurrentWeapon;
     public Weapon[] Weapons;
 
+    public List<Item> itemItems;
+    public List<Potion> potions;
+
+
     private PlayerQuestSystem playerQuestSystem;
     public bool CheckQuests = false;
-    public Dictionary<string, int> items;
+    public Dictionary<Item, int> items;
     private PlayerController playerController;
 
-    public static string lastItemPickedUp;
+    public static string lastItemPickedUp = "";
 
     // Use this for initialization
     void Start ()
     {
         SaveSystem.Instance.AddSaveableObject(this);
-        items = new Dictionary<string, int>();
+        items = new Dictionary<Item, int>();
+        potions = new List<Potion>();
+        itemItems = new List<Item>();
 
         if (File.Exists(Path.Combine(Application.persistentDataPath, "PlayerItems.json")))
         {
@@ -56,12 +62,14 @@ public class CiscoTesting : MonoBehaviour, ISaveable
     bool primaryAttackButton = false;
     bool secondaryAttackButton = false;
     bool questMenuButton = false;
+
     // Update is called once per frame
     void Update ()
     {
+        PrintItems();
+
         bool primaryAttackButtonDown = false;
         bool secondaryAttackButtonDown = false;
-        bool questMenuButtonDown = false;
 
         if (Mathf.Abs(Input.GetAxisRaw("Fire1")) > 0 && !primaryAttackButton) primaryAttackButtonDown = true;
         if (Mathf.Abs(Input.GetAxisRaw("Fire2")) > 0 && !secondaryAttackButton) secondaryAttackButtonDown = true;
@@ -75,6 +83,7 @@ public class CiscoTesting : MonoBehaviour, ISaveable
         {
             primaryAttackButton = false;
         }
+
         if (Mathf.Abs(Input.GetAxisRaw("Fire2")) > 0)
         {
             secondaryAttackButton = true;
@@ -83,6 +92,7 @@ public class CiscoTesting : MonoBehaviour, ISaveable
         {
             secondaryAttackButton = false;
         }
+
         if(secondaryAttackButtonDown) Debug.Log(primaryAttackButton + " " + secondaryAttackButtonDown);
 
         if(items.Count > 0 && items != null)
@@ -124,6 +134,19 @@ public class CiscoTesting : MonoBehaviour, ISaveable
         {
             CurrentWeapon = Weapons[2];
         }
+
+        if(Input.GetKeyDown(KeyCode.Minus))
+        {
+            health.takeDamage(1);
+        }
+        else if(Input.GetKeyDown(KeyCode.Equals))
+        {
+            if(potions.Count > 0)
+            {
+                potions[0].Consume(this);
+                potions.RemoveAt(0);
+            }
+        }
     }
 
     void Die()
@@ -133,47 +156,46 @@ public class CiscoTesting : MonoBehaviour, ISaveable
 
     public void AddItem(GameObject item)
     {
-        string itemName = item.name;
-        if(itemName.Contains("(Clone)"))
-        {
-            itemName = itemName.Replace("(Clone)", "").Trim();
-        }
+        Debug.Log("Looted an item: " + item);
 
-        if (items.ContainsKey(itemName))
+        if (items.ContainsKey(item.GetComponent<Item>()))
         {
-            items[itemName]++;
+            Debug.Log("Contained the key");
+            items[item.GetComponent<Item>()]++;
         }
         else
         {
-            Debug.Log("Adding " + itemName);
-            items.Add(itemName, 1);
-            lastItemPickedUp = itemName;
+            Debug.Log("Adding item to the dictionary");
+            items.Add(item.GetComponent<Item>(), 1);
+            itemItems.Add(item.GetComponent<Item>());
+            //lastItemPickedUp = item.Name;
         }
 
         //Check for completion of the quest when an item is picked up
-        UpdateQuestLog();
+        UpdateQuestLog(item.GetComponent<Item>());
+        //item.SetActive(false);
     }
 
-    public void RemoveItems(string name, int amount)
+    public void RemoveItems(Item name, int amount)
     {
         items[name] -= amount;
     }
 
     public void PrintItems()
     {
-        foreach (KeyValuePair<string, int> kvp in items)
+        foreach (KeyValuePair<Item, int> kvp in items)
         {
             Debug.Log(string.Format("Key = {0}, Value = {1}", kvp.Key, kvp.Value));
         }
     }
 
-    public void UpdateQuestLog()
+    public void UpdateQuestLog(Item item)
     {
-        if(items.Count > 0)
+        if (items.Count > 0)
         {
             foreach (Quest quest in playerQuestSystem.GetQuests())
             {
-                playerQuestSystem.UpdateQuests(quest.questID, items);
+                playerQuestSystem.UpdateQuests(quest.questID, items, item);
                 if (quest.questData.questState == QuestState.inProgress ||
                     quest.questData.questState == QuestState.completed)
                 {
@@ -181,16 +203,15 @@ public class CiscoTesting : MonoBehaviour, ISaveable
                 }
             }
         }
-        
     }
 
     public void Save()
     {
         List<PlayerItem> playerItems = new List<PlayerItem>();
 
-        foreach(var item in items)
+        foreach (var item in items)
         {
-            PlayerItem playerItem = new PlayerItem { name = item.Key, amount = item.Value };
+            PlayerItem playerItem = new PlayerItem { item = { Name = item.Key.Name, Type = item.Key.Type }, amount = item.Value };
             playerItems.Add(playerItem);
         }
 
@@ -202,10 +223,9 @@ public class CiscoTesting : MonoBehaviour, ISaveable
         PlayerItems playerItems = JsonArrayHandler<PlayerItems>.ReadJsonFile(Path.Combine(Application.persistentDataPath, "PlayerItems.json"));
         items.Clear();
 
-        foreach(PlayerItem item in playerItems.items)
+        foreach (PlayerItem item in playerItems.items)
         {
-            items.Add(item.name, item.amount);
+            items.Add(item.item, item.amount);
         }
     }
-
 }

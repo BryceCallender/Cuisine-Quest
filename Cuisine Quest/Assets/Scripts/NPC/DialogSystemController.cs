@@ -52,7 +52,7 @@ public class DialogSystemController : MonoBehaviour
 
     private void DisplayMessage()
     {
-        if (isEmpty())
+        if (messages.Count == 0)
         {
             animator.SetBool("isOpen", false);
             float time = animator.GetCurrentAnimatorStateInfo(0).length;
@@ -98,7 +98,7 @@ public class DialogSystemController : MonoBehaviour
 
     public bool isEmpty()
     {
-        return messages.Count == 0;
+        return messages.Count == 0 && !dialogPopup.activeSelf;
     }
 
     public void TurnOffDialogBox()

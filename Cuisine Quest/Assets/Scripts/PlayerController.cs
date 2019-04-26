@@ -27,60 +27,74 @@ public class PlayerController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        playerMoving = false;
-        H_Axis = Input.GetAxisRaw("Horizontal");
-        V_Axis = Input.GetAxisRaw("Vertical");
+        if(!PauseMenu.paused && !cameraTransition)
+        {
+            playerMoving = false;
+            H_Axis = Input.GetAxisRaw("Horizontal");
+            V_Axis = Input.GetAxisRaw("Vertical");
 
-        if ((H_Axis > 0.5f || H_Axis < -0.5f) &&
-           (V_Axis > 0.5f || V_Axis < -0.5f) && playerCanMove)
-        {
-            rb.velocity = new Vector3(H_Axis * moveSpeed, V_Axis * moveSpeed, 0f);
-            playerMoving = true;
-            lastMove = new Vector2(H_Axis, V_Axis);
-        }
-        else if((H_Axis > 0.5f || H_Axis < -0.5f) && playerCanMove)
-        {
-            rb.velocity = new Vector3(H_Axis * moveSpeed, 0f, 0f);
-            playerMoving = true;
-            lastMove = new Vector2(H_Axis, 0f);
-            if (H_Axis > 0.5f)
+            if ((H_Axis > 0.5f || H_Axis < -0.5f) &&
+               (V_Axis > 0.5f || V_Axis < -0.5f) && playerCanMove)
             {
-                DirectionFacing = new Vector2(1,0);
+                rb.velocity = new Vector3(H_Axis * moveSpeed, V_Axis * moveSpeed, 0f);
+                playerMoving = true;
+                lastMove = new Vector2(H_Axis, V_Axis);
+            }
+            else if ((H_Axis > 0.5f || H_Axis < -0.5f) && playerCanMove)
+            {
+                rb.velocity = new Vector3(H_Axis * moveSpeed, 0f, 0f);
+                playerMoving = true;
+                lastMove = new Vector2(H_Axis, 0f);
+                if (H_Axis > 0.5f)
+                {
+                    DirectionFacing = new Vector2(1, 0);
+                }
+                else
+                {
+                    DirectionFacing = new Vector2(-1, 0);
+                }
+            }
+            else if ((V_Axis > 0.5f || V_Axis < -0.5f) && playerCanMove)
+            {
+                rb.velocity = new Vector3(0f, V_Axis * moveSpeed, 0f);
+                playerMoving = true;
+                lastMove = new Vector2(0f, V_Axis);
+
+                if (V_Axis > 0.5f)
+                {
+                    DirectionFacing = new Vector2(0, 1);
+                }
+                else
+                {
+                    DirectionFacing = new Vector2(0, -1);
+                }
+            }
+            else if (cameraTransition && !playerCanMove)
+            {
+                rb.velocity = cameraTransitionDirection * moveSpeed;
             }
             else
             {
-                DirectionFacing = new Vector2(-1, 0);
+                NoMovement();
             }
-        }
-        else if((V_Axis > 0.5f || V_Axis < -0.5f) && playerCanMove)
-        {
-            rb.velocity = new Vector3(0f, V_Axis * moveSpeed, 0f);
-            playerMoving = true;
-            lastMove = new Vector2(0f, V_Axis);
-
-            if (V_Axis > 0.5f)
-            {
-                DirectionFacing = new Vector2(0, 1);
-            }
-            else
-            {
-                DirectionFacing = new Vector2(0, -1);
-            }
-        }
-        else if (cameraTransition && !playerCanMove)
-        {
-            rb.velocity = cameraTransitionDirection * moveSpeed;
         }
         else
         {
-            rb.velocity = Vector2.zero;
+            NoMovement();
         }
-
 
         anim.SetFloat("MoveX", H_Axis);
         anim.SetFloat("MoveY", V_Axis);
         anim.SetBool("PlayerMoving", playerMoving);
         anim.SetFloat("LastMoveX", lastMove.x);
         anim.SetFloat("LastMoveY", lastMove.y);
+    }
+
+    public void NoMovement()
+    {
+        rb.velocity = Vector2.zero;
+        anim.SetFloat("MoveX", 0);
+        anim.SetFloat("MoveY", 0);
+        playerMoving = false;
     }
 }

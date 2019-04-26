@@ -12,15 +12,15 @@ public class ItemQuest : Quest
         foreach(RequiredItem requiredItem in questData.requiredItems)
         {
             Item item = requiredItem.item.GetComponent<Item>();
-            if (item != null && player.items.ContainsKey(item.name))
+            if (item != null && player.items.ContainsKey(item))
             {
                 //If the item is an inventory item and the name of the gameobject
                 //matches that of the required item for the quest 
-                if(item.Type == Item.ItemType.Inventory && item.name == requiredItem.item.name)
+                if(item.Type == ItemType.Inventory && item.name == requiredItem.item.name)
                 {
                     //If one of the items doesnt meet the requirement then the 
                     //quest is not completed
-                    if (player.items[requiredItem.item.name] < requiredItem.requiredAmount)
+                    if (player.items[requiredItem.item] < requiredItem.requiredAmount)
                     {
                         questData.questState = QuestState.inProgress;
                         return false;
