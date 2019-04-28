@@ -20,10 +20,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4466618861563244}
   - component: {fileID: 212907466028656470}
-  - component: {fileID: 114935378928654416}
+  - component: {fileID: 114910095671855084}
   - component: {fileID: 58595241779462610}
   m_Layer: 0
-  m_Name: Green Weeds
+  m_Name: Greens
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,7 +57,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.24
---- !u!114 &114935378928654416
+--- !u!114 &114910095671855084
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1803489744764170}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdcc89c10cdff42d2a2eb2abc6099110, type: 3}
+  m_Script: {fileID: 11500000, guid: f50f2130e93f346f3a26c283c734abf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Greens

@@ -9,6 +9,8 @@ public class GameMenu : MonoBehaviour
     public TextMeshProUGUI potionCountText;
     public CiscoTesting player;
 
+    private int potionCount = 0;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<CiscoTesting>();
@@ -18,7 +20,15 @@ public class GameMenu : MonoBehaviour
     // Update is called once per frame
     void Update () 
     {
-        potionCountText.SetText(string.Format("x{0}", player.potions.Count));
+        if(player.items != null && player.items.Count > 0)
+        {
+            if (player.items.ContainsKey(player.potion))
+            {
+                potionCount = player.items[player.potion];
+            }
+        }
+
+        potionCountText.SetText(string.Format("x{0}", potionCount));
         //The true in this statement allows this to get components in children
         //even if they are disabled on disabled gameobjects
         weaponImage.sprite = player.CurrentWeapon.gameObject.GetComponentInChildren<SpriteRenderer>(true).sprite;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GreenWeeds : Item {
+public class Greens : Item {
 
 	
 }

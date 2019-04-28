@@ -16,12 +16,13 @@ public class ItemQuest : Quest
             {
                 //If the item is an inventory item and the name of the gameobject
                 //matches that of the required item for the quest 
-                if(item.Type == ItemType.Inventory && item.name == requiredItem.item.name)
+                if(item.Type == ItemType.Inventory && item.Name == requiredItem.item.Name)
                 {
                     //If one of the items doesnt meet the requirement then the 
                     //quest is not completed
                     if (player.items[requiredItem.item] < requiredItem.requiredAmount)
                     {
+
                         questData.questState = QuestState.inProgress;
                         return false;
                     }

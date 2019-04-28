@@ -6,8 +6,23 @@ using UnityEngine.SceneManagement;
 [System.Serializable]
 public class PlayerItem
 {
-    public Item item;
+    public ItemData item;
     public int amount;
+
+    public PlayerItem(string name, ItemType itemType, int amount)
+    {
+        item = new ItemData();
+        this.item.name = name;
+        this.item.itemType = itemType;
+        this.amount = amount;
+    }
+}
+
+[System.Serializable]
+public class ItemData
+{
+    public string name;
+    public ItemType itemType;
 }
 
 [System.Serializable]
@@ -24,9 +39,7 @@ public class CiscoTesting : MonoBehaviour, ISaveable
     public Weapon CurrentWeapon;
     public Weapon[] Weapons;
 
-    public List<Item> itemItems;
-    public List<Potion> potions;
-
+    public Potion potion;
 
     private PlayerQuestSystem playerQuestSystem;
     public bool CheckQuests = false;
@@ -40,12 +53,11 @@ public class CiscoTesting : MonoBehaviour, ISaveable
     {
         SaveSystem.Instance.AddSaveableObject(this);
         items = new Dictionary<Item, int>();
-        potions = new List<Potion>();
-        itemItems = new List<Item>();
 
         if (File.Exists(Path.Combine(Application.persistentDataPath, "PlayerItems.json")))
         {
             InitDictionary();
+            Debug.Log("Found save file");
         }
         else
         {
@@ -66,7 +78,6 @@ public class CiscoTesting : MonoBehaviour, ISaveable
     // Update is called once per frame
     void Update ()
     {
-        PrintItems();
 
         bool primaryAttackButtonDown = false;
         bool secondaryAttackButtonDown = false;
@@ -141,44 +152,35 @@ public class CiscoTesting : MonoBehaviour, ISaveable
         }
         else if(Input.GetKeyDown(KeyCode.Equals))
         {
-            if(potions.Count > 0)
-            {
-                potions[0].Consume(this);
-                potions.RemoveAt(0);
-            }
+
         }
     }
 
     void Die()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("DeathScene");
     }
 
     public void AddItem(GameObject item)
     {
-        Debug.Log("Looted an item: " + item);
-
         if (items.ContainsKey(item.GetComponent<Item>()))
         {
-            Debug.Log("Contained the key");
             items[item.GetComponent<Item>()]++;
         }
         else
         {
-            Debug.Log("Adding item to the dictionary");
             items.Add(item.GetComponent<Item>(), 1);
-            itemItems.Add(item.GetComponent<Item>());
-            //lastItemPickedUp = item.Name;
         }
 
         //Check for completion of the quest when an item is picked up
         UpdateQuestLog(item.GetComponent<Item>());
-        //item.SetActive(false);
+        item.SetActive(false);
     }
 
-    public void RemoveItems(Item name, int amount)
+    public void RemoveItems(Item item, int amount)
     {
-        items[name] -= amount;
+        items[item] -= amount;
+        UpdateQuestLog(item);
     }
 
     public void PrintItems()
@@ -186,6 +188,21 @@ public class CiscoTesting : MonoBehaviour, ISaveable
         foreach (KeyValuePair<Item, int> kvp in items)
         {
             Debug.Log(string.Format("Key = {0}, Value = {1}", kvp.Key, kvp.Value));
+        }
+    }
+
+    public void UpdateCompletionStatus()
+    {
+        if (items.Count > 0)
+        {
+            foreach (Quest quest in playerQuestSystem.GetQuests())
+            {
+                if (quest.questData.questState == QuestState.inProgress ||
+                    quest.questData.questState == QuestState.completed)
+                {
+                    quest.CheckCompletion(this);
+                }
+            }
         }
     }
 
@@ -209,9 +226,10 @@ public class CiscoTesting : MonoBehaviour, ISaveable
     {
         List<PlayerItem> playerItems = new List<PlayerItem>();
 
-        foreach (var item in items)
+        foreach (var itemObj in items)
         {
-            PlayerItem playerItem = new PlayerItem { item = { Name = item.Key.Name, Type = item.Key.Type }, amount = item.Value };
+            Debug.Log(itemObj);
+            PlayerItem playerItem = new PlayerItem(itemObj.Key.Name, itemObj.Key.Type, itemObj.Value);
             playerItems.Add(playerItem);
         }
 
@@ -225,7 +243,13 @@ public class CiscoTesting : MonoBehaviour, ISaveable
 
         foreach (PlayerItem item in playerItems.items)
         {
-            items.Add(item.item, item.amount);
+            GameObject go = new GameObject();
+            go.AddComponent<Item>();
+            Item gameObjectItem = go.GetComponent<Item>();
+            gameObjectItem.Name = item.item.name;
+            gameObjectItem.Type = item.item.itemType;
+
+            items.Add(gameObjectItem, item.amount);
         }
     }
 }

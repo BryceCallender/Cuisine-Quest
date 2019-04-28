@@ -26,6 +26,11 @@ public class AudioSourceController : MonoBehaviour
 
         DontDestroyOnLoad(this);
 
+        if (FindObjectsOfType(GetType()).Length > 1)
+        {
+            Destroy(gameObject);
+        }
+
         audioSource = GetComponent<AudioSource>();
 
         audioClipSources = new Dictionary<string, AudioClip>();

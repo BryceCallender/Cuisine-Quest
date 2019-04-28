@@ -10,18 +10,28 @@ public enum ItemType
 }
 
 [System.Serializable]
-public abstract class Item : SpawnObject 
+public class Item : SpawnObject
 {
     public string Name = "Unnamed";
     public ItemType Type;
+
+    public override int GetHashCode()
+    {
+        return Name.GetHashCode();
+    }
+
+    public override bool Equals(object obj)
+    {
+        Item item = obj as Item;
+
+        return this.Name == item.Name;
+    }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.transform.tag == "Player")
         {
             collision.GetComponent<CiscoTesting>().AddItem(gameObject);
-            //GameObject.FindGameObjectWithTag("LevelHandler").GetComponent<LevelHandler>().CurrentArea.RemoveObj(gameObject);
-            //Destroy(gameObject);
         }
     }
 }

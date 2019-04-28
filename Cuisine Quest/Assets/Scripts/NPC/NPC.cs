@@ -58,6 +58,7 @@ public class NPC : MonoBehaviour
         }
         //We have done them all
         player.GetComponent<PlayerQuestSystem>().SetQuestStatus(quest.questID,QuestState.inProgress);
+        player.UpdateCompletionStatus();
         hasTalked = true;
     }
 
@@ -88,7 +89,6 @@ public class NPC : MonoBehaviour
                             {
                                 RequiredItem item = quest.questData.requiredItems[j];
                                 collision.GetComponent<CiscoTesting>().RemoveItems(item.item, item.requiredAmount);
-                                //collision.GetComponent<CiscoTesting>().UpdateQuestLog();
                             }
                             Debug.Log("Finished Quest");
                             characterDialog[1].EnableDialog();
