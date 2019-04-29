@@ -14,6 +14,7 @@ public class SaveGameMenu : MonoBehaviour
         questUI.showQuestUI = false;
         AudioSourceController.Instance.PlayAudio("Save");
         SaveSystem.Instance.SaveGame();
+        Cancel();
     }
 
     public void Cancel()

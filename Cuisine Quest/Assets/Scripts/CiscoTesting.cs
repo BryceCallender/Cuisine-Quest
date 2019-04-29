@@ -48,8 +48,6 @@ public class CiscoTesting : MonoBehaviour, ISaveable
     public Dictionary<Item, int> items;
     private PlayerController playerController;
 
-    public static string lastItemPickedUp = "";
-
     // Use this for initialization
     void Start ()
     {
@@ -156,9 +154,14 @@ public class CiscoTesting : MonoBehaviour, ISaveable
         {
             health.takeDamage(1);
         }
-        else if(Input.GetKeyDown(KeyCode.Equals))
-        {
 
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            if(items[potion] > 0)
+            {
+                potion.Consume(this);
+                items[potion]--;
+            }
         }
     }
 
