@@ -17,8 +17,8 @@ public class Trident : Weapon {
 
     // Use this for initialization
     void Start () {
-		
-	}
+        activateWeapon(false);
+    }
 
     // Update is called once per frame
     void Update()
@@ -83,6 +83,11 @@ public class Trident : Weapon {
     }
 
     public override void AttackAbortForced()
+    {
+        attackEnd();
+    }
+
+    protected override void weaponTriggered(Collider2D collision)
     {
         attackEnd();
     }

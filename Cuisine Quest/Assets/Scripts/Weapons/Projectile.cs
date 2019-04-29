@@ -18,6 +18,11 @@ public abstract class Projectile : MonoBehaviour {
         {
             health.takeDamage(Damage);
         }
+
+        if (collision.CompareTag("BulletE"))
+        {
+            Destroy(collision.gameObject);
+        }
     }
     
 }

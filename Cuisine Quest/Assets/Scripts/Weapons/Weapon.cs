@@ -10,6 +10,7 @@ public abstract class Weapon : MonoBehaviour {
 
     public abstract bool AttackAbort();
     public abstract void AttackAbortForced();
+    protected abstract void weaponTriggered(Collider2D collision);
 
     public GameObject Mesh;
     public Collider2D AttackBox;
@@ -20,6 +21,7 @@ public abstract class Weapon : MonoBehaviour {
         if (health)
         {
             health.takeDamage(WeaponPower);
+            weaponTriggered(collision);
         }
     }
 

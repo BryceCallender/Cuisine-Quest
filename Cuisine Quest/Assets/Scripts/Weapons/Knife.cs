@@ -18,8 +18,8 @@ public class Knife : Weapon {
 
     // Use this for initialization
     void Start () {
-		
-	}
+        activateWeapon(false);
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -73,5 +73,10 @@ public class Knife : Weapon {
     public override void AttackAbortForced()
     {
         attackEnd();
+    }
+
+    protected override void weaponTriggered(Collider2D collision)
+    {
+        Debug.Log("It's a knife, not a can opener!");
     }
 }

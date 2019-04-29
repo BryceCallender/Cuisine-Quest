@@ -23,6 +23,7 @@ public class CiscoTesting : MonoBehaviour, ISaveable
 
     public Weapon CurrentWeapon;
     public Weapon[] Weapons;
+    private int weaponsIndex = 0;
 
     private PlayerQuestSystem playerQuestSystem;
     public bool CheckQuests = false;
@@ -72,6 +73,8 @@ public class CiscoTesting : MonoBehaviour, ISaveable
         if (Mathf.Abs(Input.GetAxisRaw("Fire2")) > 0 && !secondaryAttackButton) secondaryAttackButtonDown = true;
         //if(Mathf.Abs(Input.GetAxisRaw("")))
 
+        handleWeaponSwitching();
+
         if (Mathf.Abs(Input.GetAxisRaw("Fire1")) > 0)
         {
             primaryAttackButton = true;
@@ -117,18 +120,7 @@ public class CiscoTesting : MonoBehaviour, ISaveable
             CurrentWeapon.AttackSecondary(playerController.DirectionFacing, primaryAttackButton);
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            CurrentWeapon = Weapons[0];
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            CurrentWeapon = Weapons[1];
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            CurrentWeapon = Weapons[2];
-        }
+        
     }
 
     void Die()
@@ -221,6 +213,62 @@ public class CiscoTesting : MonoBehaviour, ISaveable
         foreach(PlayerItem item in playerItems.items)
         {
             items.Add(item.name, item.amount);
+        }
+    }
+
+    bool weaponSelectIncrease = false;
+    bool weaponSelectDecrease = false;
+
+    private void handleWeaponSwitching()
+    {
+        bool weaponSelectIncreaseDown = false;
+        bool weaponSelectDecreaseDown = false;
+
+        if (Input.GetAxis("WeaponSelectIncrease") > 0.5 && !weaponSelectIncrease) weaponSelectIncreaseDown = true;
+        if (Input.GetAxis("WeaponSelectDecrease") > 0.5 && !weaponSelectDecrease) weaponSelectDecreaseDown = true;
+
+        if (Input.GetAxis("WeaponSelectIncrease") > 0.5) weaponSelectIncrease = true;
+        else weaponSelectIncrease = false;
+        if (Input.GetAxis("WeaponSelectDecrease") > 0.5) weaponSelectDecrease = true;
+        else weaponSelectDecrease = false;
+
+
+        if (weaponSelectIncreaseDown)
+        {
+            weaponsIndex = (weaponsIndex + 1) % Weapons.Length;
+            CurrentWeapon = Weapons[weaponsIndex];
+        }
+        if (weaponSelectDecreaseDown)
+        {
+            weaponsIndex = (weaponsIndex - 1) ;
+            if (weaponsIndex < 0) weaponsIndex = Weapons.Length - 1;
+            CurrentWeapon = Weapons[weaponsIndex];
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if (Weapons.Length > 0)
+            {
+                weaponsIndex = 0;
+                CurrentWeapon = Weapons[weaponsIndex];
+
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            if (Weapons.Length > 1)
+            {
+                weaponsIndex = 1;
+                CurrentWeapon = Weapons[weaponsIndex];
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            if (Weapons.Length > 2)
+            {
+                weaponsIndex = 2;
+                CurrentWeapon = Weapons[weaponsIndex];
+            }
         }
     }
 

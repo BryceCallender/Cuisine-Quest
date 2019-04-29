@@ -30,7 +30,7 @@ public class Sword : Weapon {
 
 	// Use this for initialization
 	void Start () {
-        //sw = new SlashingWeapon();
+        activateWeapon(false);
 	}
 	
 	// Update is called once per frame
@@ -118,5 +118,10 @@ public class Sword : Weapon {
     public override void AttackAbortForced()
     {
         attackEnd();
+    }
+
+    protected override void weaponTriggered(Collider2D collision)
+    {
+        Debug.Log("Sword is all the trigger I need!");
     }
 }
