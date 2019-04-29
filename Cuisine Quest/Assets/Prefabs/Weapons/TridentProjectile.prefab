@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114634500745585114}
   - component: {fileID: 50503009480101620}
   - component: {fileID: 70796182550025004}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: TridentProjectile
   m_TagString: Weapon
   m_Icon: {fileID: 0}
