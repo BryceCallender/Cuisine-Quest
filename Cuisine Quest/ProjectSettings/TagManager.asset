@@ -13,6 +13,7 @@ TagManager:
   - Item
   - CameraController
   - Save
+  - Animals
   layers:
   - Default
   - TransparentFX
