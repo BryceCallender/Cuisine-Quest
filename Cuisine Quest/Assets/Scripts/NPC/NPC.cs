@@ -104,11 +104,6 @@ public class NPC : MonoBehaviour
             }
             questIndex++;
         }
-
-        if(isTalking && collision.CompareTag("Player"))
-        {
-            playerMovement.playerCanMove = false;
-        }
     }
 
     public bool CheckDependentQuests(CiscoTesting player, Quest quest, int index)

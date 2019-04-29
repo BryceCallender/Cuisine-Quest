@@ -11,9 +11,11 @@ public class PlayerItem
 
     public PlayerItem(string name, ItemType itemType, int amount)
     {
-        item = new ItemData();
-        this.item.name = name;
-        this.item.itemType = itemType;
+        item = new ItemData
+        {
+            name = name,
+            itemType = itemType
+        };
         this.amount = amount;
     }
 }
@@ -78,6 +80,10 @@ public class CiscoTesting : MonoBehaviour, ISaveable
     // Update is called once per frame
     void Update ()
     {
+        if(PauseMenu.paused)
+        {
+            return;
+        }
 
         bool primaryAttackButtonDown = false;
         bool secondaryAttackButtonDown = false;

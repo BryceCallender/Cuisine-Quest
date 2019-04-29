@@ -9,7 +9,7 @@ public class GameMenu : MonoBehaviour
     public TextMeshProUGUI potionCountText;
     public CiscoTesting player;
 
-    private int potionCount = 0;
+    private int potionCount;
 
     void Start()
     {
