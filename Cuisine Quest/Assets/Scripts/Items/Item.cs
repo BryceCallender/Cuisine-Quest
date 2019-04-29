@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public abstract class Item : SpawnObject 
+public class Item : SpawnObject 
 {
 
     public string Name = "Unnamed";
@@ -27,7 +27,7 @@ public abstract class Item : SpawnObject
     //    return myOrigin;
     //}
 
-    public void OnTriggerEnter2D(Collider2D collision)
+    public virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.transform.tag == "Player")
         {

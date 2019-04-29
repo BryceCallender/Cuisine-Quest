@@ -8,6 +8,7 @@ public class OctoEnemy : EnemyAbstract
     float timer;
     public GameObject bullet;
     private Rigidbody2D rb;
+    Animator anim;
 
     // Use this for initialization
     void Start()
@@ -17,6 +18,7 @@ public class OctoEnemy : EnemyAbstract
         health.ResetHealth();
         rb = GetComponent<Rigidbody2D>();
         speed = 5;
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -49,6 +51,7 @@ public class OctoEnemy : EnemyAbstract
             Vector2 movement = transform.up;
             movement = movement.normalized * speed;
             rb.velocity = movement;
+            anim.SetBool("moving", true);
             timer = 0.0f;
             paths_traveled += 1;
         }
@@ -59,6 +62,7 @@ public class OctoEnemy : EnemyAbstract
         else
         {
             rb.velocity = new Vector2(0, 0);
+            anim.SetBool("moving", false);
             if (timer > 0.5f)
             {
                 Attack();

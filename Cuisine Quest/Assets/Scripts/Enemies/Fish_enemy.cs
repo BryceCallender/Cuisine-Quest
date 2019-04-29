@@ -13,6 +13,7 @@ public class Fish_enemy : EnemyAbstract
     bool playerFound = false;
     Rigidbody2D rb;
     float timer = 10f;
+    Animator anim;
 
     // Use this for initialization
     void Start ()
@@ -21,6 +22,7 @@ public class Fish_enemy : EnemyAbstract
         health.setMaxHealth(1);
         health.ResetHealth();
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -54,6 +56,7 @@ public class Fish_enemy : EnemyAbstract
                 target = collide.transform;
                 print("Found");
                 playerFound = true;
+                anim.SetBool("moving", playerFound);
             }
         }
     }
@@ -83,9 +86,15 @@ public class Fish_enemy : EnemyAbstract
             collision.gameObject.GetComponent<CiscoTesting>().health.takeDamage(1);
             rb.velocity = new Vector2(0, 0);
             playerFound = false;
+            anim.SetBool("moving", playerFound);
             timer = 0.0f;
-
+            rb.constraints = RigidbodyConstraints2D.FreezeAll;
         }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        rb.constraints = RigidbodyConstraints2D.None;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     void Die()
