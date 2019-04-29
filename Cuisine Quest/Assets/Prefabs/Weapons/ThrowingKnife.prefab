@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 1
+  Mesh: {fileID: 1540381444355468}
 --- !u!212 &212288482217596424
 SpriteRenderer:
   m_ObjectHideFlags: 1

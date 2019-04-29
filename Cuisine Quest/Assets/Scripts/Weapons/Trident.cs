@@ -14,6 +14,10 @@ public class Trident : Weapon {
     public TridentProjectile Tridentin;
 
     //public GameObject Mesh;
+    // Use this for initialization
+    void Start () {
+        activateWeapon(false);
+    }
 
     // Update is called once per frame
     void Update()
@@ -36,6 +40,7 @@ public class Trident : Weapon {
     {
         //Debug.Log("Fire");
         GameObject projectile = Instantiate(Tridentin.gameObject, Tridentin.transform.position, Quaternion.identity);
+        projectile.GetComponent<Projectile>().SetLayer(gameObject.layer, Mesh.GetComponent<SpriteRenderer>().sortingOrder);
         projectile.SetActive(true);
         projectile.transform.right = transform.right;
         projectile.transform.parent = null;
@@ -63,7 +68,8 @@ public class Trident : Weapon {
     private void attackEnd()
     {
         transform.localPosition = new Vector3(0, 0, 0);
-        Mesh.SetActive(false);
+        //Mesh.SetActive(false);
+        activateWeapon(false);
         Jabbing = false;
         weaponCollider.enabled = false;
     }
@@ -78,6 +84,11 @@ public class Trident : Weapon {
     }
 
     public override void AttackAbortForced()
+    {
+        attackEnd();
+    }
+
+    protected override void weaponTriggered(Collider2D collision)
     {
         attackEnd();
     }

@@ -40,6 +40,7 @@ public class CiscoTesting : MonoBehaviour, ISaveable
 
     public Weapon CurrentWeapon;
     public Weapon[] Weapons;
+    private int weaponsIndex = 0;
 
     public Potion potion;
 
@@ -53,6 +54,13 @@ public class CiscoTesting : MonoBehaviour, ISaveable
     {
         SaveSystem.Instance.AddSaveableObject(this);
         items = new Dictionary<Item, int>();
+        health = gameObject.AddComponent<HealthSystem>();
+        playerController = GetComponent<PlayerController>();
+
+        health.setMaxHealth(5);
+        health.ResetHealth();
+        playerQuestSystem = GetComponent<PlayerQuestSystem>();
+
 
         if (File.Exists(Path.Combine(Application.persistentDataPath, "PlayerItems.json")))
         {
@@ -64,12 +72,7 @@ public class CiscoTesting : MonoBehaviour, ISaveable
             items.Clear();
         }
 
-        health = gameObject.AddComponent<HealthSystem>();
-        playerController = GetComponent<PlayerController>();
-
-        health.setMaxHealth(5);
-        health.ResetHealth();
-        playerQuestSystem = GetComponent<PlayerQuestSystem>();
+        
 	}
     bool primaryAttackButton = false;
     bool secondaryAttackButton = false;
@@ -83,12 +86,15 @@ public class CiscoTesting : MonoBehaviour, ISaveable
             return;
         }
 
+        if (!playerController) playerController = GetComponent<PlayerController>();
         bool primaryAttackButtonDown = false;
         bool secondaryAttackButtonDown = false;
 
         if (Mathf.Abs(Input.GetAxisRaw("Fire1")) > 0 && !primaryAttackButton) primaryAttackButtonDown = true;
         if (Mathf.Abs(Input.GetAxisRaw("Fire2")) > 0 && !secondaryAttackButton) secondaryAttackButtonDown = true;
         //if(Mathf.Abs(Input.GetAxisRaw("")))
+
+        handleWeaponSwitching();
 
         if (Mathf.Abs(Input.GetAxisRaw("Fire1")) > 0)
         {
@@ -137,19 +143,6 @@ public class CiscoTesting : MonoBehaviour, ISaveable
             CurrentWeapon.AttackSecondary(playerController.DirectionFacing, primaryAttackButton);
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            CurrentWeapon = Weapons[0];
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            CurrentWeapon = Weapons[1];
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            CurrentWeapon = Weapons[2];
-        }
-
         if(Input.GetKeyDown(KeyCode.Minus))
         {
             health.takeDamage(1);
@@ -170,6 +163,17 @@ public class CiscoTesting : MonoBehaviour, ISaveable
         SceneManager.LoadScene("DeathScene");
     }
 
+    public void ChangeLayer(int Layer, int orderInLayer){
+
+        gameObject.layer = Layer;
+        GetComponent<SpriteRenderer>().sortingOrder = GetComponent<SpriteRenderer>().sortingOrder + orderInLayer;
+
+        foreach(Weapon w in Weapons){
+            w.gameObject.layer = Layer;
+            w.Mesh.gameObject.layer = Layer;
+            w.Mesh.GetComponent<SpriteRenderer>().sortingOrder = w.Mesh.GetComponent<SpriteRenderer>().sortingOrder + orderInLayer;
+        }
+    }
     public void AddItem(GameObject item)
     {
         if (items.ContainsKey(item.GetComponent<Item>()))
@@ -184,6 +188,8 @@ public class CiscoTesting : MonoBehaviour, ISaveable
         //Check for completion of the quest when an item is picked up
         UpdateQuestLog(item.GetComponent<Item>());
         item.SetActive(false);
+        
+        //if(CheckQuests) UpdateQuestLog();
     }
 
     public void RemoveItems(Item item, int amount)
@@ -259,6 +265,62 @@ public class CiscoTesting : MonoBehaviour, ISaveable
             gameObjectItem.Type = item.item.itemType;
 
             items.Add(gameObjectItem, item.amount);
+        }
+    }
+
+    bool weaponSelectIncrease = false;
+    bool weaponSelectDecrease = false;
+
+    private void handleWeaponSwitching()
+    {
+        bool weaponSelectIncreaseDown = false;
+        bool weaponSelectDecreaseDown = false;
+
+        if (Input.GetAxis("WeaponSelectIncrease") > 0.5 && !weaponSelectIncrease) weaponSelectIncreaseDown = true;
+        if (Input.GetAxis("WeaponSelectDecrease") > 0.5 && !weaponSelectDecrease) weaponSelectDecreaseDown = true;
+
+        if (Input.GetAxis("WeaponSelectIncrease") > 0.5) weaponSelectIncrease = true;
+        else weaponSelectIncrease = false;
+        if (Input.GetAxis("WeaponSelectDecrease") > 0.5) weaponSelectDecrease = true;
+        else weaponSelectDecrease = false;
+
+
+        if (weaponSelectIncreaseDown)
+        {
+            weaponsIndex = (weaponsIndex + 1) % Weapons.Length;
+            CurrentWeapon = Weapons[weaponsIndex];
+        }
+        if (weaponSelectDecreaseDown)
+        {
+            weaponsIndex = (weaponsIndex - 1) ;
+            if (weaponsIndex < 0) weaponsIndex = Weapons.Length - 1;
+            CurrentWeapon = Weapons[weaponsIndex];
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if (Weapons.Length > 0)
+            {
+                weaponsIndex = 0;
+                CurrentWeapon = Weapons[weaponsIndex];
+
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            if (Weapons.Length > 1)
+            {
+                weaponsIndex = 1;
+                CurrentWeapon = Weapons[weaponsIndex];
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            if (Weapons.Length > 2)
+            {
+                weaponsIndex = 2;
+                CurrentWeapon = Weapons[weaponsIndex];
+            }
         }
     }
 }
