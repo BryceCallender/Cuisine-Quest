@@ -89,12 +89,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87c93d21abb8df54790e298f98396c26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 0}
   speed: 0
   drops:
   - Item: {fileID: 1803489744764170, guid: 6a718e7f166e4438da210d7b646d2842, type: 2}
     dropRate: 50
   - Item: {fileID: 1029527379581458, guid: 629f213a75aff4b7eacab9785f728d7d, type: 2}
-    dropRate: 5
+    dropRate: 75
 --- !u!212 &212154919650725760
 SpriteRenderer:
   m_ObjectHideFlags: 1

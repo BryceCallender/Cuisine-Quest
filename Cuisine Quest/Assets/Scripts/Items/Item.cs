@@ -2,17 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public abstract class Item : SpawnObject 
+public enum ItemType
 {
+    Inventory,
+    Weapon,
+    Ability
+}
 
+[System.Serializable]
+public class Item : SpawnObject
+{
     public string Name = "Unnamed";
     public ItemType Type;
-    public enum ItemType
+
+    public override int GetHashCode()
     {
-        Inventory,
-        Weapon,
-        Ability
+        return Name.GetHashCode();
+    }
+
+    public override bool Equals(object obj)
+    {
+        Item item = obj as Item;
+
+        return this.Name == item.Name;
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -20,8 +32,6 @@ public abstract class Item : SpawnObject
         if(collision.transform.tag == "Player")
         {
             collision.GetComponent<CiscoTesting>().AddItem(gameObject);
-            GameObject.FindGameObjectWithTag("LevelHandler").GetComponent<LevelHandler>().CurrentArea.RemoveObj(gameObject);
-            Destroy(gameObject);
         }
     }
 }
