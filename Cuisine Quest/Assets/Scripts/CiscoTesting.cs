@@ -90,15 +90,15 @@ public class CiscoTesting : MonoBehaviour, ISaveable
         }
         if(secondaryAttackButtonDown) Debug.Log(primaryAttackButton + " " + secondaryAttackButtonDown);
 
-        //if(items.Count > 0 && items != null)
-        //{
-        //    playerQuestSystem.UpdateCurrentQuestsAmountDone(items);
-        //}
+        if(items.Count > 0 && items != null)
+        {
+            playerQuestSystem.UpdateCurrentQuestsAmountDone(items);
+        }
 
-        //if (!health.isAlive())
-        //{
-        //    Die();
-        //}
+        if (!health.isAlive())
+        {
+            Die();
+        }
 
         //bool primaryAttack = Input.GetMouseButtonDown(0);
         //bool secondaryAttack = secondaryAttackButton;
