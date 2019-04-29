@@ -12,6 +12,7 @@ public abstract class Weapon : MonoBehaviour {
     public abstract void AttackAbortForced();
 
     public GameObject Mesh;
+    public Collider2D AttackBox;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -20,5 +21,11 @@ public abstract class Weapon : MonoBehaviour {
         {
             health.takeDamage(WeaponPower);
         }
+    }
+
+    public void activateWeapon(bool setActive)
+    {
+        Mesh.SetActive(setActive);
+        AttackBox.enabled = setActive;
     }
 }

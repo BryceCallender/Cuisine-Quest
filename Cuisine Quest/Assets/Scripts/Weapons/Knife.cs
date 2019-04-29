@@ -59,7 +59,8 @@ public class Knife : Weapon {
     public void attackEnd()
     {
         transform.localPosition = new Vector3(0, 0, 0);
-        Mesh.SetActive(false);
+        //Mesh.SetActive(false);
+        activateWeapon(false);
         Jabbing = false;
     }
 

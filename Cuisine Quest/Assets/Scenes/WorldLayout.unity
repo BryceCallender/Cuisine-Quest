@@ -3844,6 +3844,11 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114488384343203426, guid: 264e47a13d03d424f9941e11c76ea648,
+        type: 2}
+      propertyPath: AttackBox
+      value: 
+      objectReference: {fileID: 455825068}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 264e47a13d03d424f9941e11c76ea648, type: 2}
   m_IsPrefabAsset: 0
@@ -4613,6 +4618,11 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e0108f5c41644a9e8655690d194087e, type: 2}
   m_IsPrefabAsset: 0
+--- !u!61 &455825068 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 61601138695733258, guid: 264e47a13d03d424f9941e11c76ea648,
+    type: 2}
+  m_PrefabInternal: {fileID: 342492038}
 --- !u!1 &501354702
 GameObject:
   m_ObjectHideFlags: 0
@@ -4755,6 +4765,26 @@ Prefab:
       propertyPath: health
       value: 
       objectReference: {fileID: 34355382}
+    - target: {fileID: 61517043802245980, guid: 74564bea5681af84084fedec28d76e9e,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 61517043802245980, guid: 74564bea5681af84084fedec28d76e9e,
+        type: 2}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 61517043802245980, guid: 74564bea5681af84084fedec28d76e9e,
+        type: 2}
+      propertyPath: m_Offset.y
+      value: -0.08560181
+      objectReference: {fileID: 0}
+    - target: {fileID: 61517043802245980, guid: 74564bea5681af84084fedec28d76e9e,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 0.8287964
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74564bea5681af84084fedec28d76e9e, type: 2}
   m_IsPrefabAsset: 0
@@ -20584,9 +20614,19 @@ Prefab:
       propertyPath: m_TagString
       value: Weapon
       objectReference: {fileID: 0}
+    - target: {fileID: 114626022973499554, guid: a1edfab02b2f9d24fae09dad74961eae,
+        type: 2}
+      propertyPath: AttackBox
+      value: 
+      objectReference: {fileID: 735483036}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1edfab02b2f9d24fae09dad74961eae, type: 2}
   m_IsPrefabAsset: 0
+--- !u!61 &735483036 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 61647936784992382, guid: a1edfab02b2f9d24fae09dad74961eae,
+    type: 2}
+  m_PrefabInternal: {fileID: 710716829}
 --- !u!4 &755629992 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4200893303368310, guid: 9d4b8d9204f10134ca49a8d579925c10,
@@ -20777,6 +20817,11 @@ Prefab:
       propertyPath: KnifeCount
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 114557293358725502, guid: b7d6eb9b827d0474e88cd5a903aafb6e,
+        type: 2}
+      propertyPath: AttackBox
+      value: 
+      objectReference: {fileID: 971932000}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7d6eb9b827d0474e88cd5a903aafb6e, type: 2}
   m_IsPrefabAsset: 0
@@ -22151,6 +22196,11 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!61 &971932000 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 61096429129074314, guid: b7d6eb9b827d0474e88cd5a903aafb6e,
+    type: 2}
+  m_PrefabInternal: {fileID: 838302732}
 --- !u!1 &992547002
 GameObject:
   m_ObjectHideFlags: 0

@@ -89,7 +89,8 @@ public class Sword : Weapon {
 
             GetComponent<AudioSource>().Play();
             Slashing = true;
-            Mesh.SetActive(true);
+            //Mesh.SetActive(true);
+            activateWeapon(true);
             //SlashAttack(SP);
         }
     }
@@ -102,7 +103,8 @@ public class Sword : Weapon {
     public void attackEnd()
     {
         transform.localPosition = new Vector3(0, 0, 0);
-        Mesh.SetActive(false);
+        //Mesh.SetActive(false);
+        activateWeapon(false);
         Slashing = false;
         Jabbing = false;
     }
