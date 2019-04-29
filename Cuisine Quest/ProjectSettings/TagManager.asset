@@ -11,6 +11,8 @@ TagManager:
   - Area
   - Weapon
   - Item
+  - CameraController
+  - Save
   - Animals
   layers:
   - Default
@@ -21,10 +23,10 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - DungeonBridgeWalls
+  - DungeonBridgeObject
+  - Camera
+  - Area
   - 
   - 
   - 

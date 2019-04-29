@@ -48,7 +48,7 @@ public class PlayerQuestData
     public string questName;
     public bool hasQuest;
     public QuestState questState;
-    public int amountDone;
+    public int[] amountDone;
 }
 
 /// <summary>

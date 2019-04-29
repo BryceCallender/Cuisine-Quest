@@ -1,77 +1,126 @@
-﻿using System.Collections;
+﻿using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class CiscoTesting : MonoBehaviour 
+[System.Serializable]
+public class PlayerItem
+{
+    public string name;
+    public int amount;
+}
+
+[System.Serializable]
+public class PlayerItems
+{
+    public PlayerItem[] items;
+}
+
+
+public class CiscoTesting : MonoBehaviour, ISaveable
 {
     public HealthSystem health;
 
     public Weapon CurrentWeapon;
     public Weapon[] Weapons;
+    private int weaponsIndex = 0;
 
     private PlayerQuestSystem playerQuestSystem;
+    public bool CheckQuests = false;
     public Dictionary<string, int> items;
     private PlayerController playerController;
 
-    private Rigidbody2D rb;
-	// Use this for initialization
-	void Start ()
+    public static string lastItemPickedUp;
+
+    // Use this for initialization
+    void Start ()
     {
         health = gameObject.AddComponent<HealthSystem>();
         playerController = GetComponent<PlayerController>();
-        items = new Dictionary<string, int>();
-        rb = GetComponent<Rigidbody2D>();
+
         health.setMaxHealth(5);
         health.ResetHealth();
         playerQuestSystem = GetComponent<PlayerQuestSystem>();
+
+        items = new Dictionary<string, int>();
+
+        SaveSystem.Instance.AddSaveableObject(this);
+        
+
+        if (File.Exists(Path.Combine(Application.persistentDataPath, "PlayerItems.json")))
+        {
+            InitDictionary();
+        }
+        else
+        {
+            items.Clear();
+        }
+
+        
 	}
-	
-	// Update is called once per frame
-	void Update ()
+    bool primaryAttackButton = false;
+    bool secondaryAttackButton = false;
+    bool questMenuButton = false;
+    // Update is called once per frame
+    void Update ()
     {
-        if(!health.isAlive())
+        if (!playerController) playerController = GetComponent<PlayerController>();
+        bool primaryAttackButtonDown = false;
+        bool secondaryAttackButtonDown = false;
+        bool questMenuButtonDown = false;
+
+        if (Mathf.Abs(Input.GetAxisRaw("Fire1")) > 0 && !primaryAttackButton) primaryAttackButtonDown = true;
+        if (Mathf.Abs(Input.GetAxisRaw("Fire2")) > 0 && !secondaryAttackButton) secondaryAttackButtonDown = true;
+        //if(Mathf.Abs(Input.GetAxisRaw("")))
+
+        handleWeaponSwitching();
+
+        if (Mathf.Abs(Input.GetAxisRaw("Fire1")) > 0)
+        {
+            primaryAttackButton = true;
+        }
+        else
+        {
+            primaryAttackButton = false;
+        }
+        if (Mathf.Abs(Input.GetAxisRaw("Fire2")) > 0)
+        {
+            secondaryAttackButton = true;
+        }
+        else
+        {
+            secondaryAttackButton = false;
+        }
+        if(secondaryAttackButtonDown) Debug.Log(primaryAttackButton + " " + secondaryAttackButtonDown);
+
+        if(items.Count > 0 && items != null)
+        {
+            playerQuestSystem.UpdateCurrentQuestsAmountDone(items);
+        }
+
+        if (!health.isAlive())
         {
             Die();
         }
 
-        bool primaryAttack = Input.GetMouseButtonDown(0);
+        //bool primaryAttack = Input.GetMouseButtonDown(0);
+        //bool secondaryAttack = secondaryAttackButton;
 
-        if (primaryAttack && CurrentWeapon != null)
+        if (primaryAttackButtonDown && CurrentWeapon != null)
         {
             CurrentWeapon.Attack(playerController.DirectionFacing);
         }
-
-        if (Input.GetMouseButton(0))
+        
+        //if (Input.GetMouseButton(0))
+        //{
+        //    primaryAttack = true;
+        //}
+        if (secondaryAttackButtonDown && CurrentWeapon != null)
         {
-            primaryAttack = true;
-        }
-        if (Input.GetMouseButtonDown(1) && CurrentWeapon != null)
-        {
-            CurrentWeapon.AttackSecondary(playerController.DirectionFacing, primaryAttack);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            CurrentWeapon = Weapons[0];
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            CurrentWeapon = Weapons[1];
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            CurrentWeapon = Weapons[2];
+            CurrentWeapon.AttackSecondary(playerController.DirectionFacing, primaryAttackButton);
         }
 
-        //Check for completion of the quest when an item is picked up
-        foreach (Quest quest in playerQuestSystem.GetQuests())
-        {
-            if (quest.questData.questState == QuestState.inProgress)
-            {
-                quest.CheckCompletion(this);
-            }
-        }
+        
     }
 
     void Die()
@@ -79,6 +128,17 @@ public class CiscoTesting : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    public void ChangeLayer(int Layer, int orderInLayer){
+
+        gameObject.layer = Layer;
+        GetComponent<SpriteRenderer>().sortingOrder = GetComponent<SpriteRenderer>().sortingOrder + orderInLayer;
+
+        foreach(Weapon w in Weapons){
+            w.gameObject.layer = Layer;
+            w.Mesh.gameObject.layer = Layer;
+            w.Mesh.GetComponent<SpriteRenderer>().sortingOrder = w.Mesh.GetComponent<SpriteRenderer>().sortingOrder + orderInLayer;
+        }
+    }
     public void AddItem(GameObject item)
     {
         string itemName = item.name;
@@ -86,8 +146,6 @@ public class CiscoTesting : MonoBehaviour
         {
             itemName = itemName.Replace("(Clone)", "").Trim();
         }
-
-        Debug.Log(itemName);
 
         if (items.ContainsKey(itemName))
         {
@@ -97,15 +155,119 @@ public class CiscoTesting : MonoBehaviour
         {
             Debug.Log("Adding " + itemName);
             items.Add(itemName, 1);
+            lastItemPickedUp = itemName;
         }
 
         //Check for completion of the quest when an item is picked up
-        foreach (Quest quest in playerQuestSystem.GetQuests())
+        if(CheckQuests) UpdateQuestLog();
+    }
+
+    public void RemoveItems(string name, int amount)
+    {
+        items[name] -= amount;
+    }
+
+    public void PrintItems()
+    {
+        foreach (KeyValuePair<string, int> kvp in items)
         {
-            playerQuestSystem.UpdateQuests(quest.questID, items);
-            if (quest.questData.questState == QuestState.inProgress)
+            Debug.Log(string.Format("Key = {0}, Value = {1}", kvp.Key, kvp.Value));
+        }
+    }
+
+    public void UpdateQuestLog()
+    {
+        if(items.Count > 0)
+        {
+            foreach (Quest quest in playerQuestSystem.GetQuests())
             {
-                quest.CheckCompletion(this);
+                playerQuestSystem.UpdateQuests(quest.questID, items);
+                if (quest.questData.questState == QuestState.inProgress ||
+                    quest.questData.questState == QuestState.completed)
+                {
+                    quest.CheckCompletion(this);
+                }
+            }
+        }
+        
+    }
+
+    public void Save()
+    {
+        List<PlayerItem> playerItems = new List<PlayerItem>();
+
+        foreach(var item in items)
+        {
+            PlayerItem playerItem = new PlayerItem { name = item.Key, amount = item.Value };
+            playerItems.Add(playerItem);
+        }
+
+        JsonArrayHandler<PlayerItem>.WriteJsonFile(Path.Combine(Application.persistentDataPath, "PlayerItems.json"), playerItems);
+    }
+
+    public void InitDictionary()
+    {
+        PlayerItems playerItems = JsonArrayHandler<PlayerItems>.ReadJsonFile(Path.Combine(Application.persistentDataPath, "PlayerItems.json"));
+        items.Clear();
+
+        foreach(PlayerItem item in playerItems.items)
+        {
+            items.Add(item.name, item.amount);
+        }
+    }
+
+    bool weaponSelectIncrease = false;
+    bool weaponSelectDecrease = false;
+
+    private void handleWeaponSwitching()
+    {
+        bool weaponSelectIncreaseDown = false;
+        bool weaponSelectDecreaseDown = false;
+
+        if (Input.GetAxis("WeaponSelectIncrease") > 0.5 && !weaponSelectIncrease) weaponSelectIncreaseDown = true;
+        if (Input.GetAxis("WeaponSelectDecrease") > 0.5 && !weaponSelectDecrease) weaponSelectDecreaseDown = true;
+
+        if (Input.GetAxis("WeaponSelectIncrease") > 0.5) weaponSelectIncrease = true;
+        else weaponSelectIncrease = false;
+        if (Input.GetAxis("WeaponSelectDecrease") > 0.5) weaponSelectDecrease = true;
+        else weaponSelectDecrease = false;
+
+
+        if (weaponSelectIncreaseDown)
+        {
+            weaponsIndex = (weaponsIndex + 1) % Weapons.Length;
+            CurrentWeapon = Weapons[weaponsIndex];
+        }
+        if (weaponSelectDecreaseDown)
+        {
+            weaponsIndex = (weaponsIndex - 1) ;
+            if (weaponsIndex < 0) weaponsIndex = Weapons.Length - 1;
+            CurrentWeapon = Weapons[weaponsIndex];
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if (Weapons.Length > 0)
+            {
+                weaponsIndex = 0;
+                CurrentWeapon = Weapons[weaponsIndex];
+
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            if (Weapons.Length > 1)
+            {
+                weaponsIndex = 1;
+                CurrentWeapon = Weapons[weaponsIndex];
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            if (Weapons.Length > 2)
+            {
+                weaponsIndex = 2;
+                CurrentWeapon = Weapons[weaponsIndex];
             }
         }
     }

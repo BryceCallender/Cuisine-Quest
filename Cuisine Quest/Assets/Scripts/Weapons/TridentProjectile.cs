@@ -24,6 +24,7 @@ public class TridentProjectile : Projectile {
             Debug.Log(collision.name);
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             transform.parent = collision.transform;
+            DoDamage(collision);
         }
 
     }
