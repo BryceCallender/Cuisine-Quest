@@ -2798,6 +2798,7 @@ MonoBehaviour:
   animator: {fileID: 1522820402}
   characterDialogText: {fileID: 186534734}
   dialogPopup: {fileID: 214846825}
+  player: {fileID: 0}
   paused: 0
   isTyping: 0
   skipTimer: 0
@@ -3848,6 +3849,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 00851405f49254c28ba66a7dbd2a3fd1, type: 2}
   - {fileID: 11400000, guid: 58f82cab45cfb48aeb82c3f03b11840c, type: 2}
   hasTalked: 0
+  isTalking: 0
   characterDialog: []
 --- !u!114 &392920403
 MonoBehaviour:
@@ -4429,6 +4431,11 @@ Prefab:
       propertyPath: MyAttack
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114488384343203426, guid: 264e47a13d03d424f9941e11c76ea648,
+        type: 2}
+      propertyPath: AttackBox
+      value: 
+      objectReference: {fileID: 1782977229}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 264e47a13d03d424f9941e11c76ea648, type: 2}
   m_IsPrefabAsset: 0
@@ -4565,6 +4572,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MyArea: {fileID: 11400000, guid: 12d76c8bc098d420e951d2da4dd2eed2, type: 2}
   ToLoad: []
+--- !u!61 &529699384 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 61647936784992382, guid: a1edfab02b2f9d24fae09dad74961eae,
+    type: 2}
+  m_PrefabInternal: {fileID: 1020086914}
 --- !u!1 &546210166
 GameObject:
   m_ObjectHideFlags: 0
@@ -18012,6 +18024,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TransitionDirection: {x: 0, y: 1}
+  CC: {fileID: 0}
 --- !u!61 &595633963
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -20091,6 +20104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TransitionDirection: {x: 0, y: -1}
+  CC: {fileID: 0}
 --- !u!61 &715850870
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -20337,6 +20351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TransitionDirection: {x: 1, y: 0}
+  CC: {fileID: 0}
 --- !u!61 &879225264
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -20435,6 +20450,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MyArea: {fileID: 11400000, guid: df2950afdba69456a99dd0568867d856, type: 2}
   ToLoad: []
+--- !u!61 &898135831 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 61096429129074314, guid: b7d6eb9b827d0474e88cd5a903aafb6e,
+    type: 2}
+  m_PrefabInternal: {fileID: 2083217045}
 --- !u!4 &899951215 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4583682244427118, guid: 1c8826ca562724c4dbe5cd7e6fc6f422,
@@ -20536,6 +20556,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TransitionDirection: {x: -1, y: 0}
+  CC: {fileID: 0}
 --- !u!61 &937427599
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -21572,6 +21593,11 @@ Prefab:
       value: 
       objectReference: {fileID: 114634500745585114, guid: dbf784e0caa8aa34f9861cb9da29385c,
         type: 2}
+    - target: {fileID: 114626022973499554, guid: a1edfab02b2f9d24fae09dad74961eae,
+        type: 2}
+      propertyPath: AttackBox
+      value: 
+      objectReference: {fileID: 529699384}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1edfab02b2f9d24fae09dad74961eae, type: 2}
   m_IsPrefabAsset: 0
@@ -26305,6 +26331,8 @@ MonoBehaviour:
   - {fileID: 457721728}
   - {fileID: 1020086915}
   - {fileID: 2083217046}
+  potion: {fileID: 0}
+  CheckQuests: 0
 --- !u!50 &1133537815
 Rigidbody2D:
   serializedVersion: 4
@@ -26456,6 +26484,8 @@ MonoBehaviour:
   moveSpeed: 5
   playerCanMove: 1
   DirectionFacing: {x: 0, y: -1}
+  cameraTransition: 0
+  cameraTransitionDirection: {x: 0, y: 0}
 --- !u!1 &1136033032
 GameObject:
   m_ObjectHideFlags: 0
@@ -59980,6 +60010,11 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c8826ca562724c4dbe5cd7e6fc6f422, type: 2}
   m_IsPrefabAsset: 0
+--- !u!61 &1782977229 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 61601138695733258, guid: 264e47a13d03d424f9941e11c76ea648,
+    type: 2}
+  m_PrefabInternal: {fileID: 457721727}
 --- !u!1 &1791032012
 GameObject:
   m_ObjectHideFlags: 0
@@ -71895,6 +71930,11 @@ Prefab:
       propertyPath: KnifeCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114557293358725502, guid: b7d6eb9b827d0474e88cd5a903aafb6e,
+        type: 2}
+      propertyPath: AttackBox
+      value: 
+      objectReference: {fileID: 898135831}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7d6eb9b827d0474e88cd5a903aafb6e, type: 2}
   m_IsPrefabAsset: 0
