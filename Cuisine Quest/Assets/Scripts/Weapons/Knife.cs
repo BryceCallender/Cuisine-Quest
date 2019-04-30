@@ -15,11 +15,10 @@ public class Knife : Weapon {
     private bool Jabbing = false;
 
     //public GameObject Mesh;
-
     // Use this for initialization
     void Start () {
-		
-	}
+        activateWeapon(false);
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -31,7 +30,7 @@ public class Knife : Weapon {
 
     public override void Attack(Vector2 PlayerDirection)
     {
-        if(jw.CanAttack() && KnifeCount > 0)
+        if (jw.CanAttack() && KnifeCount > 0)
         {
             if (PlayerDirection.x < 0) jw.AttackLeft(transform, ref Jabbing);
             else if (PlayerDirection.x > 0) jw.AttackRight(transform, ref Jabbing);
@@ -46,6 +45,8 @@ public class Knife : Weapon {
         {
             AttackAbortForced();
             GameObject throwingKnife = Instantiate(ThrowingKnife, gameObject.transform.position, Quaternion.identity);
+            throwingKnife.GetComponent<Projectile>().SetLayer(gameObject.layer, Mesh.GetComponent<SpriteRenderer>().sortingOrder);
+            
             throwingKnife.GetComponent<Rigidbody2D>().velocity = KnifeThrowingSpeed * PlayerDirection;
             throwingKnife.transform.right = PlayerDirection;
 
@@ -57,7 +58,8 @@ public class Knife : Weapon {
     public void attackEnd()
     {
         transform.localPosition = new Vector3(0, 0, 0);
-        Mesh.SetActive(false);
+        //Mesh.SetActive(false);
+        activateWeapon(false);
         Jabbing = false;
     }
 
@@ -70,5 +72,10 @@ public class Knife : Weapon {
     public override void AttackAbortForced()
     {
         attackEnd();
+    }
+
+    protected override void weaponTriggered(Collider2D collision)
+    {
+        Debug.Log("It's a knife, not a can opener!");
     }
 }

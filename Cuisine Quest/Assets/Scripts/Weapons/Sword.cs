@@ -30,7 +30,7 @@ public class Sword : Weapon {
 
 	// Use this for initialization
 	void Start () {
-        //sw = new SlashingWeapon();
+        activateWeapon(false);
 	}
 	
 	// Update is called once per frame
@@ -47,7 +47,7 @@ public class Sword : Weapon {
 
     public override void Attack(Vector2 PlayerDirection)
     {
-        if(MyAttack == AttackType.Jab)
+        if (MyAttack == AttackType.Jab)
         {
             if (jw.CanAttack()) GetComponent<AudioSource>().Play();
             else return;
@@ -89,7 +89,8 @@ public class Sword : Weapon {
 
             GetComponent<AudioSource>().Play();
             Slashing = true;
-            Mesh.SetActive(true);
+            //Mesh.SetActive(true);
+            activateWeapon(true);
             //SlashAttack(SP);
         }
     }
@@ -102,7 +103,8 @@ public class Sword : Weapon {
     public void attackEnd()
     {
         transform.localPosition = new Vector3(0, 0, 0);
-        Mesh.SetActive(false);
+        //Mesh.SetActive(false);
+        activateWeapon(false);
         Slashing = false;
         Jabbing = false;
     }
@@ -116,5 +118,10 @@ public class Sword : Weapon {
     public override void AttackAbortForced()
     {
         attackEnd();
+    }
+
+    protected override void weaponTriggered(Collider2D collision)
+    {
+        Debug.Log("Sword is all the trigger I need!");
     }
 }

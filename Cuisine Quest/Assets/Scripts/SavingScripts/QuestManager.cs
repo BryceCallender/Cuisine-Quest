@@ -12,6 +12,11 @@ public class QuestManager : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(this);
+
+        if (FindObjectsOfType(GetType()).Length > 1)
+        {
+            Destroy(gameObject);
+        }
     }
 
     /// <summary>
