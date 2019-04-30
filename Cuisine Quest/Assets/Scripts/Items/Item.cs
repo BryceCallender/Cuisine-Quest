@@ -27,7 +27,7 @@ public class Item : SpawnObject
         return this.Name == item.Name;
     }
 
-    public void OnTriggerEnter2D(Collider2D collision)
+    public virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.transform.tag == "Player")
         {

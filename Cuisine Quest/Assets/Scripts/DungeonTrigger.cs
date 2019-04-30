@@ -32,6 +32,7 @@ public class DungeonTrigger : MonoBehaviour {
         if(collision.CompareTag("Player"))
         {
             float playerDirection = Vector3.Dot(EntranceDirection, collision.GetComponent<Rigidbody2D>().velocity);
+            print(playerDirection);
             if(playerDirection < 0)
             {
                 //Vector3 cameraLocation = new Vector3(MyOverworldCoordinate.x, MyOverworldCoordinate.y, Camera.main.transform.position.z);
