@@ -228,7 +228,7 @@ MonoBehaviour:
     JabDownDistance: 0.5
     JabXOffset: 0.1
     JabYOffset: -0.2
-  MyAttack: 0
+  MyAttack: 1
 --- !u!212 &212897537347576036
 SpriteRenderer:
   m_ObjectHideFlags: 1

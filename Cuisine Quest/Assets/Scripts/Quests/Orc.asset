@@ -14,11 +14,11 @@ MonoBehaviour:
   questData:
     questName: Kill the orcs
     description: Kill the orcs.
-    questType: 0
+    questType: 1
     requiredItems:
-    - item: {fileID: 1158362240031046, guid: c59c5486e736744d78494f247af8fea0, type: 2}
+    - item: {fileID: 114910095671855084, guid: 6a718e7f166e4438da210d7b646d2842, type: 2}
       requiredAmount: 100
     questState: 1
   DependentQuests: []
-  questID: 2
+  questID: 6
   AreaNeeded: {fileID: 0}
