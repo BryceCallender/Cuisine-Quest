@@ -4623,6 +4623,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114488384343203426, guid: 264e47a13d03d424f9941e11c76ea648,
+        type: 2}
+      propertyPath: AttackBox
+      value: 
+      objectReference: {fileID: 457721730}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 264e47a13d03d424f9941e11c76ea648, type: 2}
   m_IsPrefabAsset: 0
@@ -4635,6 +4640,11 @@ MonoBehaviour:
 --- !u!4 &457721729 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4418042267195816, guid: 264e47a13d03d424f9941e11c76ea648,
+    type: 2}
+  m_PrefabInternal: {fileID: 457721727}
+--- !u!61 &457721730 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 61601138695733258, guid: 264e47a13d03d424f9941e11c76ea648,
     type: 2}
   m_PrefabInternal: {fileID: 457721727}
 --- !u!1 &501354702
@@ -22236,6 +22246,11 @@ Prefab:
       value: 
       objectReference: {fileID: 114634500745585114, guid: dbf784e0caa8aa34f9861cb9da29385c,
         type: 2}
+    - target: {fileID: 114626022973499554, guid: a1edfab02b2f9d24fae09dad74961eae,
+        type: 2}
+      propertyPath: AttackBox
+      value: 
+      objectReference: {fileID: 1020086917}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1edfab02b2f9d24fae09dad74961eae, type: 2}
   m_IsPrefabAsset: 0
@@ -22248,6 +22263,11 @@ MonoBehaviour:
 --- !u!4 &1020086916 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4282640901146316, guid: a1edfab02b2f9d24fae09dad74961eae,
+    type: 2}
+  m_PrefabInternal: {fileID: 1020086914}
+--- !u!61 &1020086917 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 61647936784992382, guid: a1edfab02b2f9d24fae09dad74961eae,
     type: 2}
   m_PrefabInternal: {fileID: 1020086914}
 --- !u!1 &1022796619
@@ -77588,6 +77608,11 @@ Prefab:
       propertyPath: KnifeCount
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 114557293358725502, guid: b7d6eb9b827d0474e88cd5a903aafb6e,
+        type: 2}
+      propertyPath: AttackBox
+      value: 
+      objectReference: {fileID: 2083217048}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7d6eb9b827d0474e88cd5a903aafb6e, type: 2}
   m_IsPrefabAsset: 0
@@ -77600,6 +77625,11 @@ MonoBehaviour:
 --- !u!4 &2083217047 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4546743479675424, guid: b7d6eb9b827d0474e88cd5a903aafb6e,
+    type: 2}
+  m_PrefabInternal: {fileID: 2083217045}
+--- !u!61 &2083217048 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 61096429129074314, guid: b7d6eb9b827d0474e88cd5a903aafb6e,
     type: 2}
   m_PrefabInternal: {fileID: 2083217045}
 --- !u!1 &2087450171

@@ -30,7 +30,6 @@ public class Knife : Weapon {
 
     public override void Attack(Vector2 PlayerDirection)
     {
-        weaponCollider.enabled = true;
         if (jw.CanAttack() && KnifeCount > 0)
         {
             if (PlayerDirection.x < 0) jw.AttackLeft(transform, ref Jabbing);
@@ -62,7 +61,6 @@ public class Knife : Weapon {
         //Mesh.SetActive(false);
         activateWeapon(false);
         Jabbing = false;
-        weaponCollider.enabled = false;
     }
 
     public override bool AttackAbort()

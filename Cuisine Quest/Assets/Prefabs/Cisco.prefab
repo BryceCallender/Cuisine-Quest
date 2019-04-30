@@ -698,6 +698,7 @@ MonoBehaviour:
   - {fileID: 114693674146012156}
   - {fileID: 114792542949423402}
   - {fileID: 114616064081812372}
+  potion: {fileID: 0}
   CheckQuests: 0
 --- !u!212 &212080027839362624
 SpriteRenderer:
