@@ -47,7 +47,6 @@ public class Sword : Weapon {
 
     public override void Attack(Vector2 PlayerDirection)
     {
-        weaponCollider.enabled = true;
         if (MyAttack == AttackType.Jab)
         {
             if (jw.CanAttack()) GetComponent<AudioSource>().Play();
@@ -108,7 +107,6 @@ public class Sword : Weapon {
         activateWeapon(false);
         Slashing = false;
         Jabbing = false;
-        weaponCollider.enabled = false;
     }
 
     public override bool AttackAbort()
