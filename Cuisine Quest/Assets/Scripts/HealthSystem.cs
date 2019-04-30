@@ -6,19 +6,13 @@ public class HealthSystem : MonoBehaviour
 {
     private int currentHealth;
     private int maxHealth = 3; //whatever amount
+
     // Use this for initialization
     void Start ()
     {
         currentHealth = maxHealth;
 	}
 	
-	// Update is called once per frame
-	void Update () 
-    {
-       
-
-	}
-
     public void Die()
     {
         //removes enemy from game
@@ -29,9 +23,10 @@ public class HealthSystem : MonoBehaviour
     {
         return (currentHealth > 0);
     }
+
     public void takeDamage(int damage)
     {
-        currentHealth = currentHealth - damage;
+        currentHealth -= damage;
     }
 
     public void ResetHealth()
@@ -41,7 +36,14 @@ public class HealthSystem : MonoBehaviour
 
     public void heal(int amount)
     {
-        currentHealth = currentHealth + amount;
+        if(currentHealth + amount > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+        else
+        {
+            currentHealth += amount;
+        }
     }
 
     public int getCurrentHealth()

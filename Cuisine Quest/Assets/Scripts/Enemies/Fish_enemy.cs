@@ -21,7 +21,8 @@ public class Fish_enemy : EnemyAbstract
         health.setMaxHealth(1);
         health.ResetHealth();
         rb = GetComponent<Rigidbody2D>();
-	}
+        
+    }
 	
 	// Update is called once per frame
 	void Update ()

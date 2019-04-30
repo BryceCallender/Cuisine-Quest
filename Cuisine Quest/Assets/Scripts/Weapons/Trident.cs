@@ -14,17 +14,24 @@ public class Trident : Weapon {
     public TridentProjectile Tridentin;
 
     //public GameObject Mesh;
-
     // Use this for initialization
     void Start () {
-		
-	}
+        activateWeapon(false);
+    }
 
     // Update is called once per frame
     void Update()
     {
-
-        HoldAtAttack = Input.GetMouseButton(0);
+        //Debug.Log(Input.GetAxisRaw("Fire1"));
+        if(Mathf.Abs(Input.GetAxisRaw("Fire1")) > 0)
+        {
+            HoldAtAttack = true;
+        }
+        else
+        {
+            HoldAtAttack = false;
+        }
+        //HoldAtAttack = Input.GetMouseButton(0);
         jw.JabAttack(transform, ref Jabbing, HoldAtAttack);
 
     }
@@ -33,6 +40,7 @@ public class Trident : Weapon {
     {
         //Debug.Log("Fire");
         GameObject projectile = Instantiate(Tridentin.gameObject, Tridentin.transform.position, Quaternion.identity);
+        projectile.GetComponent<Projectile>().SetLayer(gameObject.layer, Mesh.GetComponent<SpriteRenderer>().sortingOrder);
         projectile.SetActive(true);
         projectile.transform.right = transform.right;
         projectile.transform.parent = null;
@@ -41,6 +49,7 @@ public class Trident : Weapon {
 
     public override void Attack(Vector2 PlayerDirection)
     {
+        weaponCollider.enabled = true;
         if (jw.CanAttack())
         {
             if (PlayerDirection.x < 0) jw.AttackLeft(transform, ref Jabbing);
@@ -59,8 +68,10 @@ public class Trident : Weapon {
     private void attackEnd()
     {
         transform.localPosition = new Vector3(0, 0, 0);
-        Mesh.SetActive(false);
+        //Mesh.SetActive(false);
+        activateWeapon(false);
         Jabbing = false;
+        weaponCollider.enabled = false;
     }
 
     public override bool AttackAbort()
@@ -73,6 +84,11 @@ public class Trident : Weapon {
     }
 
     public override void AttackAbortForced()
+    {
+        attackEnd();
+    }
+
+    protected override void weaponTriggered(Collider2D collision)
     {
         attackEnd();
     }

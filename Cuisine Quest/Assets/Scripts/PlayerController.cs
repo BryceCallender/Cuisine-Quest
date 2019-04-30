@@ -11,8 +11,12 @@ public class PlayerController : MonoBehaviour
     private Vector2 lastMove;
     private Rigidbody2D rb;
     public Vector2 DirectionFacing = new Vector2(0, -1);
+    private Vector2 previousFacing = new Vector2(0, -1);
     private float H_Axis;
     private float V_Axis;
+
+    public bool cameraTransition = false;
+    public Vector2 cameraTransitionDirection;
 
     // Use this for initialization
     void Start ()
@@ -24,56 +28,98 @@ public class PlayerController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        playerMoving = false;
-        H_Axis = Input.GetAxisRaw("Horizontal");
-        V_Axis = Input.GetAxisRaw("Vertical");
-
-        if ((H_Axis > 0.5f || H_Axis < -0.5f) &&
-           (V_Axis > 0.5f || V_Axis < -0.5f) && playerCanMove)
+        if(!PauseMenu.paused && !cameraTransition)
         {
-            rb.velocity = new Vector3(H_Axis * moveSpeed, V_Axis * moveSpeed, 0f);
-            playerMoving = true;
-            lastMove = new Vector2(H_Axis, V_Axis);
-        }
-        else if((H_Axis > 0.5f || H_Axis < -0.5f) && playerCanMove)
-        {
-            rb.velocity = new Vector3(H_Axis * moveSpeed, 0f, 0f);
-            playerMoving = true;
-            lastMove = new Vector2(H_Axis, 0f);
-            if (H_Axis > 0.5f)
-            {
-                DirectionFacing = new Vector2(1,0);
-            }
-            else
-            {
-                DirectionFacing = new Vector2(-1, 0);
-            }
-        }
-        else if((V_Axis > 0.5f || V_Axis < -0.5f) && playerCanMove)
-        {
-            rb.velocity = new Vector3(0f, V_Axis * moveSpeed, 0f);
-            playerMoving = true;
-            lastMove = new Vector2(0f, V_Axis);
+          playerMoving = false;
+          H_Axis = Input.GetAxisRaw("Horizontal");
+          V_Axis = Input.GetAxisRaw("Vertical");
 
-            if (V_Axis > 0.5f)
-            {
-                DirectionFacing = new Vector2(0, 1);
-            }
-            else
-            {
-                DirectionFacing = new Vector2(0, -1);
-            }
-        }
-        else
-        {
-            rb.velocity = Vector2.zero;
-        }
+          if ((H_Axis > 0.5f || H_Axis < -0.5f) && (V_Axis > 0.5f || V_Axis < -0.5f) && playerCanMove)
+          {
 
+              if(Mathf.Abs(DirectionFacing.x) > 0)
+              {
+                  V_Axis = 0;
+              }
+              else
+              {
+                  H_Axis = 0;
+              }
 
-        anim.SetFloat("MoveX", H_Axis);
-        anim.SetFloat("MoveY", V_Axis);
-        anim.SetBool("PlayerMoving", playerMoving);
-        anim.SetFloat("LastMoveX", lastMove.x);
-        anim.SetFloat("LastMoveY", lastMove.y);
-    }
-}
+              if (H_Axis > 0.5f)
+              {
+                  DirectionFacing = new Vector2(1, 0);
+              }
+              else if(H_Axis < -0.5f)
+              {
+                  DirectionFacing = new Vector2(-1, 0);
+              }
+              else if (V_Axis > 0.5f)
+              {
+                  DirectionFacing = new Vector2(0, 1);
+              }
+              else if (V_Axis < -0.5f)
+              {
+                  DirectionFacing = new Vector2(0, -1);
+              }
+              rb.velocity = new Vector3(H_Axis * moveSpeed, V_Axis * moveSpeed, 0f);
+              playerMoving = true;
+              lastMove = new Vector2(H_Axis, V_Axis);
+          }
+          else if((H_Axis > 0.5f || H_Axis < -0.5f) && playerCanMove)
+          {
+              rb.velocity = new Vector3(H_Axis * moveSpeed, 0f, 0f);
+              playerMoving = true;
+              lastMove = new Vector2(H_Axis, 0f);
+              if (H_Axis > 0.5f)
+              {
+                  DirectionFacing = new Vector2(1,0);
+              }
+              else
+              {
+                  DirectionFacing = new Vector2(-1, 0);
+              }
+          }
+          else if((V_Axis > 0.5f || V_Axis < -0.5f) && playerCanMove)
+          {
+              rb.velocity = new Vector3(0f, V_Axis * moveSpeed, 0f);
+              playerMoving = true;
+              lastMove = new Vector2(0f, V_Axis);
+
+              if (V_Axis > 0.5f)
+              {
+                  DirectionFacing = new Vector2(0, 1);
+              }
+              else
+              {
+                  DirectionFacing = new Vector2(0, -1);
+              }
+          }
+          else if (cameraTransition && !playerCanMove)
+          {
+              rb.velocity = cameraTransitionDirection * moveSpeed;
+          }
+          else
+          {
+              rb.velocity = Vector2.zero;
+              //DirectionFacing = new Vector2(0, 0);
+          }
+
+          if(previousFacing != DirectionFacing)
+          {
+              if (GetComponent<CiscoTesting>().CurrentWeapon.AttackAbort())
+              {
+                  anim.SetFloat("MoveX", H_Axis);
+                  anim.SetFloat("MoveY", V_Axis);
+
+                  anim.SetFloat("LastMoveX", lastMove.x);
+                  anim.SetFloat("LastMoveY", lastMove.y);
+
+                  previousFacing = DirectionFacing;
+              }
+          }
+          anim.SetBool("PlayerMoving", playerMoving);
+
+        }
+      }
+           

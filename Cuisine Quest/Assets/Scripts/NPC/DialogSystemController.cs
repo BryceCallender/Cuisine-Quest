@@ -10,6 +10,7 @@ public class DialogSystemController : MonoBehaviour
     public Animator animator; 
     public TextMeshProUGUI characterDialogText;
     public GameObject dialogPopup;
+    public CiscoTesting player;
     public bool paused;
     public bool isTyping;
 
@@ -41,6 +42,7 @@ public class DialogSystemController : MonoBehaviour
     public void StartDialog(Dialog dialog)
     {
         messages.Clear();
+        StopPlayerMovement();
 
         foreach (string message in dialog.messages)
         {
@@ -52,9 +54,10 @@ public class DialogSystemController : MonoBehaviour
 
     private void DisplayMessage()
     {
-        if (isEmpty())
+        if (messages.Count == 0)
         {
             animator.SetBool("isOpen", false);
+            StartPlayerMovement();
             float time = animator.GetCurrentAnimatorStateInfo(0).length;
             //Turns off the dialog box after the animation length is done
             //So the engine doesnt have to worry about rendering. 
@@ -98,7 +101,7 @@ public class DialogSystemController : MonoBehaviour
 
     public bool isEmpty()
     {
-        return messages.Count == 0;
+        return messages.Count == 0 && !dialogPopup.activeSelf;
     }
 
     public void TurnOffDialogBox()
@@ -108,12 +111,12 @@ public class DialogSystemController : MonoBehaviour
 
     private void StopPlayerMovement()
     {
-        //this.GetComponent<PlayerMovement>().enabled = false;
-        //this.GetComponent<CameraController>().enabled = false;
+        player.GetComponent<PlayerController>().playerCanMove = false;
     }
 
     private void StartPlayerMovement()
     {
+        player.GetComponent<PlayerController>().playerCanMove = true;
         //this.GetComponent<PlayerMovement>().enabled = true;
         //this.GetComponent<CameraController>().enabled = true;
     }
