@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class HealthSystem : MonoBehaviour 
 {
-    private int currentHealth;
-    private int maxHealth = 3; //whatever amount
-
+    public int currentHealth;
+    public int maxHealth = 3; //whatever amount
+    
     // Use this for initialization
     void Start ()
     {
@@ -24,7 +24,7 @@ public class HealthSystem : MonoBehaviour
         return (currentHealth > 0);
     }
 
-    public void takeDamage(int damage)
+    public virtual void takeDamage(int damage)
     {
         currentHealth -= damage;
     }
