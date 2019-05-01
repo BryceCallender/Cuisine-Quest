@@ -328,7 +328,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponPower: 1
   Mesh: {fileID: 1187061442909296}
-  AttackBox: {fileID: 0}
+  AttackBox: {fileID: 61820649360112370}
   sw:
     RotationSpeed: 800
     RotationBegin: -45
