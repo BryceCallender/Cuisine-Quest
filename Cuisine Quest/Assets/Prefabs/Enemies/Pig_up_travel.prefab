@@ -312,6 +312,8 @@ MonoBehaviour:
     dropRate: 100
   - Item: {fileID: 1816772009502150, guid: ceaa8d0fc44ae9045ba896b17dbbf57e, type: 2}
     dropRate: 50
+  - Item: {fileID: 1606376132331898, guid: ca32ba52248d147a2a345e4ec371991b, type: 2}
+    dropRate: 25
   patrolUp: 1
 --- !u!114 &114930175382989708
 MonoBehaviour:
@@ -326,6 +328,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponPower: 1
   Mesh: {fileID: 1493259285665232}
+  AttackBox: {fileID: 0}
   sw:
     RotationSpeed: 800
     RotationBegin: -45

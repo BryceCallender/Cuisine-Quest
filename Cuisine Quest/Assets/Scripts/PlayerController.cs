@@ -98,10 +98,6 @@ public class PlayerController : MonoBehaviour
             else if (cameraTransition && !playerCanMove)
             {
                 rb.velocity = cameraTransitionDirection * moveSpeed;
-                anim.SetFloat("MoveX", 0);
-                anim.SetFloat("MoveY", 0);
-                anim.SetFloat("LastMoveX", lastMove.x);
-                anim.SetFloat("LastMoveY", lastMove.y);
             }
             else
             {
