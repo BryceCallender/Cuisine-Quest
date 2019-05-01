@@ -143,6 +143,12 @@ public class Dungeness : EnemyAbstract {
         movementTarget = new Vector2(Random.Range(xBoundMin, xBoundMax) + currentArea.x, Random.Range(yBoundMin, yBoundMax) + currentArea.y);
     }
 
+    public void BodyHit(int damage){
+        CurrentBehavior = Behaviors.MoveRandom;
+        movementTarget = transform.position;
+        GetComponent<Animator>().SetTrigger("AbortAttack");
+    }
+
     public void ClawHit(int damage)
     {
         Debug.Log("Claw Hit");
