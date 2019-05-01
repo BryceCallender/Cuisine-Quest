@@ -123,6 +123,18 @@ public class CiscoTesting : MonoBehaviour, ISaveable
         
     }
 
+    public void AddWeapon(Weapon newWeapon)
+    {
+        for (int i = 0; i < Weapons.Length; i += 1)
+        {
+            if (Weapons[i] == null)
+            {
+                Weapons[i] = newWeapon;
+                newWeapon.transform.parent = transform;
+            }
+        }
+    }
+
     void Die()
     {
         SceneManager.LoadScene(0);
@@ -247,16 +259,16 @@ public class CiscoTesting : MonoBehaviour, ISaveable
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if (Weapons.Length > 0)
+            if (Weapons[0] != null)
             {
                 weaponsIndex = 0;
                 CurrentWeapon = Weapons[weaponsIndex];
-
+                
             }
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            if (Weapons.Length > 1)
+            if (Weapons[1] != null)
             {
                 weaponsIndex = 1;
                 CurrentWeapon = Weapons[weaponsIndex];
@@ -264,7 +276,7 @@ public class CiscoTesting : MonoBehaviour, ISaveable
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            if (Weapons.Length > 2)
+            if (Weapons[2] != null)
             {
                 weaponsIndex = 2;
                 CurrentWeapon = Weapons[weaponsIndex];

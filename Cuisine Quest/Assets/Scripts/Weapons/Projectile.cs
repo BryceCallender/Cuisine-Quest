@@ -18,6 +18,10 @@ public abstract class Projectile : MonoBehaviour {
         {
             health.takeDamage(Damage);
         }
+        else
+        {
+            Debug.Log("Missing HealthSystem");
+        }
 
         if (collision.CompareTag("BulletE"))
         {
