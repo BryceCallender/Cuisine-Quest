@@ -17,18 +17,17 @@ public class Fish_enemy : EnemyAbstract
     Animator anim;
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         health = gameObject.AddComponent<HealthSystem>();
         health.setMaxHealth(1);
         health.ResetHealth();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
         if (!health.isAlive())
         {
@@ -39,7 +38,7 @@ public class Fish_enemy : EnemyAbstract
         {            
             Move();
         }
-        else if(timer > 1f)
+        else if (timer > 1f)
         {
             FindPlayer();
         }
@@ -51,14 +50,14 @@ public class Fish_enemy : EnemyAbstract
     }
     void FindPlayer()
     {
-        foreach(RaycastHit2D collide in Physics2D.CircleCastAll(transform.position, minDistance, new Vector2(0, 0)))
+        foreach (RaycastHit2D collide in Physics2D.CircleCastAll(transform.position, minDistance, new Vector2(0, 0)))
         {
-            if(collide.collider.CompareTag("Player"))
+            if (collide.collider.CompareTag("Player"))
             {
                 target = collide.transform;
                 print("Found");
                 playerFound = true;
-                anim.SetBool("moving", true);
+                anim.SetBool("moving", playerFound);
             }
         }
     }
@@ -83,15 +82,14 @@ public class Fish_enemy : EnemyAbstract
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<CiscoTesting>().health.takeDamage(1);
             rb.velocity = new Vector2(0, 0);
             playerFound = false;
-            anim.SetBool("moving", false);
+            anim.SetBool("moving", playerFound);
             timer = 0.0f;
             rb.constraints = RigidbodyConstraints2D.FreezeAll;
-
         }
     }
     private void OnCollisionExit2D(Collision2D collision)

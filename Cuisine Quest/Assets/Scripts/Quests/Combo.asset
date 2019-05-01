@@ -16,11 +16,11 @@ MonoBehaviour:
     description: 
     questType: 1
     requiredItems:
-    - item: {fileID: 114266018502995966, guid: ceaa8d0fc44ae9045ba896b17dbbf57e, type: 2}
-      requiredAmount: 3
     - item: {fileID: 114910095671855084, guid: 6a718e7f166e4438da210d7b646d2842, type: 2}
       requiredAmount: 2
-    questState: 0
+    - item: {fileID: 114266018502995966, guid: ceaa8d0fc44ae9045ba896b17dbbf57e, type: 2}
+      requiredAmount: 3
+    questState: 1
   DependentQuests:
   - {fileID: 11400000, guid: a14fee48ece5f1244af3e0f8d80c1385, type: 2}
   - {fileID: 11400000, guid: 96506e99a4e40004abe9931d76ce8b83, type: 2}
