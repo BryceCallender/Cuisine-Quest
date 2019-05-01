@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Dessert
   m_EditorClassIdentifier: 
   questData:
-    questName: Jello Shots
+    questName: Dessert
     description: 
     questType: 1
     requiredItems:

@@ -43,6 +43,7 @@ public class DialogSystemController : MonoBehaviour
     {
         messages.Clear();
         StopPlayerMovement();
+        characterDialogText.text = string.Empty;
 
         foreach (string message in dialog.messages)
         {
@@ -58,10 +59,12 @@ public class DialogSystemController : MonoBehaviour
         {
             animator.SetBool("isOpen", false);
             StartPlayerMovement();
+            isTyping = false;
             float time = animator.GetCurrentAnimatorStateInfo(0).length;
             //Turns off the dialog box after the animation length is done
             //So the engine doesnt have to worry about rendering. 
             Invoke("TurnOffDialogBox", time);
+            characterDialogText.text = string.Empty;
             return;
         }
 
@@ -77,7 +80,7 @@ public class DialogSystemController : MonoBehaviour
 
     private IEnumerator SlowlyDisplayMessage(string message)
     {
-        characterDialogText.text = "";
+        characterDialogText.text = string.Empty;
         isTyping = true;
         foreach (char letter in message)
         {
@@ -87,7 +90,6 @@ public class DialogSystemController : MonoBehaviour
             //and set the text directly to the message text.
             if(Input.GetKeyDown(KeyCode.Space) && isTyping && skipTimer > timeTillSkip)
             {
-                characterDialogText.text = "";
                 StopCoroutine(coroutine);
                 characterDialogText.text = message;
                 isTyping = false;
@@ -111,13 +113,13 @@ public class DialogSystemController : MonoBehaviour
 
     private void StopPlayerMovement()
     {
+        Debug.Log("Stop player movement");
         player.GetComponent<PlayerController>().playerCanMove = false;
     }
 
     private void StartPlayerMovement()
     {
+        Debug.Log("Resume player movement");
         player.GetComponent<PlayerController>().playerCanMove = true;
-        //this.GetComponent<PlayerMovement>().enabled = true;
-        //this.GetComponent<CameraController>().enabled = true;
     }
 }
