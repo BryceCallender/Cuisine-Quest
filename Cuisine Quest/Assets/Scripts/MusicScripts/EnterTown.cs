@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class EnterTown : MonoBehaviour 
 {
+    Coroutine coroutine;
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Player"))
@@ -12,10 +13,11 @@ public class EnterTown : MonoBehaviour
             if (dot > 0)
             {
                 AudioSourceController.Instance.PlayAudioLooped("Town");
+                StopCoroutine(coroutine);
             }
             else
             {
-                StartCoroutine(PlayFieldMusic());
+                coroutine = StartCoroutine(PlayFieldMusic());
             }
         }
     }

@@ -26,8 +26,7 @@ public class NPC : MonoBehaviour
 {
     public List<Quest> giveableQuests;
     public bool hasTalked;
-    [SerializeField]
-    private bool isTalking;
+    public Item rewardItem;
     [HideInInspector]
     public CharacterDialog[] characterDialog;
     private DialogSystemController dialogSystemController;
@@ -52,7 +51,7 @@ public class NPC : MonoBehaviour
     {
         //give quest to player and set the SO to in progress
         Quest quest = player.GetComponent<PlayerQuestSystem>().GetQuestByID(giveableQuests[index].questID);
-        if (!CheckDependentQuests(player, quest, index))
+        if (!CheckDependentQuests(player, quest, index) || quest.questData.questState >= QuestState.completed)
         {
             return;
         }
@@ -73,8 +72,11 @@ public class NPC : MonoBehaviour
                 if (collision.CompareTag("Player") && !hasTalked)
                 {
                     characterDialog[0].EnableDialog();
-                    isTalking = true;
-                    GiveQuest(collision.GetComponent<CiscoTesting>(), 0);
+                    for (int i = 0; i < giveableQuests.Count; i++)
+                    {
+                        GiveQuest(collision.GetComponent<CiscoTesting>(), 0);
+                    }
+
                 }
                 //Quest is completed and we need to go to the npc to end the quest
                 else if (collision.CompareTag("Player") && hasTalked)
@@ -85,6 +87,20 @@ public class NPC : MonoBehaviour
                         {
                             //Complete the quest and enable the quest completion dialog
                             collision.GetComponent<PlayerQuestSystem>().SetQuestStatus(quest.questID, QuestState.done);
+
+                            if(rewardItem != null)
+                            {
+                                if (collision.GetComponent<CiscoTesting>().items.ContainsKey(rewardItem))
+                                {
+                                    collision.GetComponent<CiscoTesting>().items[rewardItem]++;
+                                }
+                                else
+                                {
+                                    collision.GetComponent<CiscoTesting>().items.Add(rewardItem, 1);
+                                }
+                                Debug.Log("Gave a reward of " + rewardItem.Name);
+                            }
+                       
                             for (int j = 0; j < quest.questData.requiredItems.Count; j++)
                             {
                                 RequiredItem item = quest.questData.requiredItems[j];
@@ -92,7 +108,6 @@ public class NPC : MonoBehaviour
                             }
                             Debug.Log("Finished Quest");
                             characterDialog[1].EnableDialog();
-                            isTalking = true;
                         }
                     }
                 }
@@ -100,7 +115,6 @@ public class NPC : MonoBehaviour
             else
             {
                 characterDialog[2].EnableDialog();
-                isTalking = true;
             }
             questIndex++;
         }
