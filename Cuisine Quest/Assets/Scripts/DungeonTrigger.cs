@@ -15,6 +15,8 @@ public class DungeonTrigger : MonoBehaviour {
 
     public AreaAbstract[] DungeonAreas;
     public AreaAbstract[] OverWorld;
+
+    
     
 	// Use this for initialization
 	void Start () {
