@@ -90,8 +90,14 @@ public class Fish_enemy : EnemyAbstract
             playerFound = false;
             anim.SetBool("moving", false);
             timer = 0.0f;
+            rb.constraints = RigidbodyConstraints2D.FreezeAll;
 
         }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        rb.constraints = RigidbodyConstraints2D.None;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     void Die()

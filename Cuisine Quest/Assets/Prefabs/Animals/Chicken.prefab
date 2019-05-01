@@ -124,12 +124,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e2fb6317478ec74c8bce3dd5c181a29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 0}
+  speed: 0
+  drops:
+  - Item: {fileID: 1968885735873554, guid: da00e6d1a25881c4bb2af3152698fbf0, type: 2}
+    dropRate: 80
   moveSpeed: 2
   isWalking: 0
   walkTime: 1
   walkCounter: 0
   waitTime: 3
   waitCounter: 0
+  maxhealth: 1
 --- !u!212 &212319708409398092
 SpriteRenderer:
   m_ObjectHideFlags: 1

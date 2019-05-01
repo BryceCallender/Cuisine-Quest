@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChickenMovement : MonoBehaviour
+public class ChickenMovement : EnemyAbstract
 {
     public float moveSpeed;
     private Animator anim;
@@ -12,9 +12,13 @@ public class ChickenMovement : MonoBehaviour
     public float waitTime, waitCounter;
     private int walkDirection;
     private Vector2 lastMove;
+    public int maxhealth;
     // Use this for initialization
     void Start ()
     {
+        health = gameObject.AddComponent<HealthSystem>();
+        health.setMaxHealth(maxhealth);
+        health.ResetHealth();
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         walkCounter = walkTime;
@@ -99,5 +103,15 @@ public class ChickenMovement : MonoBehaviour
         walkDirection = UnityEngine.Random.Range(0, 4);
         isWalking = true;
         walkCounter = walkTime;
+    }
+
+    public override void Move()
+    {
+
+    }
+
+    public override void Attack()
+    {
+
     }
 }

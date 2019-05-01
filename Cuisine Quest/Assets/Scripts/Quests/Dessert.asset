@@ -12,11 +12,17 @@ MonoBehaviour:
   m_Name: Dessert
   m_EditorClassIdentifier: 
   questData:
-    questName: 
+    questName: Jello Shots
     description: 
-    questType: 0
-    requiredItems: []
+    questType: 1
+    requiredItems:
+    - item: {fileID: 114174042253329884, guid: 119a294009196d04188815807ccf3f58, type: 2}
+      requiredAmount: 2
+    - item: {fileID: 114155559191110190, guid: 629f213a75aff4b7eacab9785f728d7d, type: 2}
+      requiredAmount: 1
     questState: 0
-  DependentQuests: []
+  DependentQuests:
+  - {fileID: 11400000, guid: a14fee48ece5f1244af3e0f8d80c1385, type: 2}
+  - {fileID: 11400000, guid: 00851405f49254c28ba66a7dbd2a3fd1, type: 2}
   questID: 0
   AreaNeeded: {fileID: 0}

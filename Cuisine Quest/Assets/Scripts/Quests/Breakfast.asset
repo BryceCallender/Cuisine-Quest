@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Name: Breakfast
   m_EditorClassIdentifier: 
   questData:
-    questName: 
+    questName: Breakfast
     description: 
-    questType: 0
-    requiredItems: []
+    questType: 1
+    requiredItems:
+    - item: {fileID: 114198375121334752, guid: b58c843e8dab5db46bfe9c8ce10c7251, type: 2}
+      requiredAmount: 2
     questState: 0
   DependentQuests: []
-  questID: 0
+  questID: 2
   AreaNeeded: {fileID: 0}
