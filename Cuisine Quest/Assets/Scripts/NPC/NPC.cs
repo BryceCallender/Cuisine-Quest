@@ -26,8 +26,6 @@ public class NPC : MonoBehaviour
 {
     public List<Quest> giveableQuests;
     public bool hasTalked;
-    [SerializeField]
-    private bool isTalking;
     [HideInInspector]
     public CharacterDialog[] characterDialog;
     private DialogSystemController dialogSystemController;
@@ -73,7 +71,6 @@ public class NPC : MonoBehaviour
                 if (collision.CompareTag("Player") && !hasTalked)
                 {
                     characterDialog[0].EnableDialog();
-                    isTalking = true;
                     GiveQuest(collision.GetComponent<CiscoTesting>(), 0);
                 }
                 //Quest is completed and we need to go to the npc to end the quest
@@ -92,7 +89,6 @@ public class NPC : MonoBehaviour
                             }
                             Debug.Log("Finished Quest");
                             characterDialog[1].EnableDialog();
-                            isTalking = true;
                         }
                     }
                 }
@@ -100,7 +96,6 @@ public class NPC : MonoBehaviour
             else
             {
                 characterDialog[2].EnableDialog();
-                isTalking = true;
             }
             questIndex++;
         }
