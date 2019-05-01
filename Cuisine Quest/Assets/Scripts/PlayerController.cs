@@ -107,15 +107,18 @@ public class PlayerController : MonoBehaviour
 
             if (previousFacing != DirectionFacing)
             {
-                if (GetComponent<CiscoTesting>().CurrentWeapon.AttackAbort())
+                if(GetComponent<CiscoTesting>().CurrentWeapon)
                 {
-                    anim.SetFloat("MoveX", H_Axis);
-                    anim.SetFloat("MoveY", V_Axis);
+                    if (GetComponent<CiscoTesting>().CurrentWeapon.AttackAbort())
+                    {
+                        anim.SetFloat("MoveX", H_Axis);
+                        anim.SetFloat("MoveY", V_Axis);
 
-                    anim.SetFloat("LastMoveX", lastMove.x);
-                    anim.SetFloat("LastMoveY", lastMove.y);
+                        anim.SetFloat("LastMoveX", lastMove.x);
+                        anim.SetFloat("LastMoveY", lastMove.y);
 
-                    previousFacing = DirectionFacing;
+                        previousFacing = DirectionFacing;
+                    }
                 }
             }
             anim.SetBool("PlayerMoving", playerMoving);

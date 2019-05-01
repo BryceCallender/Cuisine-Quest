@@ -41,7 +41,6 @@ GameObject:
   - component: {fileID: 114152700293897926}
   - component: {fileID: 95019667205810296}
   - component: {fileID: 50882182196732420}
-  - component: {fileID: 114466244841181874}
   - component: {fileID: 70946599184137562}
   m_Layer: 0
   m_Name: Cisco
@@ -396,19 +395,6 @@ MonoBehaviour:
   DirectionFacing: {x: 0, y: -1}
   cameraTransition: 0
   cameraTransitionDirection: {x: 0, y: 0}
---- !u!114 &114466244841181874
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1282455432396150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3900f941833fe034d92120afd88a894e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 0
-  maxHealth: 3
 --- !u!114 &114616064081812372
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -488,7 +474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 719b387e5870aea49952609e22251d4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: {fileID: 114466244841181874}
+  health: {fileID: 0}
   CurrentWeapon: {fileID: 114693674146012156}
   Weapons:
   - {fileID: 114693674146012156}

@@ -33,14 +33,18 @@ public class GameMenu : MonoBehaviour
         //even if they are disabled on disabled gameobjects
         weaponImage.sprite = player.CurrentWeapon.gameObject.GetComponentInChildren<SpriteRenderer>(true).sprite;
 
-        switch(weaponImage.sprite.name)
+        switch (weaponImage.sprite.name)
         {
             case "Sword":
+                weaponImage.sprite = player.CurrentWeapon.gameObject.GetComponentInChildren<SpriteRenderer>(true).sprite;
+                descriptionText.gameObject.SetActive(false);
+                break;
             case "Trident":
                 descriptionText.gameObject.SetActive(false);
                 break;
             case "Knife":
                 descriptionText.gameObject.SetActive(true);
+                weaponImage.sprite = player.CurrentWeapon.gameObject.GetComponentInChildren<SpriteRenderer>(true).sprite;
                 descriptionText.SetText(string.Format("x{0}", player.CurrentWeapon.GetComponent<Knife>().KnifeCount));
                 break;
         }
