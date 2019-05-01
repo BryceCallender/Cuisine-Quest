@@ -52,7 +52,7 @@ public class CiscoTesting : MonoBehaviour, ISaveable
     // Use this for initialization
     void Start ()
     {
-        SaveSystem.Instance.AddSaveableObject(this);
+        
         items = new Dictionary<Item, int>();
         health = gameObject.AddComponent<HealthSystem>();
         playerController = GetComponent<PlayerController>();
@@ -60,7 +60,7 @@ public class CiscoTesting : MonoBehaviour, ISaveable
         health.setMaxHealth(5);
         health.ResetHealth();
         playerQuestSystem = GetComponent<PlayerQuestSystem>();
-
+        SaveSystem.Instance.AddSaveableObject(this);
 
         if (File.Exists(Path.Combine(Application.persistentDataPath, "PlayerItems.json")))
         {

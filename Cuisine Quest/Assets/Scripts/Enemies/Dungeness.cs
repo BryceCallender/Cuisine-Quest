@@ -78,7 +78,8 @@ public class Dungeness : EnemyAbstract {
     private void die()
     {
         Drop();
-        Destroy(gameObject);
+        GameObject.FindGameObjectWithTag("LevelHandler").GetComponent<LevelHandler>().CurrentArea.DestroyObj(gameObject);
+        //Destroy(gameObject);
     }
 
     public override void Attack()
