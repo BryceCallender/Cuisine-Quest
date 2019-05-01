@@ -18,6 +18,7 @@ public class DungenessBody : HealthSystem {
     public override void takeDamage(int damage)
     {
         DH.takeDamage(damage);
+        DH.GetComponent<Dungeness>().BodyHit(damage);
     }
 
 }
