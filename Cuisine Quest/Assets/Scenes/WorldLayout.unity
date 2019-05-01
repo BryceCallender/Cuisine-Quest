@@ -2704,6 +2704,7 @@ MonoBehaviour:
   animator: {fileID: 1522820402}
   characterDialogText: {fileID: 186534734}
   dialogPopup: {fileID: 214846825}
+  player: {fileID: 0}
   paused: 0
   isTyping: 0
   skipTimer: 0
@@ -3803,6 +3804,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   giveableQuests: []
   hasTalked: 0
+  isTalking: 0
   characterDialog:
   - {fileID: 0}
 --- !u!114 &392920403
@@ -67762,6 +67764,7 @@ GameObject:
   - component: {fileID: 2034733142}
   - component: {fileID: 2034733144}
   - component: {fileID: 2034733143}
+  - component: {fileID: 2034733145}
   m_Layer: 11
   m_Name: D_7
   m_TagString: Area
@@ -67813,9 +67816,24 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2034733141}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54d5bf594a2660b4c96910a3ebb54a0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MyArea: {fileID: 11400000, guid: 17879e70ccdf142cbaca17facc4fb53b, type: 2}
+  ToLoad:
+  - Prefab: {fileID: 1174812945312316, guid: 98fa089a631ba9548ac952d1d67ca6fe, type: 2}
+    MyLocation: {x: 0, y: -2}
+--- !u!114 &2034733145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2034733141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46fbee26310c64582967fc0573cda273, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MyArea: {fileID: 11400000, guid: 17879e70ccdf142cbaca17facc4fb53b, type: 2}

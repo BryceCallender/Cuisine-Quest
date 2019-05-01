@@ -14,10 +14,10 @@ public class DungenessClaws : HealthSystem {
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && DH.GetComponent<Dungeness>().CurrentBehavior == Dungeness.Behaviors.Attack)
         {
             Debug.Log("Player Hit");
-            collision.gameObject.GetComponent<HealthSystem>().takeDamage(DH.gameObject.GetComponent<Dungeness>().ClawAttackPower);
+            collision.gameObject.GetComponent<CiscoTesting>().health.takeDamage(DH.gameObject.GetComponent<Dungeness>().ClawAttackPower);
         }
     }
 

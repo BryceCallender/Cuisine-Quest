@@ -631,7 +631,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  maxHealth: 30
+  maxHealth: 5
 --- !u!114 &114774464299998606
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -679,7 +679,7 @@ MonoBehaviour:
   MovementSpeed: 1
   BackingUpSpeed: 3
   ClawAttackPower: 2
-  AttackDistance: 3
+  AttackDistance: 2
   AttackReadyTime: 1
   AttackSpeed: 10
   PlayerTargetTime: 2
