@@ -28,19 +28,24 @@ public class DungeonTrigger : MonoBehaviour {
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+
         if(collision.CompareTag("Player"))
         {
             float playerDirection = Vector3.Dot(EntranceDirection, collision.GetComponent<Rigidbody2D>().velocity);
+            print(playerDirection);
             if(playerDirection < 0)
             {
                 //Vector3 cameraLocation = new Vector3(MyOverworldCoordinate.x, MyOverworldCoordinate.y, Camera.main.transform.position.z);
                 SetAreaColliders(false, true);
                 GameObject.FindGameObjectWithTag("LevelHandler").GetComponent<LevelHandler>().TeleportPlayer(EgressLocation.name, PlayerEgressLocation);
-            }else if(playerDirection > 0)
+                AudioSourceController.Instance.PlayAudioLooped("FieldMusic");
+            }
+            else if(playerDirection > 0)
             {
                 //Vector3 cameraLocation = new Vector3(MyDungeonCoordinate.x, MyDungeonCoordinate.y, Camera.main.transform.position.z);
                 SetAreaColliders(true, false);
                 GameObject.FindGameObjectWithTag("LevelHandler").GetComponent<LevelHandler>().TeleportPlayer(IngressLocation.name,  PlayerIngressLocation);
+                AudioSourceController.Instance.PlayAudioLooped("Dungeon");
             }
         }
     }

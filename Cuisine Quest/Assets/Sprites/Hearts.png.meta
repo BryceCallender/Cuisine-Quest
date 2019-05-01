@@ -93,12 +93,12 @@ TextureImporter:
       name: Hearts_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 2
         y: 77
-        width: 87
-        height: 14
+        width: 83
+        height: 13
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -113,12 +113,12 @@ TextureImporter:
       name: Hearts_1
       rect:
         serializedVersion: 2
-        x: 1
+        x: 2
         y: 62
-        width: 84
+        width: 83
         height: 13
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -133,12 +133,12 @@ TextureImporter:
       name: Hearts_2
       rect:
         serializedVersion: 2
-        x: 1
+        x: 2
         y: 47
-        width: 84
+        width: 83
         height: 13
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -153,12 +153,12 @@ TextureImporter:
       name: Hearts_3
       rect:
         serializedVersion: 2
-        x: 1
+        x: 2
         y: 32
-        width: 85
+        width: 83
         height: 13
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -173,12 +173,12 @@ TextureImporter:
       name: Hearts_4
       rect:
         serializedVersion: 2
-        x: 1
+        x: 2
         y: 17
-        width: 85
+        width: 83
         height: 13
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -193,12 +193,12 @@ TextureImporter:
       name: Hearts_5
       rect:
         serializedVersion: 2
-        x: 1
-        y: 1
-        width: 85
-        height: 14
+        x: 2
+        y: 2
+        width: 83
+        height: 13
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

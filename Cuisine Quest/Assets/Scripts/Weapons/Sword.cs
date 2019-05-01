@@ -47,7 +47,7 @@ public class Sword : Weapon {
 
     public override void Attack(Vector2 PlayerDirection)
     {
-        if(MyAttack == AttackType.Jab)
+        if (MyAttack == AttackType.Jab)
         {
             if (jw.CanAttack()) GetComponent<AudioSource>().Play();
             else return;

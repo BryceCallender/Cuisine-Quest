@@ -15,7 +15,6 @@ public class Knife : Weapon {
     private bool Jabbing = false;
 
     //public GameObject Mesh;
-
     // Use this for initialization
     void Start () {
         activateWeapon(false);
@@ -31,7 +30,7 @@ public class Knife : Weapon {
 
     public override void Attack(Vector2 PlayerDirection)
     {
-        if(jw.CanAttack() && KnifeCount > 0)
+        if (jw.CanAttack() && KnifeCount > 0)
         {
             if (PlayerDirection.x < 0) jw.AttackLeft(transform, ref Jabbing);
             else if (PlayerDirection.x > 0) jw.AttackRight(transform, ref Jabbing);

@@ -22,6 +22,12 @@ public class SaveSystem : MonoBehaviour
     private void Start()
     {
         DontDestroyOnLoad(this);
+
+        if (FindObjectsOfType(GetType()).Length > 1)
+        {
+            Destroy(gameObject);
+        }
+
         saveableObjects = new List<ISaveable>();
     }
 

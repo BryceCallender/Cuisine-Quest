@@ -14,7 +14,6 @@ public class Trident : Weapon {
     public TridentProjectile Tridentin;
 
     //public GameObject Mesh;
-
     // Use this for initialization
     void Start () {
         activateWeapon(false);

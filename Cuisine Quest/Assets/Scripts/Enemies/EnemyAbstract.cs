@@ -31,6 +31,7 @@ public abstract class EnemyAbstract : SpawnObject
 public class droppedItem
 {
     public GameObject Item;
+    [Range(0,100)]
     public int dropRate;
 }
 

@@ -91,21 +91,21 @@ public class PlayerQuestSystem : MonoBehaviour, ISaveable
         return questManager.GetQuests();
     }
 
-    public void UpdateQuests(int id, Dictionary<string,int> items)
+    public void UpdateQuests(int id, Dictionary<Item, int> items, Item item)
     {
         //if player has the item in the inventory
-        UpdateItemDisplay(id, items);
+        UpdateItemDisplay(id, items, item);
     }
 
-    public void UpdateCurrentQuestsAmountDone(Dictionary<string,int> items)
+    public void UpdateCurrentQuestsAmountDone(Dictionary<Item, int> items)
     {
         for (int i = 0; i < currentQuests.Count; i++)
         {
-            for(int j = 0; j < questManager.GetQuests()[i].questData.requiredItems.Count; j++)
+            for (int j = 0; j < questManager.GetQuests()[i].questData.requiredItems.Count; j++)
             {
-                if(items.ContainsKey(questManager.GetQuests()[i].questData.requiredItems[j].item.name))
+                if (items.ContainsKey(questManager.GetQuests()[i].questData.requiredItems[j].item))
                 {
-                    currentQuests[i].amountDone[j] = items[questManager.GetQuests()[i].questData.requiredItems[j].item.name];
+                    currentQuests[i].amountDone[j] = items[questManager.GetQuests()[i].questData.requiredItems[j].item];
                 }
                 else
                 {
@@ -115,15 +115,14 @@ public class PlayerQuestSystem : MonoBehaviour, ISaveable
         }
     }
 
-    public void UpdateItemDisplay(int id, Dictionary<string, int> items)
+    public void UpdateItemDisplay(int id, Dictionary<Item, int> items, Item item)
     {
         int num = 0;
-        foreach(RequiredItem requiredItem in questManager.quests[id].questData.requiredItems)
+        foreach (RequiredItem requiredItem in questManager.GetQuests()[id].questData.requiredItems)
         {
-            Debug.Log(CiscoTesting.lastItemPickedUp);
-            if(requiredItem.item.name.Equals(CiscoTesting.lastItemPickedUp))
-            {  
-                currentQuests[id].amountDone[num] = items[requiredItem.item.name];
+            if (item.Name.Contains(requiredItem.item.Name))
+            {
+                currentQuests[id].amountDone[num] = items[item];
                 return;
             }
             num++;

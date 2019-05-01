@@ -6,8 +6,25 @@ using UnityEngine.SceneManagement;
 [System.Serializable]
 public class PlayerItem
 {
-    public string name;
+    public ItemData item;
     public int amount;
+
+    public PlayerItem(string name, ItemType itemType, int amount)
+    {
+        item = new ItemData
+        {
+            name = name,
+            itemType = itemType
+        };
+        this.amount = amount;
+    }
+}
+
+[System.Serializable]
+public class ItemData
+{
+    public string name;
+    public ItemType itemType;
 }
 
 [System.Serializable]
@@ -25,16 +42,18 @@ public class CiscoTesting : MonoBehaviour, ISaveable
     public Weapon[] Weapons;
     private int weaponsIndex = 0;
 
+    public Potion potion;
+
     private PlayerQuestSystem playerQuestSystem;
     public bool CheckQuests = false;
-    public Dictionary<string, int> items;
+    public Dictionary<Item, int> items;
     private PlayerController playerController;
-
-    public static string lastItemPickedUp;
 
     // Use this for initialization
     void Start ()
     {
+        SaveSystem.Instance.AddSaveableObject(this);
+        items = new Dictionary<Item, int>();
         health = gameObject.AddComponent<HealthSystem>();
         playerController = GetComponent<PlayerController>();
 
@@ -42,14 +61,11 @@ public class CiscoTesting : MonoBehaviour, ISaveable
         health.ResetHealth();
         playerQuestSystem = GetComponent<PlayerQuestSystem>();
 
-        items = new Dictionary<string, int>();
-
-        SaveSystem.Instance.AddSaveableObject(this);
-        
 
         if (File.Exists(Path.Combine(Application.persistentDataPath, "PlayerItems.json")))
         {
             InitDictionary();
+            Debug.Log("Found save file");
         }
         else
         {
@@ -61,13 +77,18 @@ public class CiscoTesting : MonoBehaviour, ISaveable
     bool primaryAttackButton = false;
     bool secondaryAttackButton = false;
     bool questMenuButton = false;
+
     // Update is called once per frame
     void Update ()
     {
+        if(PauseMenu.paused)
+        {
+            return;
+        }
+
         if (!playerController) playerController = GetComponent<PlayerController>();
         bool primaryAttackButtonDown = false;
         bool secondaryAttackButtonDown = false;
-        bool questMenuButtonDown = false;
 
         if (Mathf.Abs(Input.GetAxisRaw("Fire1")) > 0 && !primaryAttackButton) primaryAttackButtonDown = true;
         if (Mathf.Abs(Input.GetAxisRaw("Fire2")) > 0 && !secondaryAttackButton) secondaryAttackButtonDown = true;
@@ -83,6 +104,7 @@ public class CiscoTesting : MonoBehaviour, ISaveable
         {
             primaryAttackButton = false;
         }
+
         if (Mathf.Abs(Input.GetAxisRaw("Fire2")) > 0)
         {
             secondaryAttackButton = true;
@@ -91,6 +113,7 @@ public class CiscoTesting : MonoBehaviour, ISaveable
         {
             secondaryAttackButton = false;
         }
+
         if(secondaryAttackButtonDown) Debug.Log(primaryAttackButton + " " + secondaryAttackButtonDown);
 
         if(items.Count > 0 && items != null)
@@ -120,7 +143,19 @@ public class CiscoTesting : MonoBehaviour, ISaveable
             CurrentWeapon.AttackSecondary(playerController.DirectionFacing, primaryAttackButton);
         }
 
-        
+        if(Input.GetKeyDown(KeyCode.Minus))
+        {
+            health.takeDamage(1);
+        }
+
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            if(items[potion] > 0)
+            {
+                potion.Consume(this);
+                items[potion]--;
+            }
+        }
     }
 
     public void AddWeapon(Weapon newWeapon)
@@ -137,7 +172,7 @@ public class CiscoTesting : MonoBehaviour, ISaveable
 
     void Die()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("DeathScene");
     }
 
     public void ChangeLayer(int Layer, int orderInLayer){
@@ -153,47 +188,42 @@ public class CiscoTesting : MonoBehaviour, ISaveable
     }
     public void AddItem(GameObject item)
     {
-        string itemName = item.name;
-        if(itemName.Contains("(Clone)"))
+        if (items.ContainsKey(item.GetComponent<Item>()))
         {
-            itemName = itemName.Replace("(Clone)", "").Trim();
-        }
-
-        if (items.ContainsKey(itemName))
-        {
-            items[itemName]++;
+            items[item.GetComponent<Item>()]++;
         }
         else
         {
-            Debug.Log("Adding " + itemName);
-            items.Add(itemName, 1);
-            lastItemPickedUp = itemName;
+            items.Add(item.GetComponent<Item>(), 1);
         }
 
         //Check for completion of the quest when an item is picked up
-        if(CheckQuests) UpdateQuestLog();
+        UpdateQuestLog(item.GetComponent<Item>());
+        item.SetActive(false);
+        
+        //if(CheckQuests) UpdateQuestLog();
     }
 
-    public void RemoveItems(string name, int amount)
+    public void RemoveItems(Item item, int amount)
     {
-        items[name] -= amount;
+        items[item] -= amount;
+        UpdateQuestLog(item);
     }
 
     public void PrintItems()
     {
-        foreach (KeyValuePair<string, int> kvp in items)
+        foreach (KeyValuePair<Item, int> kvp in items)
         {
             Debug.Log(string.Format("Key = {0}, Value = {1}", kvp.Key, kvp.Value));
         }
     }
 
-    public void UpdateQuestLog()
+    public void UpdateCompletionStatus()
     {
-        if(items.Count > 0)
+        if (items.Count > 0)
         {
             foreach (Quest quest in playerQuestSystem.GetQuests())
             {
-                playerQuestSystem.UpdateQuests(quest.questID, items);
                 if (quest.questData.questState == QuestState.inProgress ||
                     quest.questData.questState == QuestState.completed)
                 {
@@ -201,16 +231,32 @@ public class CiscoTesting : MonoBehaviour, ISaveable
                 }
             }
         }
-        
+    }
+
+    public void UpdateQuestLog(Item item)
+    {
+        if (items.Count > 0)
+        {
+            foreach (Quest quest in playerQuestSystem.GetQuests())
+            {
+                playerQuestSystem.UpdateQuests(quest.questID, items, item);
+                if (quest.questData.questState == QuestState.inProgress ||
+                    quest.questData.questState == QuestState.completed)
+                {
+                    quest.CheckCompletion(this);
+                }
+            }
+        }
     }
 
     public void Save()
     {
         List<PlayerItem> playerItems = new List<PlayerItem>();
 
-        foreach(var item in items)
+        foreach (var itemObj in items)
         {
-            PlayerItem playerItem = new PlayerItem { name = item.Key, amount = item.Value };
+            Debug.Log(itemObj);
+            PlayerItem playerItem = new PlayerItem(itemObj.Key.Name, itemObj.Key.Type, itemObj.Value);
             playerItems.Add(playerItem);
         }
 
@@ -222,9 +268,15 @@ public class CiscoTesting : MonoBehaviour, ISaveable
         PlayerItems playerItems = JsonArrayHandler<PlayerItems>.ReadJsonFile(Path.Combine(Application.persistentDataPath, "PlayerItems.json"));
         items.Clear();
 
-        foreach(PlayerItem item in playerItems.items)
+        foreach (PlayerItem item in playerItems.items)
         {
-            items.Add(item.name, item.amount);
+            GameObject go = new GameObject();
+            go.AddComponent<Item>();
+            Item gameObjectItem = go.GetComponent<Item>();
+            gameObjectItem.Name = item.item.name;
+            gameObjectItem.Type = item.item.itemType;
+
+            items.Add(gameObjectItem, item.amount);
         }
     }
 
@@ -283,5 +335,4 @@ public class CiscoTesting : MonoBehaviour, ISaveable
             }
         }
     }
-
 }

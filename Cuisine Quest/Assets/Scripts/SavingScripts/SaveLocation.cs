@@ -1,16 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SaveLocation : MonoBehaviour 
 {
+    public GameObject saveMenu;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Player"))
         {
-            Debug.Log("SAVING THE GAME");
-            AudioSourceController.Instance.PlayAudio("Save");
-            SaveSystem.Instance.SaveGame();
+            saveMenu.SetActive(true);
+            SaveGameMenu.paused = true;
         }
     }
 }
