@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114626829293990114}
   - component: {fileID: 50257676643576250}
   - component: {fileID: 60076455867985582}
+  - component: {fileID: 95040895508094996}
   m_Layer: 0
   m_Name: Jello_Slime
   m_TagString: Enemy
@@ -37,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1684182656439604}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.23, y: 17.88, z: 0}
+  m_LocalPosition: {x: 11.151321, y: 18.514786, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -97,6 +98,24 @@ PolygonCollider2D:
       - {x: 0.4064217, y: -0.3319018}
       - {x: 0.4064217, y: -0.08464905}
       - {x: 0.35697114, y: 0.32743883}
+--- !u!95 &95040895508094996
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1684182656439604}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8e7addab0167ed140a5ce00693d6c501, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114626829293990114
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -111,8 +130,8 @@ MonoBehaviour:
   health: {fileID: 0}
   speed: 0
   drops:
-  - Item: {fileID: 1029527379581458, guid: 629f213a75aff4b7eacab9785f728d7d, type: 2}
-    dropRate: 2
+  - Item: {fileID: 1601996708360696, guid: 119a294009196d04188815807ccf3f58, type: 2}
+    dropRate: 70
   player: {fileID: 0}
 --- !u!212 &212521125015383252
 SpriteRenderer:
