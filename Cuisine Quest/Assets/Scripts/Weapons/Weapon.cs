@@ -15,14 +15,6 @@ public abstract class Weapon : MonoBehaviour {
     public GameObject Mesh;
     public Collider2D AttackBox;
 
-    protected BoxCollider2D weaponCollider;
-
-    void Start()
-    {
-        weaponCollider = GetComponent<BoxCollider2D>();
-        weaponCollider.enabled = false;
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         HealthSystem health = collision.GetComponent<HealthSystem>();

@@ -4948,8 +4948,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   quests:
-  - {fileID: 11400000, guid: 6aa1848fcea304ec79bd0b015e0abd0e, type: 2}
+  - {fileID: 11400000, guid: a14fee48ece5f1244af3e0f8d80c1385, type: 2}
   - {fileID: 11400000, guid: 00851405f49254c28ba66a7dbd2a3fd1, type: 2}
+  - {fileID: 11400000, guid: 96506e99a4e40004abe9931d76ce8b83, type: 2}
+  - {fileID: 11400000, guid: 58f82cab45cfb48aeb82c3f03b11840c, type: 2}
+  - {fileID: 11400000, guid: 6aa1848fcea304ec79bd0b015e0abd0e, type: 2}
 --- !u!1 &1328215330
 GameObject:
   m_ObjectHideFlags: 0

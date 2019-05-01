@@ -29,6 +29,12 @@ public class ChickenMovement : EnemyAbstract
 	// Update is called once per frame
 	void Update ()
     {
+        if(!health.isAlive())
+        {
+            Drop();
+            Destroy(gameObject);
+        }
+
 		if(isWalking)
         {
             walkCounter -= Time.deltaTime;
