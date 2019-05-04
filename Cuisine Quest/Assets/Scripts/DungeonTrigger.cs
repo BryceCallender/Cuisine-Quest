@@ -40,7 +40,7 @@ public class DungeonTrigger : MonoBehaviour {
                 //Vector3 cameraLocation = new Vector3(MyOverworldCoordinate.x, MyOverworldCoordinate.y, Camera.main.transform.position.z);
                 SetAreaColliders(false, true);
                 GameObject.FindGameObjectWithTag("LevelHandler").GetComponent<LevelHandler>().TeleportPlayer(EgressLocation.name, PlayerEgressLocation);
-                AudioSourceController.Instance.PlayAudioLooped("FieldMusic");
+                AudioSourceController.Instance.StartCoroutine(AudioSourceController.Instance.PlayFieldMusic());
             }
             else if(playerDirection > 0)
             {

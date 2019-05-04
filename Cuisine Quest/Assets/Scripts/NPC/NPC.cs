@@ -32,6 +32,11 @@ public class NPC : MonoBehaviour
     private DialogSystemController dialogSystemController;
     private PlayerController playerMovement;
 
+    private int questsGiven;
+    private int currentQuest;
+    private bool completedQuest;
+    private bool gaveQuest;
+
     void Start()
     {
         dialogSystemController = FindObjectOfType<DialogSystemController>();
@@ -58,65 +63,70 @@ public class NPC : MonoBehaviour
         //We have done them all
         player.GetComponent<PlayerQuestSystem>().SetQuestStatus(quest.questID,QuestState.inProgress);
         player.UpdateCompletionStatus();
+        questsGiven++;
+        gaveQuest = true;
         hasTalked = true;
     }
 
-    public void OnTriggerEnter2D(Collider2D collision)
+
+    public void OnCollisionEnter2D(Collision2D collision)
     {
         int questIndex = 0;
-        foreach (var quest in giveableQuests)
+        Quest quest = giveableQuests[currentQuest];
+
+        if(CheckDependentQuests(collision.gameObject.GetComponent<CiscoTesting>(), quest, questIndex))
         {
-            if(CheckDependentQuests(collision.GetComponent<CiscoTesting>(), quest, questIndex))
+            //Enable first dialog talk
+            if (collision.gameObject.CompareTag("Player") && quest.questData.questState < QuestState.completed)
             {
-                //Enable first dialog talk
-                if (collision.CompareTag("Player") && !hasTalked)
-                {
-                    characterDialog[0].EnableDialog();
-                    for (int i = 0; i < giveableQuests.Count; i++)
-                    {
-                        GiveQuest(collision.GetComponent<CiscoTesting>(), 0);
-                    }
-
-                }
-                //Quest is completed and we need to go to the npc to end the quest
-                else if (collision.CompareTag("Player") && hasTalked)
+                characterDialog[currentQuest].EnableDialog();
+                if(!gaveQuest)
                 {
                     for (int i = 0; i < giveableQuests.Count; i++)
                     {
-                        if (quest.questData.questState == QuestState.completed)
-                        {
-                            //Complete the quest and enable the quest completion dialog
-                            collision.GetComponent<PlayerQuestSystem>().SetQuestStatus(quest.questID, QuestState.done);
-
-                            if(rewardItem != null)
-                            {
-                                if (collision.GetComponent<CiscoTesting>().items.ContainsKey(rewardItem))
-                                {
-                                    collision.GetComponent<CiscoTesting>().items[rewardItem]++;
-                                }
-                                else
-                                {
-                                    collision.GetComponent<CiscoTesting>().items.Add(rewardItem, 1);
-                                }
-                                Debug.Log("Gave a reward of " + rewardItem.Name);
-                            }
-                       
-                            for (int j = 0; j < quest.questData.requiredItems.Count; j++)
-                            {
-                                RequiredItem item = quest.questData.requiredItems[j];
-                                collision.GetComponent<CiscoTesting>().RemoveItems(item.item, item.requiredAmount);
-                            }
-                            Debug.Log("Finished Quest");
-                            characterDialog[1].EnableDialog();
-                        }
+                        GiveQuest(collision.gameObject.GetComponent<CiscoTesting>(), currentQuest);
                     }
                 }
             }
+            //Quest is completed and we need to go to the npc to end the quest
             else
             {
-                characterDialog[2].EnableDialog();
+                for (int i = 0; i < giveableQuests.Count; i++)
+                {
+                    if (quest.questData.questState == QuestState.completed)
+                    {
+                        //Complete the quest and enable the quest completion dialog
+                        collision.gameObject.GetComponent<PlayerQuestSystem>().SetQuestStatus(quest.questID, QuestState.done);
+                        gaveQuest = false;
+                        currentQuest++;
+
+                        if(rewardItem != null)
+                        {
+                            if (collision.gameObject.GetComponent<CiscoTesting>().items.ContainsKey(rewardItem))
+                            {
+                                collision.gameObject.GetComponent<CiscoTesting>().items[rewardItem]++;
+                            }
+                            else
+                            {
+                                collision.gameObject.GetComponent<CiscoTesting>().items.Add(rewardItem, 1);
+                            }
+                            Debug.Log("Gave a reward of " + rewardItem.Name);
+                        }
+                   
+                        for (int j = 0; j < quest.questData.requiredItems.Count; j++)
+                        {
+                            RequiredItem item = quest.questData.requiredItems[j];
+                            collision.gameObject.GetComponent<CiscoTesting>().RemoveItems(item.item, item.requiredAmount);
+                        }
+                        Debug.Log("Finished Quest");
+                        characterDialog[giveableQuests.Count].EnableDialog();
+                    }
+                }
             }
-            questIndex++;
+        }
+        else
+        {
+            characterDialog[giveableQuests.Count + 1].EnableDialog();
         }
     }
 

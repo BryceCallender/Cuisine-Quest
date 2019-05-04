@@ -39,12 +39,12 @@ public class Trident : Weapon {
     private void attackSecondary()
     {
         //Debug.Log("Fire");
-        GameObject projectile = Instantiate(Tridentin.gameObject, Tridentin.transform.position, Quaternion.identity);
-        projectile.GetComponent<Projectile>().SetLayer(gameObject.layer, Mesh.GetComponent<SpriteRenderer>().sortingOrder);
-        projectile.SetActive(true);
-        projectile.transform.right = transform.right;
-        projectile.transform.parent = null;
-        projectile.GetComponent<Rigidbody2D>().velocity = ProjectileSpeed * transform.right;
+        //GameObject projectile = Instantiate(Tridentin.gameObject, Tridentin.transform.position, Quaternion.identity);
+        //projectile.GetComponent<Projectile>().SetLayer(gameObject.layer, Mesh.GetComponent<SpriteRenderer>().sortingOrder);
+        //projectile.SetActive(true);
+        //projectile.transform.right = transform.right;
+        //projectile.transform.parent = null;
+        //projectile.GetComponent<Rigidbody2D>().velocity = ProjectileSpeed * transform.right;
     }
 
     public override void Attack(Vector2 PlayerDirection)

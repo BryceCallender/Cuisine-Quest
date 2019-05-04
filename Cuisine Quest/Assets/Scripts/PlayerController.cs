@@ -98,10 +98,12 @@ public class PlayerController : MonoBehaviour
             else if (cameraTransition && !playerCanMove)
             {
                 rb.velocity = cameraTransitionDirection * moveSpeed;
+                playerMoving = false;
             }
             else
             {
                 rb.velocity = Vector2.zero;
+                playerMoving = false;
                 //DirectionFacing = new Vector2(0, 0);
             }
 
@@ -123,6 +125,22 @@ public class PlayerController : MonoBehaviour
             }
             anim.SetBool("PlayerMoving", playerMoving);
 
+        }
+        else
+        {
+            Debug.Log("Stop moving");
+            playerMoving = false;
+            playerCanMove = false;
+
+            anim.SetFloat("MoveX", H_Axis);
+            anim.SetFloat("MoveY", V_Axis);
+
+            anim.SetFloat("LastMoveX", lastMove.x);
+            anim.SetFloat("LastMoveY", lastMove.y);
+
+            rb.velocity = Vector2.zero;
+
+            anim.SetBool("PlayerMoving", playerMoving);
         }
     }
 }           

@@ -23,6 +23,5 @@ MonoBehaviour:
     questState: 1
   DependentQuests:
   - {fileID: 11400000, guid: a14fee48ece5f1244af3e0f8d80c1385, type: 2}
-  - {fileID: 11400000, guid: 96506e99a4e40004abe9931d76ce8b83, type: 2}
-  questID: 0
+  questID: 4
   AreaNeeded: {fileID: 0}

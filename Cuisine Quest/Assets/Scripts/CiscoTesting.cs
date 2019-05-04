@@ -129,7 +129,7 @@ public class CiscoTesting : MonoBehaviour, ISaveable
         //bool primaryAttack = Input.GetMouseButtonDown(0);
         //bool secondaryAttack = secondaryAttackButton;
 
-        if (primaryAttackButtonDown && CurrentWeapon != null)
+        if (primaryAttackButtonDown && CurrentWeapon != null && playerController.playerCanMove)
         {
             CurrentWeapon.Attack(playerController.DirectionFacing);
         }
@@ -138,7 +138,7 @@ public class CiscoTesting : MonoBehaviour, ISaveable
         //{
         //    primaryAttack = true;
         //}
-        if (secondaryAttackButtonDown && CurrentWeapon != null)
+        if (secondaryAttackButtonDown && CurrentWeapon != null && playerController.playerCanMove)
         {
             CurrentWeapon.AttackSecondary(playerController.DirectionFacing, primaryAttackButton);
         }

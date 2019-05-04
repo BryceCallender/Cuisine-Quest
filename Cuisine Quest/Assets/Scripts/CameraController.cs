@@ -75,6 +75,7 @@ public class CameraController : MonoBehaviour
             Vector3 newPosition = Vector3.MoveTowards(transform.position, transitionDestination, TransitionSpeed * Time.deltaTime);
             transform.position = newPosition;
             Player.cameraTransition = true;
+            Player.playerCanMove = false;
 
             if(Vector3.Distance(transitionDestination, transform.position) < TransitionBuffer)
             {

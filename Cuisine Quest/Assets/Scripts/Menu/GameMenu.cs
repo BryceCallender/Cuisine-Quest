@@ -9,6 +9,8 @@ public class GameMenu : MonoBehaviour
     public TextMeshProUGUI potionCountText;
     public CiscoTesting player;
 
+    public Sprite tridentImage;
+
     private int potionCount;
 
     void Start()
@@ -31,20 +33,24 @@ public class GameMenu : MonoBehaviour
         potionCountText.SetText(string.Format("x{0}", potionCount));
         //The true in this statement allows this to get components in children
         //even if they are disabled on disabled gameobjects
+        if (player.CurrentWeapon == null)
+        {
+            return;
+        }
+
         weaponImage.sprite = player.CurrentWeapon.gameObject.GetComponentInChildren<SpriteRenderer>(true).sprite;
 
         switch (weaponImage.sprite.name)
         {
             case "Sword":
-                weaponImage.sprite = player.CurrentWeapon.gameObject.GetComponentInChildren<SpriteRenderer>(true).sprite;
                 descriptionText.gameObject.SetActive(false);
                 break;
-            case "Trident":
+            case "trident_1_55":
+                weaponImage.sprite = tridentImage;
                 descriptionText.gameObject.SetActive(false);
                 break;
             case "Knife":
                 descriptionText.gameObject.SetActive(true);
-                weaponImage.sprite = player.CurrentWeapon.gameObject.GetComponentInChildren<SpriteRenderer>(true).sprite;
                 descriptionText.SetText(string.Format("x{0}", player.CurrentWeapon.GetComponent<Knife>().KnifeCount));
                 break;
         }

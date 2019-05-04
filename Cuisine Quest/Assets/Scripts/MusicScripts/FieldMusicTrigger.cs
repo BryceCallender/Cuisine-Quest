@@ -10,14 +10,7 @@ public class FieldMusicTrigger : MonoBehaviour
 
         if (dot > 0)
         {
-            StartCoroutine(PlayFieldMusic());
+            AudioSourceController.Instance.StartCoroutine(AudioSourceController.Instance.PlayFieldMusic());
         }
-    }
-
-    IEnumerator PlayFieldMusic()
-    {
-        AudioSourceController.Instance.PlayAudio("FieldIntro");
-        yield return new WaitForSeconds(AudioSourceController.Instance.GetLengthOfCurrentSong());
-        AudioSourceController.Instance.PlayAudioLooped("FieldMusic");
     }
 }

@@ -32,7 +32,7 @@ public class DialogSystemController : MonoBehaviour
             skipTimer += Time.deltaTime;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && !isTyping)
+        if ((Input.GetKeyDown(KeyCode.Space) | Input.GetMouseButtonDown(0)) && !isTyping)
         {
             Debug.Log("Hit space");
             DisplayMessage();
@@ -88,7 +88,7 @@ public class DialogSystemController : MonoBehaviour
             //If the user hits space and the code is typing 
             //stop it. Set the text to empty, stop the coroutine 
             //and set the text directly to the message text.
-            if(Input.GetKeyDown(KeyCode.Space) && isTyping && skipTimer > timeTillSkip)
+            if((Input.GetKeyDown(KeyCode.Space) | Input.GetMouseButtonDown(0)) && isTyping && skipTimer > timeTillSkip)
             {
                 StopCoroutine(coroutine);
                 characterDialogText.text = message;
