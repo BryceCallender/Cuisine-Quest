@@ -80,6 +80,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PrefabTrident: {fileID: 114115719388811876, guid: 65c820c0335dea64c992026c3f5052d7,
     type: 2}
+  tridentItem: {fileID: 1524082380230740, guid: 36b2afa09c3d22a49a83ff08fdbc0e15,
+    type: 2}
 --- !u!212 &212495053585885208
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Dessert
   m_EditorClassIdentifier: 
   questData:
-    questName: Dessert
+    questName: Lemon Jello Shots
     description: 
     questType: 1
     requiredItems:
@@ -23,6 +23,5 @@ MonoBehaviour:
     questState: 0
   DependentQuests:
   - {fileID: 11400000, guid: a14fee48ece5f1244af3e0f8d80c1385, type: 2}
-  - {fileID: 11400000, guid: 00851405f49254c28ba66a7dbd2a3fd1, type: 2}
-  questID: 2
+  questID: 4
   AreaNeeded: {fileID: 0}

@@ -29,8 +29,8 @@ public class NPC : MonoBehaviour
     public Item rewardItem;
     [HideInInspector]
     public CharacterDialog[] characterDialog;
-    private DialogSystemController dialogSystemController;
-    private PlayerController playerMovement;
+    protected DialogSystemController dialogSystemController;
+    protected PlayerController playerMovement;
 
     void Start()
     {
@@ -39,7 +39,7 @@ public class NPC : MonoBehaviour
         playerMovement = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
     }
 
-    private void Update()
+    protected void Update()
     {
         if(dialogSystemController.isEmpty())
         {
@@ -61,42 +61,42 @@ public class NPC : MonoBehaviour
         hasTalked = true;
     }
 
-    public void OnTriggerEnter2D(Collider2D collision)
+    public virtual void OnCollisionEnter2D(Collision2D collision)
     {
         int questIndex = 0;
         foreach (var quest in giveableQuests)
         {
-            if(CheckDependentQuests(collision.GetComponent<CiscoTesting>(), quest, questIndex))
+            if(CheckDependentQuests(collision.gameObject.GetComponent<CiscoTesting>(), quest, questIndex))
             {
                 //Enable first dialog talk
-                if (collision.CompareTag("Player") && !hasTalked)
+                if (collision.gameObject.CompareTag("Player") && !hasTalked)
                 {
                     characterDialog[0].EnableDialog();
                     for (int i = 0; i < giveableQuests.Count; i++)
                     {
-                        GiveQuest(collision.GetComponent<CiscoTesting>(), 0);
+                        GiveQuest(collision.gameObject.GetComponent<CiscoTesting>(), 0);
                     }
 
                 }
                 //Quest is completed and we need to go to the npc to end the quest
-                else if (collision.CompareTag("Player") && hasTalked)
+                else if (collision.gameObject.CompareTag("Player") && hasTalked)
                 {
                     for (int i = 0; i < giveableQuests.Count; i++)
                     {
                         if (quest.questData.questState == QuestState.completed)
                         {
                             //Complete the quest and enable the quest completion dialog
-                            collision.GetComponent<PlayerQuestSystem>().SetQuestStatus(quest.questID, QuestState.done);
+                            collision.gameObject.GetComponent<PlayerQuestSystem>().SetQuestStatus(quest.questID, QuestState.done);
 
                             if(rewardItem != null)
                             {
-                                if (collision.GetComponent<CiscoTesting>().items.ContainsKey(rewardItem))
+                                if (collision.gameObject.GetComponent<CiscoTesting>().items.ContainsKey(rewardItem))
                                 {
-                                    collision.GetComponent<CiscoTesting>().items[rewardItem]++;
+                                    collision.gameObject.GetComponent<CiscoTesting>().items[rewardItem]++;
                                 }
                                 else
                                 {
-                                    collision.GetComponent<CiscoTesting>().items.Add(rewardItem, 1);
+                                    collision.gameObject.GetComponent<CiscoTesting>().items.Add(rewardItem, 1);
                                 }
                                 Debug.Log("Gave a reward of " + rewardItem.Name);
                             }
@@ -104,7 +104,7 @@ public class NPC : MonoBehaviour
                             for (int j = 0; j < quest.questData.requiredItems.Count; j++)
                             {
                                 RequiredItem item = quest.questData.requiredItems[j];
-                                collision.GetComponent<CiscoTesting>().RemoveItems(item.item, item.requiredAmount);
+                                collision.gameObject.GetComponent<CiscoTesting>().RemoveItems(item.item, item.requiredAmount);
                             }
                             Debug.Log("Finished Quest");
                             characterDialog[1].EnableDialog();

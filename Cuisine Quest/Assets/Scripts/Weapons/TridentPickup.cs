@@ -5,6 +5,7 @@ using UnityEngine;
 public class TridentPickup : MonoBehaviour {
 
     public Weapon PrefabTrident;
+    public GameObject tridentItem;
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
@@ -12,6 +13,7 @@ public class TridentPickup : MonoBehaviour {
         {
             Weapon newWeapon = Instantiate(PrefabTrident, collision.transform.position, Quaternion.identity);
             collision.GetComponent<CiscoTesting>().AddWeapon(newWeapon);
+            collision.GetComponent<CiscoTesting>().AddItem(tridentItem);
             Destroy(gameObject);
         }
     }
