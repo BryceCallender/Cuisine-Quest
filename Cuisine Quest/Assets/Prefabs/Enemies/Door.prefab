@@ -20,8 +20,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4011052153717228}
   - component: {fileID: 61709868837086718}
+  - component: {fileID: 114845679926576854}
+  - component: {fileID: 114556573514223584}
   - component: {fileID: 114385872766570802}
-  - component: {fileID: 212776627472697328}
+  - component: {fileID: 212680119291130464}
+  - component: {fileID: 95920015971169928}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -36,8 +39,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1418849649468838}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.919, y: 0.84, z: 36.21914}
-  m_LocalScale: {x: 24.74012, y: 2.5, z: 1}
+  m_LocalPosition: {x: -3.022, y: 0.808, z: 36.21914}
+  m_LocalScale: {x: 2.2, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -54,19 +57,37 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.00317798, y: -0.0023638457}
+  m_Offset: {x: 0.007445216, y: 0.0027704835}
   m_SpriteTilingProperty:
-    border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
+    border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.16, y: 0.16}
+    oldSize: {x: 0.984375, y: 0.25}
     newSize: {x: 0.16, y: 0.16}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.0813587, y: 0.13516635}
+  m_Size: {x: 0.91346645, y: 0.289428}
   m_EdgeRadius: 0
+--- !u!95 &95920015971169928
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1418849649468838}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9d33444b3292957408ea2feab2587023, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114385872766570802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -78,8 +99,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27287b62f43840d4abb3f17608520fd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  giveableQuests: []
+  hasTalked: 0
+  rewardItem: {fileID: 0}
+  characterDialog: []
   key: {fileID: 114490485229216108, guid: 9071ed8c506d02846868e3594e27e40e, type: 2}
---- !u!212 &212776627472697328
+--- !u!114 &114556573514223584
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1418849649468838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fa9117c37af9497da6cf837975d858f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialog:
+    name: 
+    messages:
+    - You open the door with your key
+--- !u!114 &114845679926576854
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1418849649468838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fa9117c37af9497da6cf837975d858f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialog:
+    name: 
+    messages:
+    - The Door is Locked
+--- !u!212 &212680119291130464
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -114,8 +169,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: fb5ab81e580ed144da93deb1fc022425, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

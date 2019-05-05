@@ -43,6 +43,9 @@ public class CiscoTesting : MonoBehaviour, ISaveable
     private int weaponsIndex = 0;
 
     public Potion potion;
+    public GameObject trident;
+
+    public GameObject tridentPickup;
 
     private PlayerQuestSystem playerQuestSystem;
     public bool CheckQuests = false;
@@ -72,7 +75,10 @@ public class CiscoTesting : MonoBehaviour, ISaveable
             items.Clear();
         }
 
-        
+        //if(Weapons[1] != null)
+        //{
+        //    Destroy(tridentPickup);
+        //} 
 	}
     bool primaryAttackButton = false;
     bool secondaryAttackButton = false;
@@ -175,7 +181,8 @@ public class CiscoTesting : MonoBehaviour, ISaveable
         SceneManager.LoadScene("DeathScene");
     }
 
-    public void ChangeLayer(int Layer, int orderInLayer){
+    public void ChangeLayer(int Layer, int orderInLayer)
+    {
 
         gameObject.layer = Layer;
         GetComponent<SpriteRenderer>().sortingOrder = GetComponent<SpriteRenderer>().sortingOrder + orderInLayer;
@@ -277,6 +284,14 @@ public class CiscoTesting : MonoBehaviour, ISaveable
             gameObjectItem.Type = item.item.itemType;
 
             items.Add(gameObjectItem, item.amount);
+
+            //if(item.item.name.Equals("Trident"))
+            //{
+            //    Debug.Log("Yeet");
+            //    GameObject weapon = Instantiate(trident, Vector3.zero, Quaternion.identity);
+            //    Weapons[1] = trident.GetComponent<Trident>();
+            //    weapon.transform.parent = transform;
+            //}
         }
     }
 

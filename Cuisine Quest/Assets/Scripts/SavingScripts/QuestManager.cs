@@ -38,4 +38,16 @@ public class QuestManager : MonoBehaviour
     {
         return quests;
     }
+
+    public bool finishedEveryQuest()
+    {
+        foreach(Quest quest in quests)
+        {
+            if(quest.questData.questState != QuestState.done)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 }

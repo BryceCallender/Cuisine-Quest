@@ -6,7 +6,7 @@ using UnityEngine;
 public class NPCState
 {
     public string name;
-    public bool hasTalked;
+    public int questNumber;
 }
 
 [System.Serializable]
@@ -27,24 +27,28 @@ public class NPC : MonoBehaviour
     public List<Quest> giveableQuests;
     public bool hasTalked;
     public Item rewardItem;
-    [HideInInspector]
-    public CharacterDialog[] characterDialog;
-    private DialogSystemController dialogSystemController;
-    private PlayerController playerMovement;
+
+    [SerializeField]
+    public CharacterDialog[] characterDialogs;
+    [SerializeField]
+    public CharacterDialog[] afterQuestDialogs;
+    public CharacterDialog cantGiveQuestDialog;
+
+    protected DialogSystemController dialogSystemController;
+    protected PlayerController playerMovement;
 
     private int questsGiven;
-    private int currentQuest;
+    public int currentQuest;
     private bool completedQuest;
     private bool gaveQuest;
 
     void Start()
     {
         dialogSystemController = FindObjectOfType<DialogSystemController>();
-        characterDialog = gameObject.GetComponents<CharacterDialog>();
         playerMovement = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
     }
 
-    private void Update()
+    protected void Update()
     {
         if(dialogSystemController.isEmpty())
         {
@@ -68,8 +72,7 @@ public class NPC : MonoBehaviour
         hasTalked = true;
     }
 
-
-    public void OnCollisionEnter2D(Collision2D collision)
+    public virtual void OnCollisionEnter2D(Collision2D collision)
     {
         int questIndex = 0;
         Quest quest = giveableQuests[currentQuest];
@@ -79,7 +82,7 @@ public class NPC : MonoBehaviour
             //Enable first dialog talk
             if (collision.gameObject.CompareTag("Player") && quest.questData.questState < QuestState.completed)
             {
-                characterDialog[currentQuest].EnableDialog();
+                characterDialogs[currentQuest].EnableDialog();
                 if(!gaveQuest)
                 {
                     for (int i = 0; i < giveableQuests.Count; i++)
@@ -99,6 +102,7 @@ public class NPC : MonoBehaviour
                         collision.gameObject.GetComponent<PlayerQuestSystem>().SetQuestStatus(quest.questID, QuestState.done);
                         gaveQuest = false;
                         currentQuest++;
+                        dialogSystemController.GetComponent<AudioSource>().Play();
 
                         if(rewardItem != null)
                         {
@@ -112,21 +116,23 @@ public class NPC : MonoBehaviour
                             }
                             Debug.Log("Gave a reward of " + rewardItem.Name);
                         }
-                   
+                        //normal thanks dialog
+                        afterQuestDialogs[currentQuest-1].EnableDialog();
+
                         for (int j = 0; j < quest.questData.requiredItems.Count; j++)
                         {
                             RequiredItem item = quest.questData.requiredItems[j];
                             collision.gameObject.GetComponent<CiscoTesting>().RemoveItems(item.item, item.requiredAmount);
                         }
                         Debug.Log("Finished Quest");
-                        characterDialog[giveableQuests.Count].EnableDialog();
+
                     }
                 }
             }
         }
         else
         {
-            characterDialog[giveableQuests.Count + 1].EnableDialog();
+            cantGiveQuestDialog.EnableDialog();
         }
     }
 
@@ -141,5 +147,4 @@ public class NPC : MonoBehaviour
         }
         return true;
     }
-
 }
