@@ -33,8 +33,6 @@ public class CameraController : MonoBehaviour
         // obtain camera component so we can modify its viewport
         Camera camera = Camera.main;
 
-        Debug.Log(camera.aspect);
-
         // if scaled height is less than current height, add letterbox
         if (scaleheight < 1.0f)
         {

@@ -25,14 +25,6 @@ public class DialogSystemController : MonoBehaviour
         dialogPopup.SetActive(false);
     }
 
-    private void Update()
-    {
-        if(isTyping)
-        {
-            skipTimer += Time.deltaTime;
-        }
-    }
-
     public void StartDialog(Dialog dialog)
     {
         messages.Clear();

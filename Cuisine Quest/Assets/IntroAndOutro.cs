@@ -1,53 +1,70 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 using System.IO;
+using UnityEngine.UI;
 
 public class IntroAndOutro : MonoBehaviour 
 {
     public GameObject ui;
     public TextMeshProUGUI screenText;
+    public Image image;
+    private QuestManager questManager;
+    private DialogSystemController dialogSystemController;
     [TextArea]
     public string intro;
     [TextArea]
     public string outro;
 
-    private Animator animator;
+    public Animator animator;
+
+    public CanvasGroup canvasGroup;
+
+    private bool finishedGame;
+    private bool stayZero;
 
     private void Start()
     {
-        animator = GetComponent<Animator>();
+        questManager = FindObjectOfType<QuestManager>();
+        dialogSystemController = FindObjectOfType<DialogSystemController>();
         if(!File.Exists(Path.Combine(Application.persistentDataPath,"PlayerItems.json")))
         {
             StartIntro();
         }
         else
         {
-            ui.SetActive(false);
+            stayZero = true;
+            canvasGroup.alpha = 0.0f;
+            image.enabled = false;
         }
-
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P))
+        if(!finishedGame)
         {
-            StartOutro();
+            if (questManager.finishedEveryQuest() && dialogSystemController.isEmpty())
+            {
+                finishedGame = true;
+                canvasGroup.alpha = 1.0f;
+                image.enabled = true;
+                StartOutro();
+            }
         }
     }
 
     public void StartIntro()
     {
+        canvasGroup.alpha = 1.0f;
         PauseMenu.paused = true;
         StartCoroutine(printText(true, intro));
-
     }
 
     public void StartOutro()
     {
+        animator.SetTrigger("End");
         PauseMenu.paused = true;
-        animator.SetTrigger("EndGame");
         StartCoroutine(printText(false, outro));
     }
 
@@ -64,14 +81,16 @@ public class IntroAndOutro : MonoBehaviour
 
         if(intro)
         {
+            yield return new WaitForSeconds(5.0f);
             animator.SetTrigger("BeginGame");
             screenText.text = string.Empty;
+            canvasGroup.alpha = 0.0f;
             PauseMenu.paused = false;
         }
         else
         {
-
+            yield return new WaitForSeconds(5.0f);
+            SceneManager.LoadScene("Credits");
         }
-
     }
 }

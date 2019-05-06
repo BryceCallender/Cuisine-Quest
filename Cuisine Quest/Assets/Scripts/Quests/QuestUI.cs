@@ -16,24 +16,10 @@ public class QuestUI : MonoBehaviour
     public int bottomScreenDisplacement = 145; //Nice number and part of it comes from how long the hearts on the screen is
     readonly Vector2 GUI_BOX_SIZE = new Vector2(200, 30);
 
-    //The amount of things for IMGUI to draw
-    int guiQuestcount;
-
-    // The position on of the scrolling viewport
-    private Vector2 scrollPosition = Vector2.zero;
-
-    float virtualWidth = 1280.0f;
-    float virtualHeight = 960.0f;
-    Matrix4x4 matrix;
-
     private void Awake()
     {
         questManager = FindObjectOfType<QuestManager>();
         playerQuestSystem = FindObjectOfType<PlayerQuestSystem>();
-
-        Debug.Log(uiImage.rectTransform.rect);
-
-        matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, new Vector3(Screen.width / virtualWidth, Screen.height / virtualHeight, 1.0f));
     }
 
     private void Update()
@@ -42,10 +28,6 @@ public class QuestUI : MonoBehaviour
         {
             showQuestUI = !showQuestUI;
         }
-
-        guiQuestcount = playerQuestSystem.GetActiveQuestCount();
-
-        Debug.Log(guiQuestcount);
     }
 
     private void OnGUI()
@@ -65,8 +47,6 @@ public class QuestUI : MonoBehaviour
                     (quest.questData.questState == QuestState.inProgress ||
                      (quest.questData.questState == QuestState.completed)))
                 {
-                    scrollPosition = GUI.BeginScrollView(new Rect(10, uiImage.rectTransform.rect.height + 25, 250, Screen.height - bottomScreenDisplacement), scrollPosition, new Rect(10, uiImage.rectTransform.rect.height + 25, 200, 100 * guiQuestcount),false,false);
-
                     //Draw the name of the quest
                     GUI.Label(new Rect(placeX, placeY, 100, 20), quest.questData.questName);
                     //Move the placement down by the offset indication

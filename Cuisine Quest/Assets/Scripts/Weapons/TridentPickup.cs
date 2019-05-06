@@ -13,7 +13,7 @@ public class TridentPickup : MonoBehaviour {
         {
             Weapon newWeapon = Instantiate(PrefabTrident, collision.transform.position, Quaternion.identity);
             newWeapon.name = "Trident";
-            collision.GetComponent<CiscoTesting>().AddWeapon(newWeapon);
+            collision.GetComponent<CiscoTesting>().Weapons[1].gameObject.SetActive(true);
             collision.GetComponent<CiscoTesting>().AddItem(tridentItem);
             Destroy(gameObject);
         }

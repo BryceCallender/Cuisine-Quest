@@ -68,17 +68,16 @@ public class CiscoTesting : MonoBehaviour, ISaveable
         if (File.Exists(Path.Combine(Application.persistentDataPath, "PlayerItems.json")))
         {
             InitDictionary();
-            Debug.Log("Found save file");
         }
         else
         {
             items.Clear();
         }
 
-        //if(Weapons[1] != null)
-        //{
-        //    Destroy(tridentPickup);
-        //} 
+        if(Weapons[1].gameObject.activeSelf)
+        {
+            Destroy(tridentPickup);
+        } 
 	}
     bool primaryAttackButton = false;
     bool secondaryAttackButton = false;
@@ -149,11 +148,6 @@ public class CiscoTesting : MonoBehaviour, ISaveable
             CurrentWeapon.AttackSecondary(playerController.DirectionFacing, primaryAttackButton);
         }
 
-        if(Input.GetKeyDown(KeyCode.Minus))
-        {
-            health.takeDamage(1);
-        }
-
         if(Input.GetKeyDown(KeyCode.E))
         {
             if(items[potion] > 0)
@@ -187,7 +181,8 @@ public class CiscoTesting : MonoBehaviour, ISaveable
         gameObject.layer = Layer;
         GetComponent<SpriteRenderer>().sortingOrder = GetComponent<SpriteRenderer>().sortingOrder + orderInLayer;
 
-        foreach(Weapon w in Weapons){
+        foreach(Weapon w in Weapons)
+        {
             w.gameObject.layer = Layer;
             w.Mesh.gameObject.layer = Layer;
             w.Mesh.GetComponent<SpriteRenderer>().sortingOrder = w.Mesh.GetComponent<SpriteRenderer>().sortingOrder + orderInLayer;
@@ -285,13 +280,10 @@ public class CiscoTesting : MonoBehaviour, ISaveable
 
             items.Add(gameObjectItem, item.amount);
 
-            //if(item.item.name.Equals("Trident"))
-            //{
-            //    Debug.Log("Yeet");
-            //    GameObject weapon = Instantiate(trident, Vector3.zero, Quaternion.identity);
-            //    Weapons[1] = trident.GetComponent<Trident>();
-            //    weapon.transform.parent = transform;
-            //}
+            if(item.item.name.Equals("Trident"))
+            {
+                Weapons[1].gameObject.SetActive(true);
+            }
         }
     }
 
