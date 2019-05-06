@@ -33,8 +33,6 @@ public class CameraController : MonoBehaviour
         // obtain camera component so we can modify its viewport
         Camera camera = Camera.main;
 
-        Debug.Log(camera.aspect);
-
         // if scaled height is less than current height, add letterbox
         if (scaleheight < 1.0f)
         {
@@ -75,6 +73,7 @@ public class CameraController : MonoBehaviour
             Vector3 newPosition = Vector3.MoveTowards(transform.position, transitionDestination, TransitionSpeed * Time.deltaTime);
             transform.position = newPosition;
             Player.cameraTransition = true;
+            Player.playerCanMove = false;
 
             if(Vector3.Distance(transitionDestination, transform.position) < TransitionBuffer)
             {
@@ -141,15 +140,17 @@ public class CameraController : MonoBehaviour
             transitionDestination += transform.position;
             Debug.Log(transitionDestination.ToString());
 
-            Player.cameraTransition = false;
+            //Player.cameraTransition = false;
             Player.playerCanMove = false;
 
+            Player.cameraTransitionDirection = direction;
+            Player.cameraTransition = true;
         }
         else
         {
             Player.cameraTransitionDirection = direction;
             Player.cameraTransition = true;
-            Debug.Log("Player Auto Move");
+
         }
     }
 }

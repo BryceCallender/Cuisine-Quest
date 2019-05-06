@@ -15,6 +15,7 @@ TagManager:
   - CameraController
   - Save
   - Animals
+  - EnemyTrigger
   layers:
   - Default
   - TransparentFX

@@ -20,8 +20,8 @@ MonoBehaviour:
       requiredAmount: 2
     - item: {fileID: 114266018502995966, guid: ceaa8d0fc44ae9045ba896b17dbbf57e, type: 2}
       requiredAmount: 3
-    questState: 0
+    questState: 3
   DependentQuests:
   - {fileID: 11400000, guid: 58f82cab45cfb48aeb82c3f03b11840c, type: 2}
-  questID: 5
+  questID: 4
   AreaNeeded: {fileID: 0}

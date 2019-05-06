@@ -107,7 +107,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1282455432396150}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -16.61, y: -23.88, z: 0}
+  m_LocalPosition: {x: -82.5, y: 18.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4610909556550678}
@@ -373,7 +373,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1282455432396150}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 00ae585524eea4a25802635357dd6e91, type: 3}
   m_Name: 
@@ -480,7 +480,9 @@ MonoBehaviour:
   - {fileID: 114693674146012156}
   - {fileID: 0}
   - {fileID: 114616064081812372}
-  potion: {fileID: 0}
+  potion: {fileID: 114139348241622228, guid: ca32ba52248d147a2a345e4ec371991b, type: 2}
+  trident: {fileID: 114115719388811876, guid: 65c820c0335dea64c992026c3f5052d7, type: 2}
+  tridentPickup: {fileID: 0}
   CheckQuests: 0
 --- !u!212 &212371850859404394
 SpriteRenderer:
@@ -608,7 +610,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 20
+  m_SortingOrder: 30
   m_Sprite: {fileID: 21300000, guid: b0b2f16222759374880706864c9f1ead, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

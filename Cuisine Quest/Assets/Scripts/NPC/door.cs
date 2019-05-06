@@ -15,7 +15,7 @@ public class door : NPC
         anim = GetComponent<Animator>();
         gate = GetComponent<BoxCollider2D>();
         dialogSystemController = FindObjectOfType<DialogSystemController>();
-        characterDialog = gameObject.GetComponents<CharacterDialog>();
+        cameraController = FindObjectOfType<CameraController>();
         playerMovement = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
     }
 	
@@ -27,17 +27,17 @@ public class door : NPC
         {
             if (collision.gameObject.GetComponent<CiscoTesting>().items == null)
             {
-                characterDialog[0].EnableDialog();
+                characterDialogs[0].EnableDialog();
             }
             else if (collision.gameObject.GetComponent<CiscoTesting>().items.ContainsKey(key))
             {
-                characterDialog[1].EnableDialog();
+                characterDialogs[1].EnableDialog();
                 anim.SetBool("Unlocked", true);
                 gate.enabled = false;
             }
             else
             {
-                characterDialog[0].EnableDialog();
+                characterDialogs[0].EnableDialog();
             }
         }
         

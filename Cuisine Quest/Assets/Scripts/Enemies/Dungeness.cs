@@ -38,6 +38,9 @@ public class Dungeness : EnemyAbstract {
     float xBoundMax = 6;
     float xBoundMin = -6;
 
+    public ParticleSystem[] RearBubbleSystem;
+    public DungenessBackWash MyBackWash;
+
     // Use this for initialization
     void Start () {
         targetPlayer();
@@ -114,21 +117,38 @@ public class Dungeness : EnemyAbstract {
         Target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
+    bool bubbleSet = true;
+    private void setRearBubbleSystem(bool state)
+    {
+        if(bubbleSet && !state || !bubbleSet && state)
+        {
+            foreach(ParticleSystem r in RearBubbleSystem)
+            {
+                r.enableEmission = state;
+            }
+            bubbleSet = state;
+            MyBackWash.gameObject.SetActive(state);
+        }
+        
+    }
 
     private void MoveRandom()
     {
         if (movementTarget == null) setRandomLocation();
         if(Vector3.Distance(movementTarget, transform.position) < 0.1)
         {
+            setRearBubbleSystem(false);
             setRandomLocation();
         }else if(Target.transform.position.y < transform.position.y)
         {
             float newY = Mathf.Clamp(Target.transform.position.y, yBoundMin + currentArea.y, yBoundMax + currentArea.y);
             movementTarget = new Vector2(movementTarget.x, newY);
             currentSpeed = BackingUpSpeed;
+            setRearBubbleSystem(true);
         }
         else
         {
+            setRearBubbleSystem(false);
             currentSpeed = MovementSpeed;
         }
         

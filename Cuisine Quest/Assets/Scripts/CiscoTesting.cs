@@ -43,6 +43,9 @@ public class CiscoTesting : MonoBehaviour, ISaveable
     private int weaponsIndex = 0;
 
     public Potion potion;
+    public GameObject trident;
+
+    public GameObject tridentPickup;
 
     private PlayerQuestSystem playerQuestSystem;
     public bool CheckQuests = false;
@@ -65,14 +68,16 @@ public class CiscoTesting : MonoBehaviour, ISaveable
         if (File.Exists(Path.Combine(Application.persistentDataPath, "PlayerItems.json")))
         {
             InitDictionary();
-            Debug.Log("Found save file");
         }
         else
         {
             items.Clear();
         }
 
-        
+        if(Weapons[1].gameObject.activeSelf)
+        {
+            Destroy(tridentPickup);
+        } 
 	}
     bool primaryAttackButton = false;
     bool secondaryAttackButton = false;
@@ -129,7 +134,7 @@ public class CiscoTesting : MonoBehaviour, ISaveable
         //bool primaryAttack = Input.GetMouseButtonDown(0);
         //bool secondaryAttack = secondaryAttackButton;
 
-        if (primaryAttackButtonDown && CurrentWeapon != null)
+        if (primaryAttackButtonDown && CurrentWeapon != null && playerController.playerCanMove)
         {
             CurrentWeapon.Attack(playerController.DirectionFacing);
         }
@@ -138,14 +143,9 @@ public class CiscoTesting : MonoBehaviour, ISaveable
         //{
         //    primaryAttack = true;
         //}
-        if (secondaryAttackButtonDown && CurrentWeapon != null)
+        if (secondaryAttackButtonDown && CurrentWeapon != null && playerController.playerCanMove)
         {
             CurrentWeapon.AttackSecondary(playerController.DirectionFacing, primaryAttackButton);
-        }
-
-        if(Input.GetKeyDown(KeyCode.Minus))
-        {
-            health.takeDamage(1);
         }
 
         if(Input.GetKeyDown(KeyCode.E))
@@ -175,16 +175,28 @@ public class CiscoTesting : MonoBehaviour, ISaveable
         SceneManager.LoadScene("DeathScene");
     }
 
-    public void ChangeLayer(int Layer, int orderInLayer){
+    public void ChangeLayer(int Layer, int orderInLayer)
+    {
 
         gameObject.layer = Layer;
         GetComponent<SpriteRenderer>().sortingOrder = GetComponent<SpriteRenderer>().sortingOrder + orderInLayer;
 
-        foreach(Weapon w in Weapons){
-            w.gameObject.layer = Layer;
-            w.Mesh.gameObject.layer = Layer;
-            w.Mesh.GetComponent<SpriteRenderer>().sortingOrder = w.Mesh.GetComponent<SpriteRenderer>().sortingOrder + orderInLayer;
+        foreach (Weapon w in Weapons)
+        {
+            if (w)
+            {
+                w.gameObject.layer = Layer;
+                w.Mesh.gameObject.layer = Layer;
+                w.Mesh.GetComponent<SpriteRenderer>().sortingOrder = w.Mesh.GetComponent<SpriteRenderer>().sortingOrder + orderInLayer;
+            }
         }
+            
+        //foreach(Weapon w in Weapons)
+        //{
+        //    w.gameObject.layer = Layer;
+        //    w.Mesh.gameObject.layer = Layer;
+        //    w.Mesh.GetComponent<SpriteRenderer>().sortingOrder = w.Mesh.GetComponent<SpriteRenderer>().sortingOrder + orderInLayer;
+        //}
     }
     public void AddItem(GameObject item)
     {
@@ -277,6 +289,11 @@ public class CiscoTesting : MonoBehaviour, ISaveable
             gameObjectItem.Type = item.item.itemType;
 
             items.Add(gameObjectItem, item.amount);
+
+            if(item.item.name.Equals("Trident"))
+            {
+                Weapons[1].gameObject.SetActive(true);
+            }
         }
     }
 
@@ -299,13 +316,21 @@ public class CiscoTesting : MonoBehaviour, ISaveable
 
         if (weaponSelectIncreaseDown)
         {
-            weaponsIndex = (weaponsIndex + 1) % Weapons.Length;
+            do
+            {
+                weaponsIndex = (weaponsIndex + 1) % Weapons.Length;
+            } while (Weapons[weaponsIndex] == null);
+
             CurrentWeapon = Weapons[weaponsIndex];
         }
         if (weaponSelectDecreaseDown)
         {
-            weaponsIndex = (weaponsIndex - 1) ;
-            if (weaponsIndex < 0) weaponsIndex = Weapons.Length - 1;
+            do
+            {
+                weaponsIndex = (weaponsIndex - 1) ;
+                if (weaponsIndex < 0) weaponsIndex = Weapons.Length - 1;
+            } while (Weapons[weaponsIndex] == null);
+             
             CurrentWeapon = Weapons[weaponsIndex];
         }
 
