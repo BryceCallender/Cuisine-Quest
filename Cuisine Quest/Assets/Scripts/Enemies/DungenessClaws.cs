@@ -21,4 +21,12 @@ public class DungenessClaws : HealthSystem {
         }
     }
 
+    public void OnCollisionStay2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Player") && DH.GetComponent<Dungeness>().CurrentBehavior != Dungeness.Behaviors.Attack)
+        {
+            collision.transform.position += new Vector3(0, 0.2f, 0);
+        }
+    }
+
 }
