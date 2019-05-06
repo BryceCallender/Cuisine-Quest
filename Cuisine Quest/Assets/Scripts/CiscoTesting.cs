@@ -303,13 +303,21 @@ public class CiscoTesting : MonoBehaviour, ISaveable
 
         if (weaponSelectIncreaseDown)
         {
-            weaponsIndex = (weaponsIndex + 1) % Weapons.Length;
+            do
+            {
+                weaponsIndex = (weaponsIndex + 1) % Weapons.Length;
+            } while (Weapons[weaponsIndex] == null);
+
             CurrentWeapon = Weapons[weaponsIndex];
         }
         if (weaponSelectDecreaseDown)
         {
-            weaponsIndex = (weaponsIndex - 1) ;
-            if (weaponsIndex < 0) weaponsIndex = Weapons.Length - 1;
+            do
+            {
+                weaponsIndex = (weaponsIndex - 1) ;
+                if (weaponsIndex < 0) weaponsIndex = Weapons.Length - 1;
+            } while (Weapons[weaponsIndex] == null);
+             
             CurrentWeapon = Weapons[weaponsIndex];
         }
 

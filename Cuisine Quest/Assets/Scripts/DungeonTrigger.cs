@@ -15,6 +15,8 @@ public class DungeonTrigger : MonoBehaviour {
 
     public AreaAbstract[] DungeonAreas;
     public AreaAbstract[] OverWorld;
+
+    public GameObject DungeonRoof;
     
 	// Use this for initialization
 	void Start () {
@@ -38,6 +40,7 @@ public class DungeonTrigger : MonoBehaviour {
                 //Vector3 cameraLocation = new Vector3(MyOverworldCoordinate.x, MyOverworldCoordinate.y, Camera.main.transform.position.z);
                 SetAreaColliders(false, true);
                 GameObject.FindGameObjectWithTag("LevelHandler").GetComponent<LevelHandler>().TeleportPlayer(EgressLocation.name, PlayerEgressLocation);
+                DungeonRoof.SetActive(true);
                 AudioSourceController.Instance.PlayAudioLooped("FieldMusic");
             }
             else if(playerDirection > 0)
@@ -45,6 +48,7 @@ public class DungeonTrigger : MonoBehaviour {
                 //Vector3 cameraLocation = new Vector3(MyDungeonCoordinate.x, MyDungeonCoordinate.y, Camera.main.transform.position.z);
                 SetAreaColliders(true, false);
                 GameObject.FindGameObjectWithTag("LevelHandler").GetComponent<LevelHandler>().TeleportPlayer(IngressLocation.name,  PlayerIngressLocation);
+                DungeonRoof.SetActive(false);
                 AudioSourceController.Instance.PlayAudioLooped("Dungeon");
             }
         }

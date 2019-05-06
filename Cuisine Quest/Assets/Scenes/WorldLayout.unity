@@ -1291,6 +1291,73 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MyArea: {fileID: 11400000, guid: ecee8ebcc289743f89a357cb53a6210d, type: 2}
   ToLoad: []
+--- !u!1001 &320608989
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4547144761019222, guid: 689b8890b46e745208ddf10fada177de, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -2.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4547144761019222, guid: 689b8890b46e745208ddf10fada177de, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -19.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 4547144761019222, guid: 689b8890b46e745208ddf10fada177de, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4547144761019222, guid: 689b8890b46e745208ddf10fada177de, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4547144761019222, guid: 689b8890b46e745208ddf10fada177de, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4547144761019222, guid: 689b8890b46e745208ddf10fada177de, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4547144761019222, guid: 689b8890b46e745208ddf10fada177de, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4547144761019222, guid: 689b8890b46e745208ddf10fada177de, type: 2}
+      propertyPath: m_RootOrder
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 1002158166846172, guid: 689b8890b46e745208ddf10fada177de, type: 2}
+      propertyPath: m_Name
+      value: DungeonDoor (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4547144761019222, guid: 689b8890b46e745208ddf10fada177de, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4547144761019222, guid: 689b8890b46e745208ddf10fada177de, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4547144761019222, guid: 689b8890b46e745208ddf10fada177de, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1002158166846172, guid: 689b8890b46e745208ddf10fada177de, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 689b8890b46e745208ddf10fada177de, type: 2}
+  m_IsPrefabAsset: 0
+--- !u!1 &320608990 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1002158166846172, guid: 689b8890b46e745208ddf10fada177de,
+    type: 2}
+  m_PrefabInternal: {fileID: 320608989}
 --- !u!1001 &324321208
 Prefab:
   m_ObjectHideFlags: 0
@@ -1853,6 +1920,11 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 7, y: 3.8176231}
   m_EdgeRadius: 0
+--- !u!1 &419712490 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1694124621005180, guid: eee8eb9f54960754fb14624071f93a75,
+    type: 2}
+  m_PrefabInternal: {fileID: 683110932}
 --- !u!1001 &419740631
 Prefab:
   m_ObjectHideFlags: 0
@@ -2177,6 +2249,57 @@ Tilemap:
   m_CorrespondingSourceObject: {fileID: 8195094280405694822, guid: eee8eb9f54960754fb14624071f93a75,
     type: 2}
   m_PrefabInternal: {fileID: 683110932}
+--- !u!1001 &547512052
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4547144761019222, guid: 689b8890b46e745208ddf10fada177de, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -10.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 4547144761019222, guid: 689b8890b46e745208ddf10fada177de, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -23.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 4547144761019222, guid: 689b8890b46e745208ddf10fada177de, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4547144761019222, guid: 689b8890b46e745208ddf10fada177de, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4547144761019222, guid: 689b8890b46e745208ddf10fada177de, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4547144761019222, guid: 689b8890b46e745208ddf10fada177de, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4547144761019222, guid: 689b8890b46e745208ddf10fada177de, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4547144761019222, guid: 689b8890b46e745208ddf10fada177de, type: 2}
+      propertyPath: m_RootOrder
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 1002158166846172, guid: 689b8890b46e745208ddf10fada177de, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 689b8890b46e745208ddf10fada177de, type: 2}
+  m_IsPrefabAsset: 0
+--- !u!1 &547512053 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1002158166846172, guid: 689b8890b46e745208ddf10fada177de,
+    type: 2}
+  m_PrefabInternal: {fileID: 547512052}
 --- !u!1001 &599691672
 Prefab:
   m_ObjectHideFlags: 0
@@ -2342,6 +2465,11 @@ Prefab:
       propertyPath: OverWorld.Array.data[3]
       value: 
       objectReference: {fileID: 61948048}
+    - target: {fileID: 114626944369769590, guid: f8e50decfe1244f4799653ccfc47c405,
+        type: 2}
+      propertyPath: DungeonRoof
+      value: 
+      objectReference: {fileID: 419712490}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8e50decfe1244f4799653ccfc47c405, type: 2}
   m_IsPrefabAsset: 0
@@ -3164,7 +3292,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4724441278353164, guid: 98fa089a631ba9548ac952d1d67ca6fe, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -28
+      value: -27.34
       objectReference: {fileID: 0}
     - target: {fileID: 4724441278353164, guid: 98fa089a631ba9548ac952d1d67ca6fe, type: 2}
       propertyPath: m_LocalPosition.z
@@ -3574,6 +3702,11 @@ Prefab:
       propertyPath: m_TagString
       value: Area
       objectReference: {fileID: 0}
+    - target: {fileID: 114626944369769590, guid: f8e50decfe1244f4799653ccfc47c405,
+        type: 2}
+      propertyPath: DungeonRoof
+      value: 
+      objectReference: {fileID: 419712490}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8e50decfe1244f4799653ccfc47c405, type: 2}
   m_IsPrefabAsset: 0
@@ -5806,6 +5939,11 @@ MonoBehaviour:
   ToLoad:
   - Prefab: {fileID: 1174812945312316, guid: 98fa089a631ba9548ac952d1d67ca6fe, type: 2}
     MyLocation: {x: 0, y: -2}
+  Doors:
+  - {fileID: 547512053}
+  - {fileID: 320608990}
+  DoorOpenDelayTime: 0.5
+  Enemies: []
 --- !u!1 &2039434607
 GameObject:
   m_ObjectHideFlags: 0

@@ -87,7 +87,7 @@ public abstract class AreaAbstract : MonoBehaviour
             }
             else
             {
-                Debug.Log("Error in Dungeon Bridge Loading");
+                //Debug.Log("Error in Dungeon Bridge Loading");
             }
         }
 

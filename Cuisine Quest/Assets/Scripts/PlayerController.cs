@@ -95,14 +95,7 @@ public class PlayerController : MonoBehaviour
                     DirectionFacing = new Vector2(0, -1);
                 }
             }
-            else if (cameraTransition && !playerCanMove)
-            {
-                rb.velocity = cameraTransitionDirection * moveSpeed;
-                anim.SetFloat("MoveX", 0);
-                anim.SetFloat("MoveY", 0);
-                anim.SetFloat("LastMoveX", lastMove.x);
-                anim.SetFloat("LastMoveY", lastMove.y);
-            }
+
             else
             {
                 rb.velocity = Vector2.zero;
@@ -124,6 +117,17 @@ public class PlayerController : MonoBehaviour
             }
             anim.SetBool("PlayerMoving", playerMoving);
 
+        }else if (cameraTransition && !playerCanMove)
+        {
+            float transitionMoveSpeed = 0.1f;
+            if (cameraTransitionDirection.y > 0) transitionMoveSpeed = 0.25f;
+            else if (cameraTransitionDirection.y < 0) transitionMoveSpeed = 0.25f;
+            rb.velocity = cameraTransitionDirection * moveSpeed * transitionMoveSpeed;
+            Debug.Log("Player Auto Move at " + transitionMoveSpeed + " * moveSpeed");
+            anim.SetFloat("MoveX", cameraTransitionDirection.x);
+            anim.SetFloat("MoveY", cameraTransitionDirection.y);
+            anim.SetFloat("LastMoveX", lastMove.x);
+            anim.SetFloat("LastMoveY", lastMove.y);
         }
     }
 }           
