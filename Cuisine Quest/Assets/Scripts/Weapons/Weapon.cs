@@ -15,21 +15,19 @@ public abstract class Weapon : MonoBehaviour {
     public GameObject Mesh;
     public Collider2D AttackBox;
 
-    protected BoxCollider2D weaponCollider;
-
-    void Start()
-    {
-        weaponCollider = GetComponent<BoxCollider2D>();
-        weaponCollider.enabled = false;
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         HealthSystem health = collision.GetComponent<HealthSystem>();
-        if (health)
+        print(transform.parent.tag);
+        print(collision.tag);
+        if (health && !collision.CompareTag(transform.parent.tag))
         {
             health.takeDamage(WeaponPower);
             weaponTriggered(collision);
+        }
+        else
+        {
+            print("WE ARE The Same");
         }
     }
 

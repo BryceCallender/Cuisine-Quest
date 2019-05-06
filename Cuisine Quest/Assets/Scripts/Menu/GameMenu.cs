@@ -5,9 +5,12 @@ using TMPro;
 public class GameMenu : MonoBehaviour
 {
     public Image weaponImage;
+    public Sprite lockSprite;
     public TextMeshProUGUI descriptionText;
     public TextMeshProUGUI potionCountText;
     public CiscoTesting player;
+
+    public Sprite tridentImage;
 
     private int potionCount;
 
@@ -31,18 +34,34 @@ public class GameMenu : MonoBehaviour
         potionCountText.SetText(string.Format("x{0}", potionCount));
         //The true in this statement allows this to get components in children
         //even if they are disabled on disabled gameobjects
+        if (player.CurrentWeapon == null)
+        {
+            return;
+        }
+
         weaponImage.sprite = player.CurrentWeapon.gameObject.GetComponentInChildren<SpriteRenderer>(true).sprite;
 
-        switch(weaponImage.sprite.name)
+        if(player.CurrentWeapon.isActiveAndEnabled)
         {
-            case "Sword":
-            case "Trident":
-                descriptionText.gameObject.SetActive(false);
-                break;
-            case "Knife":
-                descriptionText.gameObject.SetActive(true);
-                descriptionText.SetText(string.Format("x{0}", player.CurrentWeapon.GetComponent<Knife>().KnifeCount));
-                break;
+            switch (weaponImage.sprite.name)
+            {
+                case "Sword":
+                    descriptionText.gameObject.SetActive(false);
+                    break;
+                case "trident_1_55":
+                    weaponImage.sprite = tridentImage;
+                    descriptionText.gameObject.SetActive(false);
+                    break;
+                case "Knife":
+                    descriptionText.gameObject.SetActive(true);
+                    descriptionText.SetText(string.Format("x{0}", player.CurrentWeapon.GetComponent<Knife>().KnifeCount));
+                    break;
+            }
+        }
+        else
+        {
+            weaponImage.sprite = lockSprite;
+            descriptionText.gameObject.SetActive(false);
         }
 	}
 }

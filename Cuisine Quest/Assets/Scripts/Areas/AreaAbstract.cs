@@ -85,10 +85,6 @@ public abstract class AreaAbstract : MonoBehaviour
             {
                 PlayerEnterDirection(new Vector2(0, -1));
             }
-            else
-            {
-                //Debug.Log("Error in Dungeon Bridge Loading");
-            }
         }
 
     }

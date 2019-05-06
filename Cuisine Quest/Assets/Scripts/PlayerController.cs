@@ -95,24 +95,32 @@ public class PlayerController : MonoBehaviour
                     DirectionFacing = new Vector2(0, -1);
                 }
             }
-
+//             else if (cameraTransition && !playerCanMove)
+//             {
+//                 rb.velocity = cameraTransitionDirection * moveSpeed;
+//                 playerMoving = false;
+//             }
             else
             {
                 rb.velocity = Vector2.zero;
+                playerMoving = false;
                 //DirectionFacing = new Vector2(0, 0);
             }
 
             if (previousFacing != DirectionFacing)
             {
-                if (GetComponent<CiscoTesting>().CurrentWeapon.AttackAbort())
+                if(GetComponent<CiscoTesting>().CurrentWeapon)
                 {
-                    anim.SetFloat("MoveX", H_Axis);
-                    anim.SetFloat("MoveY", V_Axis);
+                    if (GetComponent<CiscoTesting>().CurrentWeapon.AttackAbort())
+                    {
+                        anim.SetFloat("MoveX", H_Axis);
+                        anim.SetFloat("MoveY", V_Axis);
 
-                    anim.SetFloat("LastMoveX", lastMove.x);
-                    anim.SetFloat("LastMoveY", lastMove.y);
+                        anim.SetFloat("LastMoveX", lastMove.x);
+                        anim.SetFloat("LastMoveY", lastMove.y);
 
-                    previousFacing = DirectionFacing;
+                        previousFacing = DirectionFacing;
+                    }
                 }
             }
             anim.SetBool("PlayerMoving", playerMoving);
@@ -128,6 +136,22 @@ public class PlayerController : MonoBehaviour
             anim.SetFloat("MoveY", cameraTransitionDirection.y);
             anim.SetFloat("LastMoveX", lastMove.x);
             anim.SetFloat("LastMoveY", lastMove.y);
+        }
+        else
+        {
+            Debug.Log("Stop moving");
+            playerMoving = false;
+            playerCanMove = false;
+
+            anim.SetFloat("MoveX", H_Axis);
+            anim.SetFloat("MoveY", V_Axis);
+
+            anim.SetFloat("LastMoveX", lastMove.x);
+            anim.SetFloat("LastMoveY", lastMove.y);
+
+            rb.velocity = Vector2.zero;
+
+            anim.SetBool("PlayerMoving", playerMoving);
         }
     }
 }           
