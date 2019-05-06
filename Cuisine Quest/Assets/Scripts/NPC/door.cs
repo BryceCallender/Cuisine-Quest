@@ -15,6 +15,7 @@ public class door : NPC
         anim = GetComponent<Animator>();
         gate = GetComponent<BoxCollider2D>();
         dialogSystemController = FindObjectOfType<DialogSystemController>();
+        cameraController = FindObjectOfType<CameraController>();
         playerMovement = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
     }
 	

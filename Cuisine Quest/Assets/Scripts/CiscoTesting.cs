@@ -181,20 +181,22 @@ public class CiscoTesting : MonoBehaviour, ISaveable
         gameObject.layer = Layer;
         GetComponent<SpriteRenderer>().sortingOrder = GetComponent<SpriteRenderer>().sortingOrder + orderInLayer;
 
-//         foreach(Weapon w in Weapons){
-//             if (w)
-//             {
-//                 w.gameObject.layer = Layer;
-//                 w.Mesh.gameObject.layer = Layer;
-//                 w.Mesh.GetComponent<SpriteRenderer>().sortingOrder = w.Mesh.GetComponent<SpriteRenderer>().sortingOrder + orderInLayer;
-//             }
-            
-        foreach(Weapon w in Weapons)
+        foreach (Weapon w in Weapons)
         {
-            w.gameObject.layer = Layer;
-            w.Mesh.gameObject.layer = Layer;
-            w.Mesh.GetComponent<SpriteRenderer>().sortingOrder = w.Mesh.GetComponent<SpriteRenderer>().sortingOrder + orderInLayer;
+            if (w)
+            {
+                w.gameObject.layer = Layer;
+                w.Mesh.gameObject.layer = Layer;
+                w.Mesh.GetComponent<SpriteRenderer>().sortingOrder = w.Mesh.GetComponent<SpriteRenderer>().sortingOrder + orderInLayer;
+            }
         }
+            
+        //foreach(Weapon w in Weapons)
+        //{
+        //    w.gameObject.layer = Layer;
+        //    w.Mesh.gameObject.layer = Layer;
+        //    w.Mesh.GetComponent<SpriteRenderer>().sortingOrder = w.Mesh.GetComponent<SpriteRenderer>().sortingOrder + orderInLayer;
+        //}
     }
     public void AddItem(GameObject item)
     {

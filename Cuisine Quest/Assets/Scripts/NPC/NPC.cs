@@ -36,6 +36,7 @@ public class NPC : MonoBehaviour
 
     protected DialogSystemController dialogSystemController;
     protected PlayerController playerMovement;
+    protected CameraController cameraController;
 
     private int questsGiven;
     public int currentQuest;
@@ -44,13 +45,14 @@ public class NPC : MonoBehaviour
 
     void Start()
     {
+        cameraController = FindObjectOfType<CameraController>();
         dialogSystemController = FindObjectOfType<DialogSystemController>();
         playerMovement = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
     }
 
     protected void Update()
     {
-        if(dialogSystemController.isEmpty())
+        if(dialogSystemController.isEmpty() && !cameraController.GetTransitioning())
         {
             playerMovement.playerCanMove = true;
         }

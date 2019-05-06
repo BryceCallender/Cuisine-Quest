@@ -877,7 +877,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: {fileID: 114437510813712460}
   speed: 0
-  drops: []
+  drops:
+  - Item: {fileID: 1254725443601532, guid: a89bdf17cf6235c4aaa3434a3de2dd41, type: 2}
+    dropRate: 100
   CurrentBehavior: 0
   Target: {fileID: 0}
   MovementSpeed: 1

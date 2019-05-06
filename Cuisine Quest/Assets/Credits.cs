@@ -4,9 +4,17 @@ using UnityEngine;
 
 public class Credits : MonoBehaviour 
 {
+    public GameObject credits;
+    public int speed;
+
     private void Start()
     {
         StartCoroutine(PlayCredits());
+    }
+
+    private void Update()
+    {
+        credits.transform.Translate(Vector3.up * Time.deltaTime * speed);
     }
 
     IEnumerator PlayCredits()

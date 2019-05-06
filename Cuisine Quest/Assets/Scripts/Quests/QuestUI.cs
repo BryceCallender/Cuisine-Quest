@@ -81,9 +81,6 @@ public class QuestUI : MonoBehaviour
 
                     //Move the placement down by the offset indication
                     placeY += offset + (padding * 2);
-
-                    // End the scroll view that we began above.
-                    GUI.EndScrollView();
                 }
             }
         }

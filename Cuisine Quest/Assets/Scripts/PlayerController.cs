@@ -124,8 +124,8 @@ public class PlayerController : MonoBehaviour
                 }
             }
             anim.SetBool("PlayerMoving", playerMoving);
-
-        }else if (cameraTransition && !playerCanMove)
+        }
+        else if (cameraTransition && !playerCanMove)
         {
             float transitionMoveSpeed = 0.1f;
             if (cameraTransitionDirection.y > 0) transitionMoveSpeed = 0.25f;
@@ -137,21 +137,21 @@ public class PlayerController : MonoBehaviour
             anim.SetFloat("LastMoveX", lastMove.x);
             anim.SetFloat("LastMoveY", lastMove.y);
         }
-        else
-        {
-            Debug.Log("Stop moving");
-            playerMoving = false;
-            playerCanMove = false;
+        //else
+        //{
+        //    Debug.Log("Stop moving");
+        //    playerMoving = false;
+        //    playerCanMove = false;
 
-            anim.SetFloat("MoveX", H_Axis);
-            anim.SetFloat("MoveY", V_Axis);
+        //    anim.SetFloat("MoveX", H_Axis);
+        //    anim.SetFloat("MoveY", V_Axis);
 
-            anim.SetFloat("LastMoveX", lastMove.x);
-            anim.SetFloat("LastMoveY", lastMove.y);
+        //    anim.SetFloat("LastMoveX", lastMove.x);
+        //    anim.SetFloat("LastMoveY", lastMove.y);
 
-            rb.velocity = Vector2.zero;
+        //    rb.velocity = Vector2.zero;
 
-            anim.SetBool("PlayerMoving", playerMoving);
-        }
+        //    anim.SetBool("PlayerMoving", playerMoving);
+        //}
     }
 }           
