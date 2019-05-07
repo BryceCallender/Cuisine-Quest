@@ -8,7 +8,6 @@ public class DisableCredits : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("OOF");
         collision.gameObject.SetActive(false);
         quitButton.gameObject.SetActive(true);
     }

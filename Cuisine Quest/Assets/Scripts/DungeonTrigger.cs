@@ -41,7 +41,6 @@ public class DungeonTrigger : MonoBehaviour {
                 SetAreaColliders(false, true);
                 GameObject.FindGameObjectWithTag("LevelHandler").GetComponent<LevelHandler>().TeleportPlayer(EgressLocation.name, PlayerEgressLocation);
                 DungeonRoof.SetActive(true);
-//                 AudioSourceController.Instance.PlayAudioLooped("FieldMusic");
                 AudioSourceController.Instance.StartCoroutine(AudioSourceController.Instance.PlayFieldMusic());
             }
             else if(playerDirection > 0)
@@ -50,6 +49,7 @@ public class DungeonTrigger : MonoBehaviour {
                 SetAreaColliders(true, false);
                 GameObject.FindGameObjectWithTag("LevelHandler").GetComponent<LevelHandler>().TeleportPlayer(IngressLocation.name,  PlayerIngressLocation);
                 DungeonRoof.SetActive(false);
+                AudioSourceController.Instance.StopAllCoroutines();
                 AudioSourceController.Instance.PlayAudioLooped("Dungeon");
             }
         }

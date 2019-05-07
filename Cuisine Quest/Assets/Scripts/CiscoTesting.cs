@@ -51,6 +51,7 @@ public class CiscoTesting : MonoBehaviour, ISaveable
     public bool CheckQuests = false;
     public Dictionary<Item, int> items;
     private PlayerController playerController;
+    public GameObject saveMenu;
 
     // Use this for initialization
     void Start ()
@@ -86,7 +87,7 @@ public class CiscoTesting : MonoBehaviour, ISaveable
     // Update is called once per frame
     void Update ()
     {
-        if(PauseMenu.paused)
+        if(PauseMenu.paused || saveMenu.activeSelf)
         {
             return;
         }

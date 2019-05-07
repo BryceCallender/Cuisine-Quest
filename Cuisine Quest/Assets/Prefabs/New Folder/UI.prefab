@@ -645,8 +645,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1911495319521090}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 376.12933, y: 160.35295, z: 11.419055}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 752.25867, y: 320.7059, z: 22.83811}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224942148897571990}
@@ -1033,8 +1033,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: a454050719005b444b59a84eaafba779, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1963,8 +1963,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: a454050719005b444b59a84eaafba779, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -2269,7 +2269,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 90a2dde0942123c4ebb9c4af580c5818, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2438,8 +2438,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2476,7 +2476,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 30.865898, y: 0, z: 0, w: 0}
+  m_margin: {x: 89.40105, y: 90.72916, z: 105.36308, w: 87.8025}
   m_textInfo:
     textComponent: {fileID: 114866510136165430}
     characterCount: 0
@@ -2668,7 +2668,7 @@ MonoBehaviour:
     lineCount: 0
     pageCount: 0
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -2840,14 +2840,15 @@ MonoBehaviour:
   ui: {fileID: 1037910522395942}
   screenText: {fileID: 114866510136165430}
   image: {fileID: 114951841982484190}
-  intro: "Dear Journal,\r\n\nAfter a month at sea I have finally found new land that
-    I have never explored. This foreign place seems to be called Broigord by the locals.
-    It has been years since I left home to satisfy my ever-growing curiosity of the
-    world. I want to learn about different cultures, the diversity of people, and
-    all the wonderful cuisines they have to offer. I have set camp just east of a
-    small town but running low on resources. Hopefully I can pick up jobs in town
+  intro: "Dear Journal,\r\n\r\nAfter a month at sea I have finally found new land
+    that I have never explored. This foreign place seems to be called Broigord by
+    the locals. It has been years since I left home to satisfy my ever-growing curiosity
+    of the world. I want to learn about different cultures, the diversity of people,
+    and all the wonderful cuisines they have to offer. I have set camp just east of
+    a small town but running low on resources. Hopefully I can pick up jobs in town
     to buy the materials I need to continue my adventure. I am excited to see what
-    the land of Broigord has to offer me. \r\n\n-Cisco\r\n"
+    the land of Broigord has to offer me. If I ever need to save my progress I know
+    the star light sources are where I must go.\n\n-Cisco\r\n"
   outro: "Dear Journal,\n \r\nMy time in this town has been wonderful. I was able
     to restock on the stuff I need to continue my adventure. Working with the chef
     brought me more adventures that was in search of since leaving home. The chef
@@ -3011,7 +3012,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 1a5d8785d80a4ee42a2a4c8632436dc0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3347,7 +3348,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}

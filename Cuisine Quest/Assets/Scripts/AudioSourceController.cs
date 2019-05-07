@@ -43,7 +43,6 @@ public class AudioSourceController : MonoBehaviour
 
     public void PlayAudio(string name)
     {
-        StopAllCoroutines();
         audioSource.clip = audioClipSources[name];
         audioSource.loop = false;
         audioSource.Play();
@@ -51,7 +50,6 @@ public class AudioSourceController : MonoBehaviour
 
     public void PlayAudioLooped(string name)
     {
-        StopAllCoroutines();
         audioSource.clip = audioClipSources[name];
         audioSource.loop = true;
         audioSource.Play();
@@ -75,9 +73,10 @@ public class AudioSourceController : MonoBehaviour
     public IEnumerator PlayFieldMusic()
     {
         PlayAudio("FieldIntro");
-        yield return new WaitForSeconds(GetLengthOfCurrentSong());
+        while (audioSource.isPlaying)
+        {
+            yield return null;
+        }
         PlayAudioLooped("FieldMusic");
     }
-
-
 }

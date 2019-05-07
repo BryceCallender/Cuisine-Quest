@@ -12,9 +12,9 @@ public class IntroAndOutro : MonoBehaviour
     public Image image;
     private QuestManager questManager;
     private DialogSystemController dialogSystemController;
-    [TextArea]
+    [TextArea(1,20)]
     public string intro;
-    [TextArea]
+    [TextArea(1,20)]
     public string outro;
 
     public Animator animator;
@@ -22,7 +22,6 @@ public class IntroAndOutro : MonoBehaviour
     public CanvasGroup canvasGroup;
 
     private bool finishedGame;
-    private bool stayZero;
 
     private void Start()
     {
@@ -34,7 +33,6 @@ public class IntroAndOutro : MonoBehaviour
         }
         else
         {
-            stayZero = true;
             canvasGroup.alpha = 0.0f;
             image.enabled = false;
         }

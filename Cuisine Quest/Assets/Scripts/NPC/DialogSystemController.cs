@@ -49,7 +49,6 @@ public class DialogSystemController : MonoBehaviour
             Debug.Log("No Messages");
             animator.SetBool("isOpen", false);
             StartPlayerMovement();
-            isTyping = false;
             float time = animator.GetCurrentAnimatorStateInfo(0).length;
             //Turns off the dialog box after the animation length is done
             //So the engine doesnt have to worry about rendering. 
