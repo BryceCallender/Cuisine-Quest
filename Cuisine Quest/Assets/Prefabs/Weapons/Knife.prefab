@@ -107,8 +107,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eb0cbc38813db543a0af8b6021f0477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponPower: 4
+  WeaponPower: 1
   Mesh: {fileID: 1504176483828512}
+  AttackBox: {fileID: 0}
   KnifeCount: 1
   KnifeThrowingSpeed: 20
   ThrowingKnife: {fileID: 1667652139356886, guid: 35b8de0b58955b34ca309e3a1cc59bcb,

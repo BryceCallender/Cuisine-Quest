@@ -12,6 +12,7 @@ public class NPCSavingState : MonoBehaviour, ISaveable
 
     private void Start()
     {
+        SaveSystem.Instance.AddSaveableObject(this);
         filePath = Path.Combine(Application.persistentDataPath, fileName);
 
         npcStates = new List<NPCState>();
@@ -37,7 +38,7 @@ public class NPCSavingState : MonoBehaviour, ISaveable
 
         for (int i = 0; i < npcStates.Count; i++)
         {
-            npcs[i].hasTalked = npcStates[i].hasTalked;
+            npcs[i].currentQuest = npcStates[i].questNumber;
         }
 
     }
@@ -46,7 +47,7 @@ public class NPCSavingState : MonoBehaviour, ISaveable
     {
         for(int i = 0; i < npcs.Count; i++)
         {
-            npcStates[i].hasTalked = npcs[i].hasTalked;
+            npcStates[i].questNumber = npcs[i].currentQuest;
         }
         JsonArrayHandler<NPCState>.WriteJsonFile(filePath, npcStates);
     }
@@ -59,8 +60,8 @@ public class NPCSavingState : MonoBehaviour, ISaveable
         {
             NPCState state = new NPCState
             {
-                name = npcs[index].characterDialog[0].dialog.name,
-                hasTalked = false
+                name = npcs[index].characterDialogs[0].dialog.name,
+                questNumber = 0
             };
             npcStates.Add(state);
             index++;
@@ -72,11 +73,5 @@ public class NPCSavingState : MonoBehaviour, ISaveable
     public void Save()
     {
         WriteFile();
-    }
-
-    public void Clear()
-    {
-        InitNPCFile();
-        ReadFile();
     }
 }

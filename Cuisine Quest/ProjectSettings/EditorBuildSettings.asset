@@ -14,4 +14,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TestingQuest.unity
     guid: 9a442ebcec1c040a38865fac8254e942
+  - enabled: 1
+    path: Assets/Scenes/TestingSaveUIQuests.unity
+    guid: ddadb43d25bec42bbab0f843f974f409
+  - enabled: 1
+    path: Assets/Scenes/DeathScene.unity
+    guid: 1d48d34c575e7461eacb328da0306f1d
+  - enabled: 1
+    path: Assets/Scenes/playingBuild.unity
+    guid: 93d2b44e3a8b21440b37cbc558a149a2
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: 9cd8c73d72a724bbea36df3980e1c879
   m_configObjects: {}

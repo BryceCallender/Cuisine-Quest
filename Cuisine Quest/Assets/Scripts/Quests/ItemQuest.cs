@@ -9,24 +9,33 @@ public class ItemQuest : Quest
 
     public override bool CheckCompletion(CiscoTesting player)
     {
-        Debug.Log(questData.requiredItems.Count);
         foreach(RequiredItem requiredItem in questData.requiredItems)
         {
             Item item = requiredItem.item.GetComponent<Item>();
-            if (item != null && player.items.ContainsKey(item.name))
+            if (item != null && player.items.ContainsKey(item))
             {
                 //If the item is an inventory item and the name of the gameobject
                 //matches that of the required item for the quest 
-                if(item.Type == Item.ItemType.Inventory && item.name == requiredItem.item.name)
+                if(item.Type == ItemType.Inventory && item.Name == requiredItem.item.Name)
                 {
-                    if (player.items[requiredItem.item.name] >= requiredItem.requiredAmount)
+                    //If one of the items doesnt meet the requirement then the 
+                    //quest is not completed
+                    if (player.items[requiredItem.item] < requiredItem.requiredAmount)
                     {
-                        questData.questState = QuestState.completed;
-                        player.items[requiredItem.item.name] -= requiredItem.requiredAmount;
+
+                        questData.questState = QuestState.inProgress;
+                        return false;
                     }
                 }
             }
+            else
+            {
+                return false;
+            }
         }
-        return questData.questState == QuestState.completed;
+        //It went through all and were greater than or equal to the amount
+        //required to set to complete and return true
+        questData.questState = QuestState.completed;
+        return true;
     }
 }

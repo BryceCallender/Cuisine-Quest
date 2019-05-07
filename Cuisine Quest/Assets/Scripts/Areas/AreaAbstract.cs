@@ -7,17 +7,27 @@ public abstract class AreaAbstract : MonoBehaviour
 {
 
     public AreaScriptable MyArea;
-    private List<GameObject> loaded = new List<GameObject>();
+    protected List<GameObject> loaded = new List<GameObject>();
     public List<SpawningObject> ToLoad = new List<SpawningObject>();
+    public abstract void PlayerEnterDirection(Vector2 direction);
 
     public void LoadArea()
     {
-        foreach (SpawningObject so in ToLoad)
+        if (LoadAreaSpecial())
+        {
+            loadArea(ToLoad);
+        }
+        
+    }
+    protected void loadArea(List<SpawningObject> loadObjects)
+    {
+        foreach (SpawningObject so in loadObjects)
         {
             //LoadObj(so.Prefab, so.MyLocation);
             LoadObj(so);
         }
     }
+    public abstract bool LoadAreaSpecial();
 
     public void LoadObj(SpawningObject objOrigin)
     {
@@ -57,6 +67,24 @@ public abstract class AreaAbstract : MonoBehaviour
         if (collision.tag == "Player")
         {
             GameObject.FindGameObjectWithTag("LevelHandler").GetComponent<LevelHandler>().StartMoveArea(this);
+
+            float xDelta = transform.position.x - collision.transform.position.x;
+            float yDelta = transform.position.y - collision.transform.position.y;
+            if (xDelta > 6)
+            {
+                PlayerEnterDirection(new Vector2(1, 0));
+            }else if(xDelta < -6)
+            {
+                PlayerEnterDirection(new Vector2(-1, 0));
+            }
+            else if(yDelta > 4)
+            {
+                PlayerEnterDirection(new Vector2(0, 1));
+            }
+            else if(yDelta < -4)
+            {
+                PlayerEnterDirection(new Vector2(0, -1));
+            }
         }
 
     }

@@ -50,7 +50,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1753450195486828}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: -0.00000004371139}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -77,13 +77,13 @@ BoxCollider2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1753450195486828}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.49874592, y: 0}
+  m_Offset: {x: 0.37693012, y: -0.0026360005}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -94,7 +94,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.33146858, y: 0.29963303}
+  m_Size: {x: 0.28274155, y: 0.30490503}
   m_EdgeRadius: 0
 --- !u!114 &114626022973499554
 MonoBehaviour:
@@ -109,6 +109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponPower: 2
   Mesh: {fileID: 1796157709208636}
+  AttackBox: {fileID: 61647936784992382}
   jw:
     AttackPowerMultiplier: 0
     AttackWait: 0.4
@@ -123,7 +124,8 @@ MonoBehaviour:
     JabYOffset: -0.2
   ProjectileSpeed: 10
   ProjectileFireRate: 1
-  Tridentin: {fileID: 0}
+  Tridentin: {fileID: 114634500745585114, guid: dbf784e0caa8aa34f9861cb9da29385c,
+    type: 2}
 --- !u!212 &212641157620679434
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -159,7 +161,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 55
-  m_Sprite: {fileID: 21300000, guid: d2ecf6639b4089243aff530ec6ca203f, type: 3}
+  m_Sprite: {fileID: 21300110, guid: 9f2cd334c03894301b9b05865c192f0c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

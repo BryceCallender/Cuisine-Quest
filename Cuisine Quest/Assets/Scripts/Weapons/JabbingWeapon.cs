@@ -77,7 +77,7 @@ public class JabbingWeapon {
         {
             Jabbing = true;
             jabFinishSet = false;
-            transform.GetComponent<Weapon>().Mesh.SetActive(true);
+            transform.GetComponent<Weapon>().activateWeapon(true);
             //GetComponent<AudioSource>().Play();
             attackedLast = Time.fixedTime;
         }

@@ -11,7 +11,11 @@ TagManager:
   - Area
   - Weapon
   - Item
+  - EnemyTrigger
+  - CameraController
+  - Save
   - Animals
+  - EnemyTrigger
   layers:
   - Default
   - TransparentFX
@@ -21,10 +25,10 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - DungeonBridgeWalls
+  - DungeonBridgeObject
+  - Camera
+  - Area
   - 
   - 
   - 

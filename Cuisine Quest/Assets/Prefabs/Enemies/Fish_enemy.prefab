@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 50668986867936666}
   - component: {fileID: 114999344910303112}
   - component: {fileID: 60451600291250822}
+  - component: {fileID: 95888812093741136}
   m_Layer: 0
   m_Name: Fish_enemy
   m_TagString: Enemy
@@ -37,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1532510661676368}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.61, y: -4.21, z: 0}
+  m_LocalPosition: {x: -21.42869, y: -15.514759, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -62,7 +63,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!60 &60451600291250822
 PolygonCollider2D:
   m_ObjectHideFlags: 1
@@ -79,7 +80,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.54}
+    oldSize: {x: 0.5, y: 0.84375}
     newSize: {x: 0.32, y: 0.54}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -87,17 +88,35 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.14, y: 0.16}
-      - {x: 0.07, y: 0.26999998}
-      - {x: -0.049999997, y: 0.26999998}
-      - {x: -0.07, y: 0.24}
-      - {x: -0.16, y: 0.089999996}
-      - {x: -0.16, y: -0.26}
-      - {x: -0.14, y: -0.26999998}
-      - {x: 0.13, y: -0.26999998}
-      - {x: 0.12, y: -0.25}
-      - {x: 0.16, y: -0.13}
-      - {x: 0.16, y: 0.11}
+    - - {x: 0.21875, y: 0.25}
+      - {x: 0.109375, y: 0.421875}
+      - {x: -0.078125, y: 0.421875}
+      - {x: -0.109375, y: 0.375}
+      - {x: -0.25, y: 0.140625}
+      - {x: -0.25, y: -0.40625}
+      - {x: -0.21875, y: -0.421875}
+      - {x: 0.203125, y: -0.421875}
+      - {x: 0.1875, y: -0.390625}
+      - {x: 0.25, y: -0.203125}
+      - {x: 0.25, y: 0.171875}
+--- !u!95 &95888812093741136
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1532510661676368}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0d2a3ba9ed46bfc4a9f031f8e5382fba, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114999344910303112
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -113,7 +132,9 @@ MonoBehaviour:
   speed: 3
   drops:
   - Item: {fileID: 1502174101148422, guid: d56de10e62e7045eaad7df7843a4339f, type: 2}
-    dropRate: 50
+    dropRate: 60
+  - Item: {fileID: 1606376132331898, guid: ca32ba52248d147a2a345e4ec371991b, type: 2}
+    dropRate: 20
   offset: -90
 --- !u!212 &212180311035297208
 SpriteRenderer:

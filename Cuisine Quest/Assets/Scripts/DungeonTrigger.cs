@@ -15,6 +15,8 @@ public class DungeonTrigger : MonoBehaviour {
 
     public AreaAbstract[] DungeonAreas;
     public AreaAbstract[] OverWorld;
+
+    public GameObject DungeonRoof;
     
 	// Use this for initialization
 	void Start () {
@@ -26,21 +28,29 @@ public class DungeonTrigger : MonoBehaviour {
         
 	}
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
+
         if(collision.CompareTag("Player"))
         {
             float playerDirection = Vector3.Dot(EntranceDirection, collision.GetComponent<Rigidbody2D>().velocity);
+            print(playerDirection);
             if(playerDirection < 0)
             {
                 //Vector3 cameraLocation = new Vector3(MyOverworldCoordinate.x, MyOverworldCoordinate.y, Camera.main.transform.position.z);
                 SetAreaColliders(false, true);
                 GameObject.FindGameObjectWithTag("LevelHandler").GetComponent<LevelHandler>().TeleportPlayer(EgressLocation.name, PlayerEgressLocation);
-            }else if(playerDirection > 0)
+                DungeonRoof.SetActive(true);
+                AudioSourceController.Instance.StartCoroutine(AudioSourceController.Instance.PlayFieldMusic());
+            }
+            else if(playerDirection > 0)
             {
                 //Vector3 cameraLocation = new Vector3(MyDungeonCoordinate.x, MyDungeonCoordinate.y, Camera.main.transform.position.z);
                 SetAreaColliders(true, false);
                 GameObject.FindGameObjectWithTag("LevelHandler").GetComponent<LevelHandler>().TeleportPlayer(IngressLocation.name,  PlayerIngressLocation);
+                DungeonRoof.SetActive(false);
+                AudioSourceController.Instance.StopAllCoroutines();
+                AudioSourceController.Instance.PlayAudioLooped("Dungeon");
             }
         }
     }

@@ -4,11 +4,31 @@ using System.IO;
 
 public class SaveSystem : MonoBehaviour
 {
-    public List<GameObject> saveableObjects;
+    public List<ISaveable> saveableObjects; // list of scripts with ISaveable interface defined 
+    public List<string> fileNames;
+
+    private static SaveSystem instance = null;
+
+    public static SaveSystem Instance
+    {
+        get { return instance; }
+    }
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
         DontDestroyOnLoad(this);
+
+        if (FindObjectsOfType(GetType()).Length > 1)
+        {
+            Destroy(gameObject);
+        }
+
+        saveableObjects = new List<ISaveable>();
     }
 
     /// <summary>
@@ -21,18 +41,23 @@ public class SaveSystem : MonoBehaviour
     {
         Debug.Log("Game Saved");
         AudioSourceController.Instance.PlayAudio("Save");
-        foreach (GameObject saveObject in saveableObjects)
+        foreach (ISaveable saveObject in saveableObjects)
         {
-           saveObject.GetComponent<ISaveable>().Save();
+            saveObject.Save();
         }
     }
 
     public void NewGame()
     {
         Debug.Log("New Game");
-        foreach (GameObject saveObject in saveableObjects)
+        foreach (string fileName in fileNames)
         {
-            saveObject.GetComponent<ISaveable>().Clear();
+            File.Delete(Path.Combine(Application.persistentDataPath, fileName));
         }
+    }
+
+    public void AddSaveableObject(ISaveable objectToSave)
+    {
+        saveableObjects.Add(objectToSave);
     }
 }

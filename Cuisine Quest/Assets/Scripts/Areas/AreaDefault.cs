@@ -8,7 +8,10 @@ public class AreaDefault : AreaAbstract {
 	void Update () {
 		
 	}
-
+    public override bool LoadAreaSpecial()
+    {
+        return true;
+    }
     //remove permanently or until specified time
     public override void DestroyObj(GameObject obj)
     {
@@ -23,5 +26,10 @@ public class AreaDefault : AreaAbstract {
         //Default behavior
         removeObj(obj);
 
+    }
+
+    public override void PlayerEnterDirection(Vector2 direction)
+    {
+        
     }
 }

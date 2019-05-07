@@ -11,6 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab43afd18941d490e963b18c72477128, type: 3}
   m_Name: T_0
   m_EditorClassIdentifier: 
-  Name: T_0
-  Location: {x: 16, y: 30}
+  Location: {x: 16, y: 40}
   DefaultPlayerLocation: {x: 0.5, y: -0.5}
