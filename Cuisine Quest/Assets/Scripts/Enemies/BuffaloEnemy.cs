@@ -5,28 +5,32 @@ using UnityEngine;
 
 public class BuffaloEnemy : EnemyAbstract
 {
+    public float moveSpeed;
+    private Animator anim;
+    private Rigidbody2D rb;
+    public bool isWalking;
+    public float walkTime, walkCounter;
+    public float waitTime, waitCounter;
+    private int walkDirection;
+    private Vector2 lastMove;
+
     Transform target;
+    bool playerFound = false;
+    float minDistance = 3f;
     Vector3 targetPos;
     Vector3 thisPos;
-    public float offset;
-    float angle;
-    float minDistance = 3f;
-    float range;
-    bool playerFound = false;
-    Rigidbody2D rb;
-    float timer = 10f;
-    float waitTimer = 0f;
     Vector3 movement;
-
-
     // Use this for initialization
     void Start()
     {
         health = gameObject.AddComponent<HealthSystem>();
         health.setMaxHealth(5);
         health.ResetHealth();
+        anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        
+        walkCounter = walkTime;
+        waitCounter = waitTime;
+        chooseDirection();
     }
 
     // Update is called once per frame
@@ -41,34 +45,31 @@ public class BuffaloEnemy : EnemyAbstract
         {
             Move();
         }
-        else if (timer > 1f)
+        else if (isWalking)
         {
+            walkCounter -= Time.deltaTime;
+            walkAnimation();
             FindPlayer();
-            //for random movement if player not found
-            if (waitTimer < 1f)
+            if (walkCounter < 0)
             {
-                waitTimer += Time.deltaTime;
-                movement = new Vector3(transform.position.x + UnityEngine.Random.Range(-3f, 3f), transform.position.y + UnityEngine.Random.Range(-3f, 3f));
-            }
-            else
-            {
-                transform.position = Vector2.MoveTowards(transform.position, movement, Time.deltaTime);
-                //if it has reached it destination or ran into a wall and cannot reach its
-                //destination after 3 sec move somewhere else
-                if (Vector3.Distance(transform.position, movement) == 0f || waitTimer > 3f)   
-                {
-                    waitTimer = 0;
-                }
-                else
-                    waitTimer += Time.deltaTime;
+                isWalking = false;
+                waitCounter = waitTime;
             }
         }
         else
         {
-            timer += Time.deltaTime;
+            waitCounter -= Time.deltaTime;
+            rb.velocity = Vector2.zero;
+            FindPlayer();
+            if (waitCounter < 0)
+            {
+                chooseDirection();
+                walkAnimation();
+            }
         }
-    }
+        anim.SetBool("Moving", isWalking);
 
+    }
     void FindPlayer()
     {
         foreach (RaycastHit2D collide in Physics2D.CircleCastAll(transform.position, minDistance, new Vector2(0, 0)))
@@ -80,12 +81,50 @@ public class BuffaloEnemy : EnemyAbstract
                 playerFound = true;
                 targetPos = target.position;
                 thisPos = transform.position;
+                if (Mathf.Abs((thisPos.x - targetPos.x)) > Mathf.Abs((thisPos.y - targetPos.y)))
+                {
+                    if ((thisPos.x - targetPos.x) < 0)
+                    {
+                        anim.SetFloat("MoveX", 1f);
+                        anim.SetFloat("MoveY", 0f);
+                        lastMove = new Vector2(1f, 0f);
+                        anim.SetFloat("LastMoveX", lastMove.x);
+                        anim.SetFloat("LastMoveY", 0f);
+                    }
+                    else
+                    {
+                        anim.SetFloat("MoveX", -1f);
+                        anim.SetFloat("MoveY", 0f);
+                        lastMove = new Vector2(-1f, 0f);
+                        anim.SetFloat("LastMoveX", lastMove.x);
+                        anim.SetFloat("LastMoveY", 0f);
+                    }
+
+                }
+                else
+                {
+                    if ((thisPos.y - targetPos.y) < 0)
+                    {
+                        anim.SetFloat("MoveY", 1f);
+                        anim.SetFloat("MoveX", 0f);
+                        lastMove = new Vector2(0f, 1f);
+                        anim.SetFloat("LastMoveY", lastMove.y);
+                        anim.SetFloat("LastMoveX", 0f);
+                    }
+                    else
+                    {
+                        anim.SetFloat("MoveY", -1f);
+                        anim.SetFloat("MoveX", 0f);
+                        lastMove = new Vector2(0f, -1f);
+                        anim.SetFloat("LastMoveY", lastMove.y);
+                        anim.SetFloat("LastMoveX", 0f);
+                    }
+                }
                 //targetPos.x = targetPos.x - thisPos.x;
                 //targetPos.y = targetPos.y - thisPos.y;
             }
         }
     }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -93,35 +132,90 @@ public class BuffaloEnemy : EnemyAbstract
             rb.constraints = RigidbodyConstraints2D.FreezeAll;
             collision.gameObject.GetComponent<CiscoTesting>().health.takeDamage(1);
             playerFound = false;
-            timer = 0.0f;
+            isWalking = false;
+            anim.SetBool("Moving", isWalking);
+            waitCounter = 3;
         }
-        
-
+        else if (collision.gameObject.CompareTag("Wall"))
+        {
+            chooseDirection();
+            walkAnimation();
+        }
     }
-
-    public override void Attack()
-    {
-        //throw new NotImplementedException();
-    }
-
     public override void Move()
     {
         if (Vector3.Distance(transform.position, targetPos) == 0f)
         {
-            waitTimer = 0;
+            isWalking = false;
+            anim.SetBool("Moving", isWalking);
+            waitCounter = 3;
             playerFound = false;
         }
-        else if(waitTimer < 1f)
+        else if (waitCounter > 1.5f)
         {
-            waitTimer += Time.deltaTime;
+            isWalking = false;
+            anim.SetBool("Moving", isWalking);
+            waitCounter -= Time.deltaTime;
         }
         else
         {
             rb.constraints = RigidbodyConstraints2D.None;
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            isWalking = true;
+            anim.SetBool("Moving", isWalking);
             transform.position = Vector2.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
         }
 
+    }
+    public void walkAnimation()
+    {
+        switch (walkDirection)
+        {
+            case 0:
+                rb.velocity = new Vector2(0, moveSpeed);
+                anim.SetFloat("MoveY", 1f);
+                anim.SetFloat("MoveX", 0f);
+                lastMove = new Vector2(0f, 1f);
+                anim.SetFloat("LastMoveY", lastMove.y);
+                anim.SetFloat("LastMoveX", 0f);
+                break;
+            case 1:
+                rb.velocity = new Vector2(moveSpeed, 0);
+                anim.SetFloat("MoveX", 1f);
+                anim.SetFloat("MoveY", 0f);
+                lastMove = new Vector2(1f, 0f);
+                anim.SetFloat("LastMoveX", lastMove.x);
+                anim.SetFloat("LastMoveY", 0f);
+                break;
+            case 2:
+                rb.velocity = new Vector2(0, -moveSpeed);
+                anim.SetFloat("MoveY", -1f);
+                anim.SetFloat("MoveX", 0f);
+                lastMove = new Vector2(0f, -1f);
+                anim.SetFloat("LastMoveY", lastMove.y);
+                anim.SetFloat("LastMoveX", 0f);
+                break;
+            case 3:
+                rb.velocity = new Vector2(-moveSpeed, 0);
+                anim.SetFloat("MoveX", -1f);
+                anim.SetFloat("MoveY", 0f);
+                lastMove = new Vector2(-1f, 0f);
+                anim.SetFloat("LastMoveX", lastMove.x);
+                anim.SetFloat("LastMoveY", 0f);
+                break;
+        }
+    }
+    public void chooseDirection()
+    {
+        walkDirection = UnityEngine.Random.Range(0, 4);
+        isWalking = true;
+        walkCounter = walkTime;
+    }
+
+
+    public override void Attack()
+    {
+        throw new NotImplementedException();
     }
 
     void Die()
