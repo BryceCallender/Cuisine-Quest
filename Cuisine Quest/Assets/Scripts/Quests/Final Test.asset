@@ -21,5 +21,6 @@ MonoBehaviour:
     questState: 0
   DependentQuests:
   - {fileID: 11400000, guid: 6aa1848fcea304ec79bd0b015e0abd0e, type: 2}
+  reward: {fileID: 114490485229216108, guid: cc1f0530ab11246a085d94185cb7c209, type: 2}
   questID: 7
   AreaNeeded: {fileID: 0}

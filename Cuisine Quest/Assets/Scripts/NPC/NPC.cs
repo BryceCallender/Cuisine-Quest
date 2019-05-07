@@ -26,7 +26,6 @@ public class NPC : MonoBehaviour
 {
     public List<Quest> giveableQuests;
     public bool hasTalked;
-    public Item rewardItem;
 
     [SerializeField]
     public CharacterDialog[] characterDialogs;
@@ -106,17 +105,17 @@ public class NPC : MonoBehaviour
                         currentQuest++;
                         dialogSystemController.GetComponent<AudioSource>().Play();
 
-                        if(rewardItem != null)
+                        if(quest.reward != null)
                         {
-                            if (collision.gameObject.GetComponent<CiscoTesting>().items.ContainsKey(rewardItem))
+                            if (collision.gameObject.GetComponent<CiscoTesting>().items.ContainsKey(quest.reward))
                             {
-                                collision.gameObject.GetComponent<CiscoTesting>().items[rewardItem]++;
+                                collision.gameObject.GetComponent<CiscoTesting>().items[quest.reward]++;
                             }
                             else
                             {
-                                collision.gameObject.GetComponent<CiscoTesting>().items.Add(rewardItem, 1);
+                                collision.gameObject.GetComponent<CiscoTesting>().items.Add(quest.reward, 1);
                             }
-                            Debug.Log("Gave a reward of " + rewardItem.Name);
+                            Debug.Log("Gave a reward of " + quest.reward.Name);
                         }
                         //normal thanks dialog
                         afterQuestDialogs[currentQuest-1].EnableDialog();

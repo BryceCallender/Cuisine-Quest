@@ -35,7 +35,7 @@ public class AreaBoss : AreaAbstract {
         }
         if(doorsShut){
             
-            if (loaded.Count <= 0)
+            if (Enemies.Count <= 0)
             {
                 Debug.Log("Enemy Count: " + loaded.Count);
                 if(!doorOpenDelayBegun){

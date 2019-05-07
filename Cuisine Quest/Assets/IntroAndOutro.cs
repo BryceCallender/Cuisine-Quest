@@ -45,7 +45,6 @@ public class IntroAndOutro : MonoBehaviour
             if (questManager.finishedEveryQuest() && dialogSystemController.isEmpty())
             {
                 finishedGame = true;
-                canvasGroup.alpha = 1.0f;
                 image.enabled = true;
                 StartOutro();
             }

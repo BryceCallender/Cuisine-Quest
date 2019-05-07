@@ -46,6 +46,7 @@ public class Dungeness : EnemyAbstract {
         targetPlayer();
         movementTarget = transform.position;
         currentArea = GameObject.FindGameObjectWithTag("LevelHandler").GetComponent<LevelHandler>().CurrentArea.transform.position;
+        ((AreaBoss)GameObject.FindGameObjectWithTag("LevelHandler").GetComponent<LevelHandler>().CurrentArea).Enemies.Add(this);
     }
 	
 	// Update is called once per frame
@@ -82,6 +83,7 @@ public class Dungeness : EnemyAbstract {
     {
         Drop();
         GameObject.FindGameObjectWithTag("LevelHandler").GetComponent<LevelHandler>().CurrentArea.DestroyObj(gameObject);
+        ((AreaBoss)GameObject.FindGameObjectWithTag("LevelHandler").GetComponent<LevelHandler>().CurrentArea).Enemies.Remove(this);
         //Destroy(gameObject);
     }
 

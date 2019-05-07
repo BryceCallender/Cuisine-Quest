@@ -44,6 +44,7 @@ public class DialogSystemController : MonoBehaviour
 
     public void DisplayMessage()
     {
+        Debug.Log(messages.Count);
         if (messages.Count == 0)
         {
             Debug.Log("No Messages");
@@ -52,7 +53,8 @@ public class DialogSystemController : MonoBehaviour
             float time = animator.GetCurrentAnimatorStateInfo(0).length;
             //Turns off the dialog box after the animation length is done
             //So the engine doesnt have to worry about rendering. 
-            Invoke("TurnOffDialogBox", time);
+            TurnOffDialogBox();
+            //Invoke("TurnOffDialogBox", time);
             return;
         }
 

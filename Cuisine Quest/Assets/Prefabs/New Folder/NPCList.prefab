@@ -43,6 +43,8 @@ GameObject:
   - component: {fileID: 114495026080219858}
   - component: {fileID: 114890431649056010}
   - component: {fileID: 114296042869974808}
+  - component: {fileID: 114329556552956466}
+  - component: {fileID: 114214654566471986}
   m_Layer: 0
   m_Name: Lemon Crazy
   m_TagString: Untagged
@@ -202,7 +204,9 @@ MonoBehaviour:
   dialog:
     name: Jorge
     messages:
-    - LEMONADE!!!!
+    - I don't know what to do... Oh you there could you help me really quick? We have
+      run out of lemons for our lemonade and I don't want to tell the head chef. Could
+      you quickly go and get us some?
 --- !u!114 &114135252131908262
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -224,6 +228,21 @@ MonoBehaviour:
       be wild ones roaming around and they don\u2019t fight back, but it will show
       me you know how to swing a sword. After that I will be more comfortable sending
       you to more dangerous areas."
+--- !u!114 &114214654566471986
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1173180564063422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fa9117c37af9497da6cf837975d858f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialog:
+    name: Jorge
+    messages:
+    - I expected nothing less of you! Thank you for all your help!
 --- !u!114 &114222555383585936
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -322,6 +341,22 @@ MonoBehaviour:
     messages:
     - I got nothing for you to do right now. Come back later and I should have something
       for you to do.
+--- !u!114 &114329556552956466
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1173180564063422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fa9117c37af9497da6cf837975d858f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialog:
+    name: Jorge
+    messages:
+    - Yes! This is exactly what I needed! I can now finish the recipe and finally
+      show it to the owner. Thank you so much.
 --- !u!114 &114344401643193246
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -337,11 +372,11 @@ MonoBehaviour:
     name: Lemon Crazy
     messages:
     - So, I have been experimenting on a new recipe for a dessert that I am very close
-      on perfecting. Customers have been waiting for me to unveil this new creation
-      and I do not want to let them down. I need you gather for me some more lemons
-      and find the Slime in the dungeons. I am close to turning the Slimes into a
-      wonderful Lemon Jello Shot. The Slimes are able to produce a texture I have
-      neve seen before which enhances the experience of eating Jello tenfold.
+      on perfecting. I want to show this to the owner and see if he likes this new
+      creation and I do not want to let them down. Could you gather for me some more
+      lemons and find the Slime in the dungeons. I am close to turning the Slimes
+      into a wonderful Lemon Jello Shot. The Slimes are able to produce a texture
+      I have neve seen before which enhances the experience of eating Jello tenfold.
 --- !u!114 &114468957444250630
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -377,15 +412,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 96506e99a4e40004abe9931d76ce8b83, type: 2}
   - {fileID: 11400000, guid: acbe5acbbf92abd479d9d7b6f054ad83, type: 2}
   hasTalked: 0
-  rewardItem: {fileID: 0}
   characterDialogs:
   - {fileID: 114024681175896944}
   - {fileID: 114344401643193246}
   - {fileID: 114938374879752382}
   afterQuestDialogs:
   - {fileID: 114890431649056010}
-  - {fileID: 114890431649056010}
-  - {fileID: 114890431649056010}
+  - {fileID: 114329556552956466}
+  - {fileID: 114214654566471986}
   cantGiveQuestDialog: {fileID: 114296042869974808}
   currentQuest: 0
 --- !u!114 &114578156724053360
@@ -465,8 +499,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 503ecbab26c7a724195912c8ec7d4988, type: 2}
   - {fileID: 11400000, guid: a59a19bc38c6cfa409cc7bf3141ab1e1, type: 2}
   hasTalked: 0
-  rewardItem: {fileID: 114490485229216108, guid: 9071ed8c506d02846868e3594e27e40e,
-    type: 2}
   characterDialogs:
   - {fileID: 114715193488581428}
   - {fileID: 114135252131908262}
@@ -553,7 +585,7 @@ MonoBehaviour:
   dialog:
     name: Jorge
     messages:
-    - Thank you so much! I dont have anything to give you right now sorry.
+    - Thank you so much! Now I don't have to bother the chef.
 --- !u!114 &114938374879752382
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -568,12 +600,12 @@ MonoBehaviour:
   dialog:
     name: Lemon Crazy
     messages:
-    - I have one more task for you. My most sought after dish would definitely be
-      the Lemon Pepper Wings. This dish was the first dish that brought attention
-      to my restaurant and still remains my signature dish. I need you to gather me
-      more wings from the wild Buffalo Wings. Be careful the are know to be very territorial
-      and will charge at anyone they deem a threat. After all the things you have
-      accomplished I have no doubt you are more than qualified to the job.
+    - There's another dish I have been experimenting with. I call it lemon pepper
+      wings. This dish has been in my mind for many years and I know it will finally
+      prove my great worth here at the restaurant. I need you to gather me more wings
+      from the wild Buffalos. Be careful the are know to be very territorial and will
+      charge at anyone they deem a threat. After all the help you have given me I
+      have no doubt you are more than qualified for the job.
 --- !u!114 &114998396857019306
 MonoBehaviour:
   m_ObjectHideFlags: 1
