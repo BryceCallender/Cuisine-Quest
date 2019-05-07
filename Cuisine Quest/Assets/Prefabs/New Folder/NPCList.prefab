@@ -189,7 +189,8 @@ MonoBehaviour:
   dialog:
     name: Cheff
     messages:
-    - Fill me in please
+    - 'I had no doubts that you would obtain it. Now there are more things I need
+      to tell you about the crab. '
 --- !u!114 &114024681175896944
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -260,7 +261,8 @@ MonoBehaviour:
     - "Cisco you are the most reliable person I have ever hired. You helped me keep
       my customers happy and now you\u2019ve helped me with the King. After he takes
       this dish, no doubt, word will spread to other noble families and they will
-      travel in search of my cuisine. (add some more dialogue to conclude)"
+      travel in search of my cuisine. I know I can trust you with any task and I hope
+      your travels bring you great joy and fortune."
 --- !u!114 &114236999805715654
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -436,14 +438,8 @@ MonoBehaviour:
   dialog:
     name: Cheff
     messages:
-    - "Cisco! I was just informed the King has come to visit and he demands a dish
-      only fit for a King. He wanted something I didn\u2019t offer on the menu as
-      he wants a dish not everyone gets to eat. I never make this dish to sell because
-      gathering the ingredients is far too dangerous to out weigh the benefit. I never
-      wanted to ask you to do this but since the King demands, and I have no one else
-      to ask, I\u2019m going to have to need you to find the King\u2019s Crab. You
-      can find it in the deepest section in the dungeon. Please prepare before you
-      set out on this task."
+    - 'You can find the crab in the deepest part of the dungeon. It is stronger than
+      any foe you have faced so far. Please prepare before you set out on this task. '
 --- !u!114 &114586720559414100
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -458,7 +454,15 @@ MonoBehaviour:
   dialog:
     name: Cheff
     messages:
-    - Quest 5
+    - "Cisco! I was just informed the King has come to visit and he demands a dish
+      only fit for a King. He wanted something I didn\u2019t offer on the menu as
+      he wants a dish not everyone gets to eat. I never make this dish to sell because
+      gathering the ingredients is far too dangerous to out weigh the benefit. I never
+      wanted to ask you to do this but since the King demands, and I have no one else
+      to ask, I\u2019m going to have to need you to find the King\u2019s Crab. "
+    - 'Before I give you the key to go fight it I want you to prove to me that you''ll
+      be okay by grabbing the legendary trident in the dungeon. Quickly, grab it and
+      return to me and I''ll give you a key to the deepest part of the dungeon. '
 --- !u!114 &114640948185971142
 MonoBehaviour:
   m_ObjectHideFlags: 1
