@@ -18,10 +18,16 @@ public abstract class Weapon : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         HealthSystem health = collision.GetComponent<HealthSystem>();
-        if (health)
+        print(transform.parent.tag);
+        print(collision.tag);
+        if (health && !collision.CompareTag(transform.parent.tag))
         {
             health.takeDamage(WeaponPower);
             weaponTriggered(collision);
+        }
+        else
+        {
+            print("WE ARE The Same");
         }
     }
 

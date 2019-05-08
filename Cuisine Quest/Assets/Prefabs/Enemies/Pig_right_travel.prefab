@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 95693949288489778}
   m_Layer: 0
   m_Name: Pig_right_travel
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -329,6 +329,7 @@ MonoBehaviour:
   WeaponPower: 1
   Mesh: {fileID: 1187061442909296}
   AttackBox: {fileID: 61820649360112370}
+  attachment: {fileID: 1717434940305222}
   sw:
     RotationSpeed: 800
     RotationBegin: -45

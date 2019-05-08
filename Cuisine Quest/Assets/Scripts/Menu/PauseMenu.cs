@@ -8,7 +8,6 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(paused);
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             paused = !paused;
@@ -45,6 +44,7 @@ public class PauseMenu : MonoBehaviour
     public void GoToMainMenu()
     {
         ResumeTime();
+        AudioSourceController.Instance.PlayAudioLooped("MainMenu");
         SceneManager.LoadScene("MainMenu");
     }
 }

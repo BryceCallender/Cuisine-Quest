@@ -8,32 +8,27 @@ public class QuestUI : MonoBehaviour
     public RawImage uiImage;
     QuestManager questManager;
     PlayerQuestSystem playerQuestSystem;
-    public GUIStyle guiStyle;
+    public GUIStyle boxStyle;
+    public GUIStyle questLabels;
+    public GUIStyle labelText;
+    public GUIStyle questProgressStyle;
     public bool showQuestUI;
 
-    const int offset = 20;
-    const int padding = 5;
+    public int offset = 20;
+    public int padding = 5;
     public int bottomScreenDisplacement = 145; //Nice number and part of it comes from how long the hearts on the screen is
-    readonly Vector2 GUI_BOX_SIZE = new Vector2(200, 30);
-
-    //The amount of things for IMGUI to draw
-    int guiQuestcount;
-
-    // The position on of the scrolling viewport
-    private Vector2 scrollPosition = Vector2.zero;
-
-    float virtualWidth = 1280.0f;
-    float virtualHeight = 960.0f;
-    Matrix4x4 matrix;
+    readonly Vector2 GUI_BOX_SIZE = new Vector2(300, 50);
 
     private void Awake()
     {
         questManager = FindObjectOfType<QuestManager>();
         playerQuestSystem = FindObjectOfType<PlayerQuestSystem>();
 
-        Debug.Log(uiImage.rectTransform.rect);
-
-        matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, new Vector3(Screen.width / virtualWidth, Screen.height / virtualHeight, 1.0f));
+        labelText.normal.textColor = Color.black;
+        questProgressStyle.normal.textColor = Color.white;
+        questProgressStyle.fontSize = 25;
+        questProgressStyle.contentOffset = new Vector2(0,-5.0f);
+        questProgressStyle.alignment = TextAnchor.MiddleLeft;
     }
 
     private void Update()
@@ -42,10 +37,6 @@ public class QuestUI : MonoBehaviour
         {
             showQuestUI = !showQuestUI;
         }
-
-        guiQuestcount = playerQuestSystem.GetActiveQuestCount();
-
-        Debug.Log(guiQuestcount);
     }
 
     private void OnGUI()
@@ -56,19 +47,17 @@ public class QuestUI : MonoBehaviour
             //Used to be 250 for width of the boxes
             List<Quest> quests = questManager.GetQuests();
             //Draw Big Box to hold all the quests
-            GUI.Box(new Rect(10,uiImage.rectTransform.rect.height + 25,250,Screen.height - bottomScreenDisplacement),"Quests");
-            int placeX = 15;
-            int placeY = (int)uiImage.rectTransform.rect.height + 40;
+            GUI.Box(new Rect(10,uiImage.rectTransform.rect.height + 25,350,Screen.height - bottomScreenDisplacement),"Quests", boxStyle);
+            int placeX = 25;
+            int placeY = (int)uiImage.rectTransform.rect.height + 55;
             foreach (Quest quest in quests)
             {
                 if (playerQuestSystem.GetHasQuestByID(quest.questID) &&
                     (quest.questData.questState == QuestState.inProgress ||
                      (quest.questData.questState == QuestState.completed)))
                 {
-                    scrollPosition = GUI.BeginScrollView(new Rect(10, uiImage.rectTransform.rect.height + 25, 250, Screen.height - bottomScreenDisplacement), scrollPosition, new Rect(10, uiImage.rectTransform.rect.height + 25, 200, 100 * guiQuestcount),false,false);
-
                     //Draw the name of the quest
-                    GUI.Label(new Rect(placeX, placeY, 100, 20), quest.questData.questName);
+                    GUI.Label(new Rect(placeX, placeY, 100, 20), quest.questData.questName,labelText);
                     //Move the placement down by the offset indication
                     placeY += offset;
 
@@ -78,13 +67,14 @@ public class QuestUI : MonoBehaviour
                     //all the quests inside its own box. 1 Box per quest
                     if (quest.questData.questState == QuestState.completed)
                     {
-                        GUI.Box(new Rect(placeX, placeY, GUI_BOX_SIZE.x, GUI_BOX_SIZE.y), "");
+                        GUI.Box(new Rect(placeX, placeY, GUI_BOX_SIZE.x, GUI_BOX_SIZE.y), "",questLabels);
                         //Just display that the quest has been completed
-                        GUI.Label(new Rect(placeX + padding, placeY + padding, GUI_BOX_SIZE.x, GUI_BOX_SIZE.y), "Completed Quest!");
+                        GUI.Label(new Rect(placeX + padding + 5, placeY + padding, GUI_BOX_SIZE.x, GUI_BOX_SIZE.y), "Completed Quest!", questProgressStyle);
+                        placeY += (int)GUI_BOX_SIZE.y;
                     }
                     else if(quest.questData.questState == QuestState.inProgress)
                     {
-                        GUI.Box(new Rect(placeX, placeY, GUI_BOX_SIZE.x, GUI_BOX_SIZE.y * quest.questData.requiredItems.Count), "");
+                        GUI.Box(new Rect(placeX, placeY, GUI_BOX_SIZE.x, GUI_BOX_SIZE.y * quest.questData.requiredItems.Count), "", questLabels);
                         //Draw the numbers of stuff left for the quest
                         int index = 0;
                         foreach (RequiredItem requiredItem in quest.questData.requiredItems)
@@ -92,7 +82,7 @@ public class QuestUI : MonoBehaviour
                             string completionString = string.Format("{0}: ", requiredItem.item.Name);
                             completionString += playerQuestSystem.GetQuestCompletionStatus(quest.questID)[index].ToString();
                             completionString += "/" + requiredItem.requiredAmount;
-                            GUI.Label(new Rect(placeX + padding, placeY + padding, GUI_BOX_SIZE.x, GUI_BOX_SIZE.y), completionString);
+                            GUI.Label(new Rect(placeX + padding + 5, placeY + padding, GUI_BOX_SIZE.x, GUI_BOX_SIZE.y), completionString, questProgressStyle);
                             //Move the placement down by the offset indication
                             placeY += offset + (padding * 2);
                             index++;
@@ -101,9 +91,6 @@ public class QuestUI : MonoBehaviour
 
                     //Move the placement down by the offset indication
                     placeY += offset + (padding * 2);
-
-                    // End the scroll view that we began above.
-                    GUI.EndScrollView();
                 }
             }
         }

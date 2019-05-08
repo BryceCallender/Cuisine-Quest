@@ -69,4 +69,24 @@ public class AudioSourceController : MonoBehaviour
         }
         return 0;
     }
+
+    public IEnumerator PlayFieldMusic()
+    {
+        PlayAudio("FieldIntro");
+        while (audioSource.isPlaying)
+        {
+            yield return null;
+        }
+        PlayAudioLooped("FieldMusic");
+    }
+
+    public IEnumerator PlaySaveMusic()
+    {
+        PlayAudio("Save");
+        while (audioSource.isPlaying)
+        {
+            yield return null;
+        }
+        PlayAudioLooped("FieldMusic");
+    }
 }

@@ -6,7 +6,6 @@ public class HealthSystem : MonoBehaviour
 {
     public int currentHealth;
     public int maxHealth = 3; //whatever amount
-    
     // Use this for initialization
     void Start ()
     {
@@ -27,6 +26,7 @@ public class HealthSystem : MonoBehaviour
     public virtual void takeDamage(int damage)
     {
         currentHealth -= damage;
+        StartCoroutine(hitFeedback());
     }
 
     public void ResetHealth()
@@ -59,5 +59,12 @@ public class HealthSystem : MonoBehaviour
     public void knockBack()
     {
         //add code here or move to proper class
+    }
+
+    public virtual IEnumerator hitFeedback()
+    {
+        gameObject.GetComponent<Renderer>().material.color = Color.red;
+        yield return new WaitForSeconds(0.2f);
+        gameObject.GetComponent<Renderer>().material.color = Color.white;
     }
 }

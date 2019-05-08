@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class AreaDungeonBridge : AreaAbstract {
     public List<SpawningObject> ToLoadOnBridge = new List<SpawningObject>();
     public int BridgeObjectOrderInLayer = 100;
 
     public GameObject UnderBridgeWall;
+    public Tilemap BridgeWalls;
+    public Tilemap BridgeFloor;
+    public float BridgeDefaultAlpha = 0.5f;
     // Use this for initialization
     void Start () {
 		
@@ -69,6 +73,9 @@ public class AreaDungeonBridge : AreaAbstract {
 
         }else{
             UnderBridgeWall.SetActive(true);
+            BridgeFloor.color = new Color(1, 1, 1, BridgeDefaultAlpha);
+            BridgeWalls.color = new Color(1, 1, 1, BridgeDefaultAlpha);
+            //BridgeFloor.SetColor(new Vector3Int(0,0,0),);
         }
         
         
@@ -88,6 +95,8 @@ public class AreaDungeonBridge : AreaAbstract {
             //player.GetComponent<SpriteRenderer>().sortingOrder = 20;
 
             UnderBridgeWall.SetActive(false);
+            BridgeFloor.color = new Color(1, 1, 1, 1);
+            BridgeWalls.color = new Color(1, 1, 1, 1);
         }
     }
 }
