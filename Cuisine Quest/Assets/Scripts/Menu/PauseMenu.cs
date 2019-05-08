@@ -44,6 +44,7 @@ public class PauseMenu : MonoBehaviour
     public void GoToMainMenu()
     {
         ResumeTime();
+        AudioSourceController.Instance.PlayAudioLooped("MainMenu");
         SceneManager.LoadScene("MainMenu");
     }
 }

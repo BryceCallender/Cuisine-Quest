@@ -40,7 +40,7 @@ public class SaveSystem : MonoBehaviour
     public void SaveGame()
     {
         Debug.Log("Game Saved");
-        AudioSourceController.Instance.PlayAudio("Save");
+        AudioSourceController.Instance.StartCoroutine(AudioSourceController.Instance.PlaySaveMusic());
         foreach (ISaveable saveObject in saveableObjects)
         {
             saveObject.Save();

@@ -24,7 +24,7 @@ public class BuffaloEnemy : EnemyAbstract
     void Start()
     {
         health = gameObject.AddComponent<HealthSystem>();
-        health.setMaxHealth(5);
+        health.setMaxHealth(4);
         health.ResetHealth();
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
